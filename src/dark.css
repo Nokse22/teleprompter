@@ -1,0 +1,10 @@
+.textview {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.dark-mode .textview {
+    color: #ffffff;
+    background-color: #000000;
+}
+

@@ -2,7 +2,7 @@
 
 
 <div align="center">
-<img src="data/icons/hicolor/scalable/apps/com.github.nokse22.teleprompter.svg" height="64">
+<img src="data/icons/hicolor/scalable/apps/com.github.nokse22.teleprompter.svg" height="100">
 
 # Teleprompter
 
@@ -10,6 +10,11 @@
 
 A simple Gtk4 app to read scrolling text written in python
 
+  <div align="center">
+  <img src="data/resources/Screenshot.png" height="400"/>
+  </div>
+  
+  
 </div>
 
 ## Installation

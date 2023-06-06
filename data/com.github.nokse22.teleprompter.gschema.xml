@@ -21,9 +21,21 @@
     </key>
 
 	  <key name="speed" type="i">
-      <default>1</default>
+      <default>10</default>
       <summary>The speed</summary>
       <description>The speed</description>
+    </key>
+
+	  <key name="slow-speed" type="i">
+      <default>5</default>
+      <summary>The slow speed</summary>
+      <description>The slow speed</description>
+    </key>
+
+	  <key name="highlight" type="s">
+      <default>'#ff0000'</default>
+      <summary>The slow speed</summary>
+      <description>The slow speed</description>
     </key>
 
 	</schema>

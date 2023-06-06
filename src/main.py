@@ -86,17 +86,36 @@ class TeleprompterApplication(Adw.Application):
         scrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
         scrollSpeedScale.set_size_request(200, -1)
         scrollSpeedScale.set_value_pos(0)
-        #scrollSpeedScale.set_value_pos(TeleprompterWindow.speed)
         scrollSpeedScale.set_draw_value(True)
 
         scrollSpeedRow.add_suffix(scrollSpeedScale)
-
-        speed = Gtk.Adjustment(upper=100, step_increment=1, lower=1)
-
+        speed = Gtk.Adjustment(upper=5, step_increment=1, lower=0.1)
+        speed.set_value(TeleprompterWindow.settings.speed)
         scrollSpeedScale.set_adjustment(speed)
+
+
+        slowScrollSpeedRow = Adw.ActionRow(title="Slow Scroll Speed", subtitle="When pressing the spacebar")
+        scrollSettingsGroup.add(slowScrollSpeedRow)
+
+        slowScrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
+        slowScrollSpeedScale.set_size_request(200, -1)
+        slowScrollSpeedScale.set_value_pos(0)
+        slowScrollSpeedScale.set_draw_value(True)
+
+        slowScrollSpeedRow.add_suffix(slowScrollSpeedScale)
+        speed2 = Gtk.Adjustment(upper=TeleprompterWindow.settings.speed - 0.1, step_increment=1, lower=0.1)
+        speed2.set_value(TeleprompterWindow.settings.slowSpeed)
+        slowScrollSpeedScale.set_adjustment(speed2)
 
         textGroup = Adw.PreferencesGroup(title="Text")
         stylePage.add(textGroup)
+
+        highlightColorPickerRow = Adw.ActionRow(title="Highlight color")
+        textGroup.add(highlightColorPickerRow)
+
+        highlightColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
+        highlightColorPicker.set_rgba(TeleprompterWindow.settings.highlightColor)
+        highlightColorPickerRow.add_suffix(highlightColorPicker)
 
         fontColorPickerRow = Adw.ActionRow(title="Font color")
         textGroup.add(fontColorPickerRow)
@@ -125,10 +144,11 @@ class TeleprompterApplication(Adw.Application):
         pref.present()
 
         backgroundColorPicker.connect("color-set", self.on_background_color_changed)
+        highlightColorPicker.connect("color-set", self.on_highlight_color_changed)
         fontColorPicker.connect("color-set", self.on_text_color_changed)
         fontPicker.connect("font-set", self.on_font_changed)
-
-        print('app.preferences action activated')
+        scrollSpeedScale.connect("value-changed", self.on_speed_changed, speed2)
+        slowScrollSpeedScale.connect("value-changed", self.on_slow_speed_changed)
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -146,21 +166,36 @@ class TeleprompterApplication(Adw.Application):
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
     def on_background_color_changed(self, colorWidget):
-        print("background color changed")
+        # print("background color changed")
         TeleprompterWindow.settings.backgroundColor = colorWidget.get_rgba()
 
     def on_text_color_changed(self, colorWidget):
-        print("font color changed")
+        # print("font color changed")
         TeleprompterWindow.settings.textColor = colorWidget.get_rgba()
 
-    def on_font_changed(self, fontWidget):
-        print("font changed")
+    def on_highlight_color_changed(self, colorWidget):
+        # print("highlight color changed")
+        TeleprompterWindow.settings.highlightColor = colorWidget.get_rgba()
 
+    def on_font_changed(self, fontWidget):
+        # print("font changed")
         TeleprompterWindow.settings.font = fontWidget.get_font()
+
+    def on_speed_changed(self, sliderWidget, slowSpeedAdj):
+        # print("speed changed")
+        speed1 = sliderWidget.get_value()
+        TeleprompterWindow.settings.speed = speed1
+        if slowSpeedAdj.get_value() >= speed1:
+            slowSpeedAdj.set_value(speed1)
+            slowSpeedAdj.set_upper(sliderWidget.get_value())
+        else:
+            slowSpeedAdj.set_upper(sliderWidget.get_value() - 0.1)
+
+    def on_slow_speed_changed(self, sliderWidget):
+        # print("slow speed changed")
+        TeleprompterWindow.settings.slowSpeed = sliderWidget.get_value()
 
 def main(version):
     """The application's entry point."""
-    #a = TeleprompterWindow.scrolled_window.get_vadjustment()
-    #print(a)
     app = TeleprompterApplication()
     return app.run(sys.argv)

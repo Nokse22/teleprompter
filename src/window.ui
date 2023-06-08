@@ -52,7 +52,6 @@
                 <property name="buffer">text_buffer</property>
                 <property name="cursor-visible">False</property>
                 <property name="editable">1</property>
-                <property name="indent">0</property>
                 <property name="justification">left</property>
                 <property name="pixels-above-lines">6</property>
                 <property name="pixels-below-lines">6</property>
@@ -80,6 +79,7 @@
                 <child>
                   <object class="GtkButton" id="start_button">
                     <property name="icon-name">media-playback-start-symbolic</property>
+                    <property name="tooltip-text">Start/Stop</property>
                     <property name="can-target">1</property>
                     <property name="css-classes">suggested-action</property>
                     <signal name="clicked" handler="play_button_clicked" swapped="no" />
@@ -88,6 +88,7 @@
                 <child>
                   <object class="GtkButton">
                     <property name="icon-name">value-increase-symbolic</property>
+                    <property name="tooltip-text">Increase Speed</property>
                     <signal name="clicked" handler="increase_speed_button_clicked" swapped="no" />
                   </object>
                 </child>
@@ -95,6 +96,7 @@
                 <child>
                   <object class="GtkButton">
                     <property name="icon-name">value-decrease-symbolic</property>
+                    <property name="tooltip-text">Decrease Speed</property>
                     <signal name="clicked" handler="decrease_speed_button_clicked" swapped="no" />
                   </object>
                 </child>
@@ -105,12 +107,14 @@
                 <child>
                   <object class="GtkButton">
                     <property name="icon-name">view-fullscreen-symbolic</property>
+                    <property name="tooltip-text">Increase Font Size</property>
                     <signal name="clicked" handler="increase_font_button_clicked" swapped="no" />
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton">
                     <property name="icon-name">view-restore-symbolic</property>
+                    <property name="tooltip-text">Decrease Font Size</property>
                     <signal name="clicked" handler="decrease_font_button_clicked" swapped="no" />
                   </object>
                 </child>
@@ -121,6 +125,7 @@
                 <child>
                   <object class="GtkButton" id="open_button">
                     <property name="icon-name">document-open-symbolic</property>
+                    <property name="tooltip-text">Open a File</property>
                     <signal name="clicked" handler="open_button_clicked" swapped="no" />
                   </object>
                 </child>
@@ -129,22 +134,6 @@
                     <property name="icon-name">edit-paste-symbolic</property>
                     <property name="tooltip-text">Paste from Clipboard</property>
                     <signal name="clicked" handler="paste_button_clicked" swapped="no" />
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkScale" id="progress_bar">
-                    <property name="visible">0</property>
-                    <property name="hexpand">true</property>
-                    <property name="orientation">0</property>
-                    <property name="show-fill-level">true</property>
-                    <property name="sensitive">false</property>
-                    <property name="adjustment">
-                      <object class="GtkAdjustment" id="progress_bar_adj">
-                        <property name="lower">0</property>
-                        <property name="upper">100</property>
-                        <property name="value">0</property>
-                      </object>
-                    </property>
                   </object>
                 </child>
                 <style>

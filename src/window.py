@@ -241,6 +241,12 @@ def on_key_press(widget, event):
         # Call your function here
         print("Spacebar pressed!")
 
+def  on_text_pasted(text_buffer, clipboard, self):
+    print("pasted")
+    apply_text_tags(self)
+    # colorBackground(self)
+    updateFont(self)
+
 @Gtk.Template(resource_path='/com/github/nokse22/teleprompter/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
@@ -248,8 +254,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     open_button = Gtk.Template.Child("open_button")
     scrolled_window = Gtk.Template.Child("scrolled_window")
     start_button = Gtk.Template.Child("start_button")
-    progress_scale = Gtk.Template.Child("progress_bar")
-    progress_scale_adjustment = Gtk.Template.Child("progress_bar_adj")
     paste_button = Gtk.Template.Child("paste_button")
     overlay = Gtk.Template.Child("overlay")
 
@@ -270,6 +274,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         apply_text_tags(self)
         colorBackground(self)
         updateFont(self)
+        self.text_buffer.connect("paste-done", on_text_pasted, self)
         #self.text_buffer.connect("changed", apply_text_tags, self.text_buffer)
         #update(self)
 

@@ -21,7 +21,7 @@ gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk
 
 from gi.repository import Adw
-from gi.repository import Gtk, Pango, GLib, Gio
+from gi.repository import Pango, GLib, Gio, cairo
 
 def toHexStr(color):
     text_color = "#{:02X}{:02X}{:02X}".format(
@@ -57,13 +57,21 @@ def on_file_selected(dialog, response, self):
             try:
                 with open(file_path, 'r') as file:
                     file_contents = file.read()
-                    # Do something with the file contents
-                    # print("File Contents:\n", file_contents)
-                    self.text_buffer.set_text("\n\n\n\n\n\n\n\n\n" + file_contents + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
-                    update(self)
+                    self.text_buffer.set_text("\n\n\n\n\n\n\n\n\n" + file_contents + "\n\n\n\n\n\n\n\n\n\n\n")
+                    apply_text_tags(self)
+                    updateFont(self)
             except OSError as e:
-                print("Error reading file:", str(e))
+                dialog.destroy()
+                toast = Adw.Toast()
+                toast.set_title("Error reading file")
+                toast.set_timeout(1)
+                self.overlay.add_toast(toast)
+
         dialog.destroy()
+        toast = Adw.Toast()
+        toast.set_title("File successfully opened")
+        toast.set_timeout(1)
+        self.overlay.add_toast(toast)
 
     if response == Gtk.ResponseType.CANCEL:
         dialog.destroy()
@@ -82,6 +90,8 @@ def show_file_chooser_dialog(self):
     filter_txt.set_name("Text files")
     filter_txt.add_pattern("*.txt")
     dialog.add_filter(filter_txt)
+    dialog.set_filter(filter_txt)
+
 
     dialog.connect("response", on_file_selected, self)
     dialog.show()
@@ -120,7 +130,7 @@ def load_app_settings():
 
 def autoscroll(self, scrolled_window):
     adjustment = scrolled_window.get_vadjustment()
-    adjustment.set_value(adjustment.get_value() + self.speed)
+    adjustment.set_value(adjustment.get_value() + wordPerMinuteToSpeed(self, self.settings.speed))
     scrolled_window.set_vadjustment(adjustment)
 
     # self.progress_scale_adjustment.set_value((self.adj/adjustment.get_upper() - adjustment.get_lower())*100)
@@ -130,7 +140,7 @@ def autoscroll(self, scrolled_window):
     else:
         return 1
 
-def apply_text_tags(self, text_buffer):
+def apply_text_tags(self):
     print("apply tags")
     save_app_settings(self.settings)
     # Create a text tag for color1
@@ -170,6 +180,13 @@ def apply_text_tags(self, text_buffer):
 
         start_iter.forward_word_end()
 
+def updateFont(self):
+    tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
+
+    # Apply the tag to the entire text buffer
+    self.text_buffer.apply_tag(tag, self.text_buffer.get_start_iter(), self.text_buffer.get_end_iter())
+
+def colorBackground(self):
     css_data = """
         textview {{
             background-color: #242424;
@@ -183,20 +200,46 @@ def apply_text_tags(self, text_buffer):
     context = self.textview.get_style_context()
     context.add_provider(style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-    tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
+def wordPerMinuteToSpeed(self, speed):
+    # Split the font string into font properties and size
+    font_properties = self.settings.font.split()
+    font_size = font_properties[-1]
 
-    # Apply the tag to the entire text buffer
-    self.text_buffer.apply_tag(tag, self.text_buffer.get_start_iter(), self.text_buffer.get_end_iter())
+    # Convert the font size to an integer and increase it by +5 or -5
+    font = int(font_size)
+    width = self.textview.get_allocation().width
+    speed = self.settings.speed * 4/ ((-font*0.2 + 0.02*width)*font*2.62) # to rework
+    print(speed)
 
+    return speed
+
+def modifyFont(self, amount):
+    # Split the font string into font properties and size
+    font_properties = self.settings.font.split()
+    font_size = font_properties[-1]
+
+    # Convert the font size to an integer and increase it by +5 or -5
+    new_font_size = int(font_size) + amount
+
+    # Update the font size in the font properties list
+    font_properties[-1] = str(new_font_size)
+
+    # Construct the updated font string
+    self.settings.font = ' '.join(font_properties)
 
 class AppSettings:
     def __init__(self):
         self.font = 'Cantarell 80'
         self.textColor = Gdk.RGBA()
         self.backgroundColor = Gdk.RGBA()
-        self.speed = 1.0
-        self.slowSpeed = 0.5
+        self.speed = 150
+        self.slowSpeed = 50
         self.highlightColor = Gdk.RGBA()
+
+def on_key_press(widget, event):
+    if event.keyval == Gdk.KEY_space:
+        # Call your function here
+        print("Spacebar pressed!")
 
 @Gtk.Template(resource_path='/com/github/nokse22/teleprompter/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
@@ -207,6 +250,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     start_button = Gtk.Template.Child("start_button")
     progress_scale = Gtk.Template.Child("progress_bar")
     progress_scale_adjustment = Gtk.Template.Child("progress_bar_adj")
+    paste_button = Gtk.Template.Child("paste_button")
+    overlay = Gtk.Template.Child("overlay")
 
     playing = False
 
@@ -218,23 +263,22 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     text_buffer = Gtk.Template.Child("text_buffer")
     textview = Gtk.Template.Child("text_view")
 
-    adj = 0
+    #paste_button.set_tooltip_text("This is a tooltip")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        apply_text_tags(self, self.text_buffer)
-        self.text_buffer.connect("changed", apply_text_tags, self.text_buffer)
+        apply_text_tags(self)
+        colorBackground(self)
+        updateFont(self)
+        #self.text_buffer.connect("changed", apply_text_tags, self.text_buffer)
         #update(self)
 
     @Gtk.Template.Callback("play_button_clicked")
     def bar1(self, *args):
-        print("play")
-        #update(self)
-        apply_text_tags(self, self.text_buffer)
+        apply_text_tags(self)
         if not self.playing:
             self.start_button.set_icon_name("media-playback-pause-symbolic")
             self.playing = True
-            self.speed = 0.5 # self.settings.speed
 
             # Start continuous autoscrolling
             GLib.timeout_add(10, autoscroll, self, self.scrolled_window)
@@ -245,20 +289,51 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("open_button_clicked")
     def bar2(self, *args):
-        print("open button clicked")
+        # print("open button clicked")
         show_file_chooser_dialog(self)
 
     @Gtk.Template.Callback("increase_speed_button_clicked")
     def bar3(self, *args):
-        print("increase speed clicked")
-        self.speed += 0.1
+        # print("increase speed clicked")
+        self.settings.speed += 5
 
     @Gtk.Template.Callback("decrease_speed_button_clicked")
     def bar4(self, *args):
-        print("decrease speed clicked")
-        self.speed -= 0.1
-        if self.speed <= 0:
-            self.speed = 0.1
+        # print("decrease speed clicked")
+        self.settings.speed -= 5
+        if self.settings.speed <= 0:
+            self.settings.speed = 5
+
+    @Gtk.Template.Callback("paste_button_clicked")
+    def bar5(self, *args):
+        # I spent one entire evening trying to make this work...
+        clipboard = Gdk.Display().get_default().get_clipboard()
+
+        def callback(clipboard, res, data):
+            text = clipboard.read_text_finish(res)
+            self.text_buffer.set_text("\n\n" + text + "\n\n\n\n\n\n\n\n\n")
+            apply_text_tags(self)
+            updateFont(self)
+            toast = Adw.Toast()
+            toast.set_title("Pasted Clipboard Content")
+            toast.set_timeout(1)
+            self.overlay.add_toast(toast)
+
+        data = {}
+        res = clipboard.read_text_async(None, callback, data)
+
+    @Gtk.Template.Callback("decrease_font_button_clicked")
+    def bar6(self, *args):
+        modifyFont(self, -5)
+        updateFont(self)
+
+    @Gtk.Template.Callback("increase_font_button_clicked")
+    def bar7(self, *args):
+        modifyFont(self, 5)
+        updateFont(self)
+
+
+
 
 
 

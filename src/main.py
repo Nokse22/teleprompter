@@ -80,7 +80,7 @@ class TeleprompterApplication(Adw.Application):
         scrollSettingsGroup = Adw.PreferencesGroup(title="Scroll Settings")
         settingsPage.add(scrollSettingsGroup)
 
-        scrollSpeedRow = Adw.ActionRow(title="Scroll Speed")
+        scrollSpeedRow = Adw.ActionRow(title="Scroll Speed", subtitle="Measured in words per minute")
         scrollSettingsGroup.add(scrollSpeedRow)
 
         scrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
@@ -89,7 +89,7 @@ class TeleprompterApplication(Adw.Application):
         scrollSpeedScale.set_draw_value(True)
 
         scrollSpeedRow.add_suffix(scrollSpeedScale)
-        speed = Gtk.Adjustment(upper=5, step_increment=1, lower=0.1)
+        speed = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
         speed.set_value(TeleprompterWindow.settings.speed)
         scrollSpeedScale.set_adjustment(speed)
 
@@ -103,7 +103,7 @@ class TeleprompterApplication(Adw.Application):
         slowScrollSpeedScale.set_draw_value(True)
 
         slowScrollSpeedRow.add_suffix(slowScrollSpeedScale)
-        speed2 = Gtk.Adjustment(upper=TeleprompterWindow.settings.speed - 0.1, step_increment=1, lower=0.1)
+        speed2 = Gtk.Adjustment(upper=TeleprompterWindow.settings.speed / 2, step_increment=1, lower=5)
         speed2.set_value(TeleprompterWindow.settings.slowSpeed)
         slowScrollSpeedScale.set_adjustment(speed2)
 
@@ -131,19 +131,20 @@ class TeleprompterApplication(Adw.Application):
         fontColorPicker.set_rgba(TeleprompterWindow.settings.textColor)
         fontColorPickerRow.add_suffix(fontColorPicker)
 
-        backgroundGroup = Adw.PreferencesGroup(title="Background")
-        stylePage.add(backgroundGroup)
 
-        backgroundColorPickerRow = Adw.ActionRow(title="Background color")
-        backgroundGroup.add(backgroundColorPickerRow)
+        # backgroundGroup = Adw.PreferencesGroup(title="Background")
+        # stylePage.add(backgroundGroup)
 
-        backgroundColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
-        backgroundColorPicker.set_rgba(TeleprompterWindow.settings.backgroundColor)
-        backgroundColorPickerRow.add_suffix(backgroundColorPicker)
+        # backgroundColorPickerRow = Adw.ActionRow(title="Background color")
+        # backgroundGroup.add(backgroundColorPickerRow)
+
+        # backgroundColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
+        # backgroundColorPicker.set_rgba(TeleprompterWindow.settings.backgroundColor)
+        # backgroundColorPickerRow.add_suffix(backgroundColorPicker)
 
         pref.present()
 
-        backgroundColorPicker.connect("color-set", self.on_background_color_changed)
+        # backgroundColorPicker.connect("color-set", self.on_background_color_changed)
         highlightColorPicker.connect("color-set", self.on_highlight_color_changed)
         fontColorPicker.connect("color-set", self.on_text_color_changed)
         fontPicker.connect("font-set", self.on_font_changed)
@@ -185,11 +186,11 @@ class TeleprompterApplication(Adw.Application):
         # print("speed changed")
         speed1 = sliderWidget.get_value()
         TeleprompterWindow.settings.speed = speed1
-        if slowSpeedAdj.get_value() >= speed1:
-            slowSpeedAdj.set_value(speed1)
-            slowSpeedAdj.set_upper(sliderWidget.get_value())
+        if slowSpeedAdj.get_value() >= speed1 / 2:
+            slowSpeedAdj.set_value(speed1 / 2)
+            slowSpeedAdj.set_upper(sliderWidget.get_value() / 2)
         else:
-            slowSpeedAdj.set_upper(sliderWidget.get_value() - 0.1)
+            slowSpeedAdj.set_upper(sliderWidget.get_value() / 2)
 
     def on_slow_speed_changed(self, sliderWidget):
         # print("slow speed changed")

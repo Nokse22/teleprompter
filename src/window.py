@@ -141,15 +141,12 @@ def autoscroll(self, scrolled_window):
         return 1
 
 def apply_text_tags(self):
-    print("apply tags")
-    save_app_settings(self.settings)
-    # Create a text tag for color1
+    # print("apply tags")
+
     tag_color1 = Gtk.TextTag()
     tag_color1.set_property("foreground", toHexStr(self.settings.textColor))
-    print(toHexStr(self.settings.textColor))
     self.text_buffer.get_tag_table().add(tag_color1)
 
-    # Create a text tag for color2
     tag_color2 = Gtk.TextTag()
     tag_color2.set_property("foreground", toHexStr(self.settings.highlightColor))
     self.text_buffer.get_tag_table().add(tag_color2)
@@ -158,27 +155,7 @@ def apply_text_tags(self):
     start_iter = self.text_buffer.get_start_iter()
     end_iter = self.text_buffer.get_end_iter()
 
-    # Iterate through the buffer and apply text tags
-    while start_iter.forward_word_end():
-        end_iter.assign(start_iter)
-        start_iter.backward_word_start()
-
-        # Get the text segment
-        text = self.text_buffer.get_text(start_iter, end_iter, False)
-
-        # Apply text tags based on conditions
-        if "[" in text and "]" in text:
-            start_offset = start_iter.get_offset()
-            bracket_start_index = text.index("[")
-            bracket_end_index = text.index("]")
-            if bracket_start_index < bracket_end_index:
-                tag_start_iter = self.text_buffer.get_iter_at_offset(start_offset + bracket_start_index + 1)
-                tag_end_iter = self.text_buffer.get_iter_at_offset(start_offset + bracket_end_index)
-                self.text_buffer.apply_tag(tag_color2, tag_start_iter, tag_end_iter)
-        else:
-            self.text_buffer.apply_tag(tag_color1, start_iter, end_iter)
-
-        start_iter.forward_word_end()
+    self.text_buffer.apply_tag(tag_color1, start_iter, end_iter)
 
 def updateFont(self):
     tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
@@ -208,7 +185,7 @@ def wordPerMinuteToSpeed(self, speed):
     # Convert the font size to an integer and increase it by +5 or -5
     font = int(font_size)
     width = self.textview.get_allocation().width
-    speed = self.settings.speed * 4/ ((-font*0.2 + 0.02*width)*font*2.62) # to rework
+    speed = self.settings.speed * font * 0.04 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
     print(speed)
 
     return speed
@@ -247,6 +224,11 @@ def  on_text_pasted(text_buffer, clipboard, self):
     # colorBackground(self)
     updateFont(self)
 
+def on_text_inserted(text_buffer, loc, text, lenght, self):
+    apply_text_tags(self)
+    # colorBackground(self)
+    updateFont(self)
+
 @Gtk.Template(resource_path='/com/github/nokse22/teleprompter/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
@@ -274,7 +256,11 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         apply_text_tags(self)
         colorBackground(self)
         updateFont(self)
+
         self.text_buffer.connect("paste-done", on_text_pasted, self)
+
+        self.text_buffer.connect("insert-text", on_text_inserted, self)
+
         #self.text_buffer.connect("changed", apply_text_tags, self.text_buffer)
         #update(self)
 
@@ -301,6 +287,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def bar3(self, *args):
         # print("increase speed clicked")
         self.settings.speed += 5
+        save_app_settings(self.settings)
 
     @Gtk.Template.Callback("decrease_speed_button_clicked")
     def bar4(self, *args):
@@ -308,6 +295,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.settings.speed -= 5
         if self.settings.speed <= 0:
             self.settings.speed = 5
+        save_app_settings(self.settings)
 
     @Gtk.Template.Callback("paste_button_clicked")
     def bar5(self, *args):
@@ -331,11 +319,13 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def bar6(self, *args):
         modifyFont(self, -5)
         updateFont(self)
+        save_app_settings(self.settings)
 
     @Gtk.Template.Callback("increase_font_button_clicked")
     def bar7(self, *args):
         modifyFont(self, 5)
         updateFont(self)
+        save_app_settings(self.settings)
 
 
 

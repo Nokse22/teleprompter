@@ -40,8 +40,8 @@
         <child>
       <object class="AdwClamp">
         <property name="maximum-size">2600</property>
-         <property name="margin-start">60</property>
-        <property name="margin-end">60</property>
+         <property name="margin-start">90</property>
+        <property name="margin-end">20</property>
         <property name="tightening-threshold">1000</property>
           <child>
           <object class="GtkScrolledWindow" id="scrolled_window">
@@ -50,13 +50,14 @@
             <child>
               <object class="GtkTextView" id="text_view">
                 <property name="buffer">text_buffer</property>
-                <property name="cursor-visible">False</property>
+                <property name="width-request">400</property>
+                <property name="cursor-visible">1</property>
                 <property name="editable">1</property>
                 <property name="justification">left</property>
                 <property name="pixels-above-lines">6</property>
                 <property name="pixels-below-lines">6</property>
-                <property name="right-margin">10</property>
-                <property name="left-margin">40</property>
+                <property name="right-margin">-1</property>
+                <property name="left-margin">-1</property>
                 <property name="wrap-mode">word-char</property>
                 <property name="can-focus">1</property>
                 <property name="can-target">1</property>

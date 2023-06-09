@@ -61,6 +61,9 @@ class TeleprompterApplication(Adw.Application):
                                 developer_name='Nokse',
                                 version='0.1.0',
                                 developers=['Nokse'],
+                                license_type="GTK_LICENSE_GPL_3_0",
+                                issue_url='https://github.com/Nokse22/teleprompter/issues',
+                                website='https://github.com/Nokse22/teleprompter',
                                 copyright='© 2023 Noske')
         about.present()
 

@@ -60,6 +60,8 @@ def on_file_selected(dialog, response, self):
                     self.text_buffer.set_text("\n\n\n\n\n\n\n\n\n" + file_contents + "\n\n\n\n\n\n\n\n\n\n\n")
                     apply_text_tags(self)
                     updateFont(self)
+                    start = self.text_buffer.get_start_iter()
+                    search_and_mark_highlight(self, start)
             except OSError as e:
                 dialog.destroy()
                 toast = Adw.Toast()
@@ -143,6 +145,9 @@ def autoscroll(self, scrolled_window):
 def apply_text_tags(self):
     # print("apply tags")
 
+    start_iter = self.text_buffer.get_start_iter()
+    end_iter = Gtk.TextIter()
+
     tag_color1 = Gtk.TextTag()
     tag_color1.set_property("foreground", toHexStr(self.settings.textColor))
     self.text_buffer.get_tag_table().add(tag_color1)
@@ -156,6 +161,35 @@ def apply_text_tags(self):
     end_iter = self.text_buffer.get_end_iter()
 
     self.text_buffer.apply_tag(tag_color1, start_iter, end_iter)
+
+def search_and_mark_highlight(self, start):
+    end = self.text_buffer.get_end_iter()
+    text = "["
+
+    tag_color2 = Gtk.TextTag()
+    tag_color2.set_property("foreground", toHexStr(self.settings.highlightColor))
+    tag_color2.set_property("weight", Pango.Weight.BOLD)
+    self.text_buffer.get_tag_table().add(tag_color2)
+
+    match = start.forward_search(text, 0, end)
+
+    if match is not None:
+        match_start, match_end = match
+        match_end_highlight = search_end_highligh(self, match_end)
+        if match_end_highlight != None:
+            self.text_buffer.apply_tag(tag_color2, match_start, match_end_highlight)
+        search_and_mark_highlight(self, match_end)
+
+def search_end_highligh(self, start):
+    end = self.text_buffer.get_end_iter()
+
+    match = start.forward_search("]", 0, end)
+
+    if match is not None:
+        match_start, match_end = match
+        return match_end
+
+    return start + 1
 
 def updateFont(self):
     tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
@@ -186,7 +220,6 @@ def wordPerMinuteToSpeed(self, speed):
     font = int(font_size)
     width = self.textview.get_allocation().width
     speed = self.settings.speed * font * 0.04 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
-    print(speed)
 
     return speed
 
@@ -213,21 +246,15 @@ class AppSettings:
         self.slowSpeed = 50
         self.highlightColor = Gdk.RGBA()
 
-def on_key_press(widget, event):
-    if event.keyval == Gdk.KEY_space:
-        # Call your function here
-        print("Spacebar pressed!")
-
 def  on_text_pasted(text_buffer, clipboard, self):
-    print("pasted")
     apply_text_tags(self)
-    # colorBackground(self)
     updateFont(self)
 
 def on_text_inserted(text_buffer, loc, text, lenght, self):
     apply_text_tags(self)
-    # colorBackground(self)
     updateFont(self)
+    start = self.text_buffer.get_start_iter()
+    search_and_mark_highlight(self, start)
 
 @Gtk.Template(resource_path='/com/github/nokse22/teleprompter/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
@@ -242,14 +269,11 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     playing = False
 
     settings = AppSettings()
-    # save_app_settings(settings)
 
     settings = load_app_settings()
 
     text_buffer = Gtk.Template.Child("text_buffer")
     textview = Gtk.Template.Child("text_view")
-
-    #paste_button.set_tooltip_text("This is a tooltip")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -260,6 +284,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.text_buffer.connect("paste-done", on_text_pasted, self)
 
         self.text_buffer.connect("insert-text", on_text_inserted, self)
+
+        start = self.text_buffer.get_start_iter()
+        search_and_mark_highlight(self, start)
 
         #self.text_buffer.connect("changed", apply_text_tags, self.text_buffer)
         #update(self)
@@ -289,6 +316,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.settings.speed += 5
         save_app_settings(self.settings)
 
+        start = self.text_buffer.get_start_iter()
+        search_and_mark_highlight(self, start)
+
     @Gtk.Template.Callback("decrease_speed_button_clicked")
     def bar4(self, *args):
         # print("decrease speed clicked")
@@ -307,6 +337,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             self.text_buffer.set_text("\n\n" + text + "\n\n\n\n\n\n\n\n\n")
             apply_text_tags(self)
             updateFont(self)
+            start = self.text_buffer.get_start_iter()
+            search_and_mark_highlight(self, start)
             toast = Adw.Toast()
             toast.set_title("Pasted Clipboard Content")
             toast.set_timeout(1)

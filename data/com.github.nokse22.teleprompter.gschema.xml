@@ -38,5 +38,11 @@
       <description>The slow speed</description>
     </key>
 
+	  <key name="bold-highlight" type="b">
+      <default>true</default>
+      <summary>Also bold all the highlight</summary>
+      <description>Also bold all the highlight</description>
+    </key>
+
 	</schema>
 </schemalist>

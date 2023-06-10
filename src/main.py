@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2023 Lorenzo
+# Copyright 2023 Nokse
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -120,6 +120,14 @@ class TeleprompterApplication(Adw.Application):
         highlightColorPicker.set_rgba(TeleprompterWindow.settings.highlightColor)
         highlightColorPickerRow.add_suffix(highlightColorPicker)
 
+        boldHighlight = Adw.ActionRow(title="Bold Highlight")
+        textGroup.add(boldHighlight)
+
+        boldHighlightSwitch = Gtk.Switch(valign = Gtk.Align.CENTER)
+        boldHighlightSwitch.set_active(TeleprompterWindow.settings.boldHighlight)
+
+        boldHighlight.add_suffix(boldHighlightSwitch)
+
         fontColorPickerRow = Adw.ActionRow(title="Font color")
         textGroup.add(fontColorPickerRow)
 
@@ -153,6 +161,7 @@ class TeleprompterApplication(Adw.Application):
         fontPicker.connect("font-set", self.on_font_changed)
         scrollSpeedScale.connect("value-changed", self.on_speed_changed, speed2)
         slowScrollSpeedScale.connect("value-changed", self.on_slow_speed_changed)
+        boldHighlightSwitch.connect("state-set", self.on_bold_highlight_set)
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -198,6 +207,10 @@ class TeleprompterApplication(Adw.Application):
     def on_slow_speed_changed(self, sliderWidget):
         # print("slow speed changed")
         TeleprompterWindow.settings.slowSpeed = sliderWidget.get_value()
+
+    def on_bold_highlight_set(self, switch, foo):
+        TeleprompterWindow.settings.boldHighlight = not switch.get_state()
+        print(switch.get_state())
 
 def main(version):
     """The application's entry point."""

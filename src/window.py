@@ -1,5 +1,5 @@
 #
-# Copyright 2023 Lorenzo
+# Copyright 2023 Nokse
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -94,7 +94,6 @@ def show_file_chooser_dialog(self):
     dialog.add_filter(filter_txt)
     dialog.set_filter(filter_txt)
 
-
     dialog.connect("response", on_file_selected, self)
     dialog.show()
 
@@ -125,6 +124,8 @@ def load_app_settings():
 
     settings.speed = gio_settings.get_int("speed") / 10
     settings.slowSpeed = gio_settings.get_int("slow-speed") / 10
+
+    settings.boldHighlight = gio_settings.get_boolean("bold-highlight")
 
     print("settings loaded")
 
@@ -168,7 +169,7 @@ def search_and_mark_highlight(self, start):
 
     tag_color2 = Gtk.TextTag()
     tag_color2.set_property("foreground", toHexStr(self.settings.highlightColor))
-    tag_color2.set_property("weight", Pango.Weight.BOLD)
+    if self.settings.boldHighlight: tag_color2.set_property("weight", Pango.Weight.BOLD)
     self.text_buffer.get_tag_table().add(tag_color2)
 
     match = start.forward_search(text, 0, end)
@@ -245,6 +246,7 @@ class AppSettings:
         self.speed = 150
         self.slowSpeed = 50
         self.highlightColor = Gdk.RGBA()
+        self.boldHighlight = True
 
 def  on_text_pasted(text_buffer, clipboard, self):
     apply_text_tags(self)
@@ -322,8 +324,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.settings.speed += 5
         save_app_settings(self.settings)
 
-        start = self.text_buffer.get_start_iter()
-        search_and_mark_highlight(self, start)
+        #start = self.text_buffer.get_start_iter()
+        #search_and_mark_highlight(self, start)
 
     @Gtk.Template.Callback("decrease_speed_button_clicked")
     def bar4(self, *args):
@@ -357,12 +359,16 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def bar6(self, *args):
         modifyFont(self, -5)
         updateFont(self)
+        start = self.text_buffer.get_start_iter()
+        search_and_mark_highlight(self, start)
         save_app_settings(self.settings)
 
     @Gtk.Template.Callback("increase_font_button_clicked")
     def bar7(self, *args):
         modifyFont(self, 5)
         updateFont(self)
+        start = self.text_buffer.get_start_iter()
+        search_and_mark_highlight(self, start)
         save_app_settings(self.settings)
 
 

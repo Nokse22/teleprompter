@@ -18,65 +18,166 @@
             <property name="menu-model">primary_menu</property>
           </object>
         </child>
-        <!-- <child type="start"> -->
-        <!--   <object class="GtkButton" id="open_button"> -->
-        <!--     <property name="label">Open</property> -->
-        <!--     <signal name="clicked" handler="open_button_clicked" swapped="no" /> -->
-        <!--   </object> -->
-        <!-- </child> -->
-        <!-- <child type="start"> -->
-        <!--   <object class="GtkButton" id="paste_button"> -->
-        <!--     <property name="icon-name">edit-paste-symbolic</property> -->
-        <!--     <property name="tooltip-text">Paste from Clipboard</property> -->
-        <!--     <signal name="clicked" handler="paste_button_clicked" swapped="no" /> -->
-        <!--   </object> -->
-        <!-- </child> -->
       </object>
     </child>
     <child>
     <object class="AdwToastOverlay" id="overlay">
     <child>
-      <object class="GtkOverlay">
-        <child>
+
+      <object class="AdwFlap" id="flap">
+      <property name="transition-type">over</property>
+      <property name="fold-duration">200</property>
+      <property name="swipe-to-close">0</property>
+      <property name="swipe-to-open">0</property>
+      <property name="fold-threshold-policy">minimum</property>
+      <property name="content">
+
+      <object class="GtkBox">
+       <property name="orientation">1</property>
+
+      <child>
       <object class="AdwClamp">
         <property name="maximum-size">2600</property>
-         <property name="margin-start">90</property>
-        <property name="margin-end">20</property>
+        <!-- <property name="margin-start">6</property> -->
+        <!-- <property name="margin-end">6</property> -->
+        <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
         <property name="tightening-threshold">1000</property>
+        <property name="vexpand">True</property>
           <child>
           <object class="GtkScrolledWindow" id="scrolled_window">
             <property name="hscrollbar-policy">never</property>
             <property name="vexpand">True</property>
             <child>
               <object class="GtkTextView" id="text_view">
+                <property name="vexpand">True</property>
                 <property name="buffer">text_buffer</property>
-                <property name="width-request">400</property>
+                <!-- <property name="width-request">450</property> -->
                 <property name="cursor-visible">1</property>
                 <property name="editable">1</property>
                 <property name="justification">left</property>
                 <property name="pixels-above-lines">6</property>
                 <property name="pixels-below-lines">6</property>
+
                 <property name="wrap-mode">word-char</property>
                 <property name="can-focus">1</property>
                 <property name="can-target">1</property>
               </object>
             </child>
-            </object>
-            </child>
           </object>
         </child>
-            <child type="overlay">
+        </object>
+        </child>
+
+            <child>
+                  <object class="GtkRevealer">
+                    <property name="transition-type">slide-down</property>
+                    <property name="transition-duration">300</property>
+                    <property name="reveal-child"
+                bind-source="flap"
+                bind-property="folded"
+                bind-flags="sync-create"/>
+
+                    <child>
+
+                      <object class="GtkBox">
+                        <property name="spacing">10</property>
+                        <property name="orientation">0</property>
+                        <property name="margin-start">10</property>
+                        <property name="margin-bottom">10</property>
+                        <property name="margin-top">10</property>
+                        <property name="margin-end">10</property>
+                        <property name="valign">center</property>
+                        <property name="halign">center</property>
+                        <property name="css-classes">toolbar
+                        </property>
+
+                        <child>
+                          <object class="GtkButton" id="start_button2">
+                            <property name="icon-name">media-playback-start-symbolic</property>
+                            <property name="tooltip-text">Start/Stop</property>
+                            <property name="can-target">1</property>
+                            <property name="css-classes">suggested-action</property>
+                            <signal name="clicked" handler="play_button_clicked" swapped="no" />
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="icon-name">value-increase-symbolic</property>
+                            <property name="tooltip-text">Increase Speed</property>
+                            <signal name="clicked" handler="increase_speed_button_clicked" swapped="no" />
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkButton">
+                            <property name="icon-name">value-decrease-symbolic</property>
+                            <property name="tooltip-text">Decrease Speed</property>
+                            <signal name="clicked" handler="decrease_speed_button_clicked" swapped="no" />
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator">
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="icon-name">view-fullscreen-symbolic</property>
+                            <property name="tooltip-text">Increase Font Size</property>
+                            <signal name="clicked" handler="increase_font_button_clicked" swapped="no" />
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="icon-name">view-restore-symbolic</property>
+                            <property name="tooltip-text">Decrease Font Size</property>
+                            <signal name="clicked" handler="decrease_font_button_clicked" swapped="no" />
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator">
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="icon-name">document-open-symbolic</property>
+                            <property name="tooltip-text">Open a File</property>
+                            <signal name="clicked" handler="open_button_clicked" swapped="no" />
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="icon-name">edit-paste-symbolic</property>
+                            <property name="tooltip-text">Paste from Clipboard</property>
+                            <signal name="clicked" handler="paste_button_clicked" swapped="no" />
+                          </object>
+                        </child>
+                        <style>
+                          <class name="toolbar"/>
+                          <class name="osd"/>
+                          <class name="darken"/>
+                        </style>
+                      </object>
+                  </child>
+
+                </object>
+              </child>
+
+      </object>
+      </property>
+        <property name="flap">
+
               <object class="GtkBox" id="toolbar">
                 <property name="orientation">1</property>
-                <property name="margin-start">20</property>
-                <property name="margin-end">20</property>
-                <property name="margin-bottom">20</property>
-                <property name="margin-top">20</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">0</property>
+                <property name="margin-bottom">10</property>
+                <property name="margin-top">10</property>
                 <property name="valign">center</property>
-                <property name="halign">start</property>
+                <property name="halign">center</property>
 
                 <child>
-                  <object class="GtkButton" id="start_button">
+                  <object class="GtkButton" id="start_button1">
                     <property name="icon-name">media-playback-start-symbolic</property>
                     <property name="tooltip-text">Start/Stop</property>
                     <property name="can-target">1</property>
@@ -141,7 +242,8 @@
                   <class name="darken"/>
                 </style>
               </object>
-            </child>
+              <!-- close toolbar box -->
+            </property>
       </object>
     </child>
   </object>
@@ -151,10 +253,16 @@
   </template>
 <object class="GtkTextBuffer" id="text_buffer">
     <property name="text">
+
 [START]
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magnam.
-[APPLAUSE]
-Ut enim mortis metu omnis quietae vitae status perturbatur, et ut succumbere doloribus eosque humili animo inbecilloque ferre miserum est, ob eamque causam propter volu
+This app can be used to read a script from the screen, just paste or open a text file.
+Anything between square brackets like [this] is highlighted.
+
+[Customization]
+The font, color of the text and highlights can be customized.
+
+
+
 
 
 

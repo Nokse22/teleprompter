@@ -262,7 +262,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     open_button = Gtk.Template.Child("open_button")
     scrolled_window = Gtk.Template.Child("scrolled_window")
-    start_button = Gtk.Template.Child("start_button")
+    start_button1 = Gtk.Template.Child("start_button1")
+    start_button2 = Gtk.Template.Child("start_button2")
     paste_button = Gtk.Template.Child("paste_button")
     overlay = Gtk.Template.Child("overlay")
 
@@ -294,14 +295,19 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("play_button_clicked")
     def bar1(self, *args):
         apply_text_tags(self)
+        start = self.text_buffer.get_start_iter()
+        search_and_mark_highlight(self, start)
+
         if not self.playing:
-            self.start_button.set_icon_name("media-playback-pause-symbolic")
+            self.start_button1.set_icon_name("media-playback-pause-symbolic")
+            self.start_button2.set_icon_name("media-playback-pause-symbolic")
             self.playing = True
 
             # Start continuous autoscrolling
             GLib.timeout_add(10, autoscroll, self, self.scrolled_window)
         else:
-            self.start_button.set_icon_name("media-playback-start-symbolic")
+            self.start_button1.set_icon_name("media-playback-start-symbolic")
+            self.start_button2.set_icon_name("media-playback-start-symbolic")
             self.playing = False
             self.speed = 0
 

@@ -76,9 +76,9 @@ class TeleprompterApplication(Adw.Application):
         settingsPage.set_icon_name("applications-system-symbolic")
         pref.add(settingsPage)
 
-        stylePage = Adw.PreferencesPage(title="Style")
-        stylePage.set_icon_name("applications-graphics-symbolic")
-        pref.add(stylePage)
+        # stylePage = Adw.PreferencesPage(title="Style")
+        # stylePage.set_icon_name("applications-graphics-symbolic")
+        # pref.add(stylePage)
 
         scrollSettingsGroup = Adw.PreferencesGroup(title="Scroll Settings")
         settingsPage.add(scrollSettingsGroup)
@@ -98,7 +98,7 @@ class TeleprompterApplication(Adw.Application):
 
 
         slowScrollSpeedRow = Adw.ActionRow(title="Slow Scroll Speed", subtitle="When pressing the spacebar")
-        scrollSettingsGroup.add(slowScrollSpeedRow)
+        # scrollSettingsGroup.add(slowScrollSpeedRow)
 
         slowScrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
         slowScrollSpeedScale.set_size_request(200, -1)
@@ -111,7 +111,7 @@ class TeleprompterApplication(Adw.Application):
         slowScrollSpeedScale.set_adjustment(speed2)
 
         textGroup = Adw.PreferencesGroup(title="Text")
-        stylePage.add(textGroup)
+        settingsPage.add(textGroup)
 
         highlightColorPickerRow = Adw.ActionRow(title="Highlight color")
         textGroup.add(highlightColorPickerRow)

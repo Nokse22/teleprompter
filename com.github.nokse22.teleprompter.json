@@ -5,11 +5,11 @@
     "sdk" : "org.gnome.Sdk",
     "command" : "teleprompter",
     "finish-args" : [
-        "--share=network",
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
-        "--socket=wayland"
+        "--socket=wayland",
+        "--filesystem=home:ro"
     ],
     "cleanup" : [
         "/include",
@@ -30,7 +30,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "file:///home/lorenzo/Projects"
+                    "url" : "https://github.com/Nokse22/teleprompter",
+                    "branch" : "main"
                 }
             ]
         }

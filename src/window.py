@@ -220,7 +220,7 @@ def wordPerMinuteToSpeed(self, speed):
     # Convert the font size to an integer and increase it by +5 or -5
     font = int(font_size)
     width = self.textview.get_allocation().width
-    speed = self.settings.speed * font * 0.04 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
+    speed = self.settings.speed * font * 0.1 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
 
     return speed
 
@@ -240,12 +240,14 @@ def modifyFont(self, amount):
 
 class AppSettings:
     def __init__(self):
-        self.font = 'Cantarell 80'
+        self.font = 'Cantarell 40'
         self.textColor = Gdk.RGBA()
+        self.textColor.parse("#62A0EA")
         self.backgroundColor = Gdk.RGBA()
         self.speed = 150
         self.slowSpeed = 50
         self.highlightColor = Gdk.RGBA()
+        self.highlightColor.parse("#ED333B")
         self.boldHighlight = True
 
 def  on_text_pasted(text_buffer, clipboard, self):
@@ -267,6 +269,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     start_button1 = Gtk.Template.Child("start_button1")
     start_button2 = Gtk.Template.Child("start_button2")
     paste_button = Gtk.Template.Child("paste_button")
+    fullscreen_button = Gtk.Template.Child("fullscreen_button")
     overlay = Gtk.Template.Child("overlay")
 
     playing = False
@@ -277,6 +280,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     text_buffer = Gtk.Template.Child("text_buffer")
     textview = Gtk.Template.Child("text_view")
+
+    fullscreened = False
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -357,7 +362,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("decrease_font_button_clicked")
     def bar6(self, *args):
-        modifyFont(self, -5)
+        modifyFont(self, -10)
         updateFont(self)
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)
@@ -365,11 +370,22 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("increase_font_button_clicked")
     def bar7(self, *args):
-        modifyFont(self, 5)
+        modifyFont(self, 10)
         updateFont(self)
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)
         save_app_settings(self.settings)
+
+    @Gtk.Template.Callback("fullscreen_button_clicked")
+    def bar8(self, *args):
+        if self.fullscreened:
+            self.unfullscreen()
+            self.fullscreen_button.set_icon_name("view-fullscreen-symbolic")
+            self.fullscreened = False
+        else:
+            self.fullscreen()
+            self.fullscreen_button.set_icon_name("view-restore-symbolic")
+            self.fullscreened = True
 
 
 

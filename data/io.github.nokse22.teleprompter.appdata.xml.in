@@ -20,8 +20,9 @@
   <launchable type="desktop-id">io.github.nokse22.teleprompter.desktop</launchable>
   <url type="homepage">https://github.com/Nokse22/teleprompter</url>
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
+
   <releases>
-	  <release version="0.1.0" date="2023-06-18">
+	  <release version="0.1.0" date="2023-06-12">
 		  <description>
 			  <p>First release</p>
 		  </description>
@@ -34,9 +35,11 @@
 
 	<screenshots>
     <screenshot type="default">
-      <image>https://github.com/Nokse22/teleprompter/blob/0d02d2a1516018e0579aae854ed36bb994cba733/data/resources/Screenshot%201.png</image>
-      <image>https://github.com/Nokse22/teleprompter/blob/0d02d2a1516018e0579aae854ed36bb994cba733/data/resources/Screenshot%202.png</image>
+      <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%201.png</image>
     </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%202.png</image>
+	  </screenshot>
   </screenshots>
 
 </component>

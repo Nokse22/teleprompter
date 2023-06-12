@@ -119,14 +119,14 @@
                   </child>
                   <child>
                     <object class="GtkButton">
-                      <property name="icon-name">view-fullscreen-symbolic</property>
+                      <property name="icon-name">increase-font</property>
                       <property name="tooltip-text">Increase Font Size</property>
                       <signal name="clicked" handler="increase_font_button_clicked" swapped="no" />
                     </object>
                   </child>
                   <child>
                     <object class="GtkButton">
-                      <property name="icon-name">view-restore-symbolic</property>
+                      <property name="icon-name">decrease-font</property>
                       <property name="tooltip-text">Decrease Font Size</property>
                       <signal name="clicked" handler="decrease_font_button_clicked" swapped="no" />
                     </object>
@@ -198,14 +198,14 @@
                 </child>
                 <child>
                   <object class="GtkButton">
-                    <property name="icon-name">view-fullscreen-symbolic</property>
+                    <property name="icon-name">increase-font</property>
                     <property name="tooltip-text">Increase Font Size</property>
                     <signal name="clicked" handler="increase_font_button_clicked" swapped="no" />
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton">
-                    <property name="icon-name">view-restore-symbolic</property>
+                    <property name="icon-name">decrease-font</property>
                     <property name="tooltip-text">Decrease Font Size</property>
                     <signal name="clicked" handler="decrease_font_button_clicked" swapped="no" />
                   </object>

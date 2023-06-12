@@ -23,6 +23,19 @@ A simple Gtk4 app to read scrolling text from your screen, written in python.
 
 ## Installation
 
+### From Flathub (coming soon)
+
+Teleprompter is available to download on
+[Flathub](https://flathub.org/apps/details/io.github.nokse22.teleprompter).
+
+<a href="https://flathub.org/apps/details/io.github.nokse22.teleprompter" title="Download on Flathub">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="data/resources/flathub-badges/download-i.svg">
+    <source media="(prefers-color-scheme: light)" srcset="data/resources/flathub-badges/download.svg">
+    <img alt="Download Sticky Notes on Flathub" src="data/resources/flathub-badges/download.svg">
+  </picture>
+</a>
+
 ### From source
 
 You just need to clone the repository
@@ -32,3 +45,4 @@ git clone https://github.com/Nokse22/teleprompter.git
 ```
 
 Open the project in GNOME Builder and click "Run Project".
+

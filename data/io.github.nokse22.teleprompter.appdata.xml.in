@@ -36,6 +36,10 @@
 	<screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%201.png</image>
+<<<<<<< HEAD
+=======
+      <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%202.png</image>
+>>>>>>> branch 'main' of https://github.com/Nokse22/teleprompter.git
     </screenshot>
 
 	  <screenshot>

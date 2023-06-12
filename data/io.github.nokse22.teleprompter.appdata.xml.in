@@ -8,6 +8,8 @@
 	  <p>A simple app to read scrolling text from your screen. It has an adaptive layout to work on smartphones too.</p>
 	</description>
 
+  <summary>Display scrolling text on your screen</summary>
+
 	<content_rating type="oars-1.0">
   </content_rating>
 
@@ -22,7 +24,7 @@
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
 
   <releases>
-	  <release version="0.1.0" date="2023-06-12">
+	  <release version="0.1.1" date="2023-06-11">
 		  <description>
 			  <p>First release</p>
 		  </description>

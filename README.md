@@ -2,7 +2,7 @@
 
 
 <div align="center">
-<img src="data/icons/hicolor/scalable/apps/com.github.nokse22.teleprompter.svg" height="100">
+<img src="data/icons/hicolor/scalable/apps/io.github.nokse22.teleprompter.svg" height="100">
 
 # Teleprompter
 

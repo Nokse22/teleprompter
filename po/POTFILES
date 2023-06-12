@@ -1,6 +1,6 @@
-data/com.github.nokse22.teleprompter.desktop.in
-data/com.github.nokse22.teleprompter.appdata.xml.in
-data/com.github.nokse22.teleprompter.gschema.xml
+data/io.github.nokse22.teleprompter.desktop.in
+data/io.github.nokse22.teleprompter.appdata.xml.in
+data/io.github.nokse22.teleprompter.gschema.xml
 src/main.py
 src/window.py
 src/window.ui

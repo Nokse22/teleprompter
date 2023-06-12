@@ -32,7 +32,7 @@ def toHexStr(color):
     return text_color
 
 def save_app_settings(settings):
-    schema_id = "com.github.nokse22.teleprompter"
+    schema_id = "io.github.nokse22.teleprompter"
     print("saving")
 
     # Create a Gio.Settings object for the schema
@@ -99,7 +99,7 @@ def show_file_chooser_dialog(self):
 
 def load_app_settings():
     print("loading")
-    schema_id = "com.github.nokse22.teleprompter"
+    schema_id = "io.github.nokse22.teleprompter"
 
     # Create a Gio.Settings object for the schema
     gio_settings = Gio.Settings(schema_id)
@@ -260,7 +260,7 @@ def on_text_inserted(text_buffer, loc, text, lenght, self):
     start = self.text_buffer.get_start_iter()
     search_and_mark_highlight(self, start)
 
-@Gtk.Template(resource_path='/com/github/nokse22/teleprompter/window.ui')
+@Gtk.Template(resource_path='/io/github/nokse22/teleprompter/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
 
@@ -326,7 +326,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("increase_speed_button_clicked")
     def bar3(self, *args):
         # print("increase speed clicked")
-        self.settings.speed += 5
+        self.settings.speed += 10
         save_app_settings(self.settings)
 
         #start = self.text_buffer.get_start_iter()
@@ -335,9 +335,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("decrease_speed_button_clicked")
     def bar4(self, *args):
         # print("decrease speed clicked")
-        self.settings.speed -= 5
-        if self.settings.speed <= 0:
-            self.settings.speed = 5
+        self.settings.speed -= 10
+        if self.settings.speed <= 40:
+            self.settings.speed = 40
         save_app_settings(self.settings)
 
     @Gtk.Template.Callback("paste_button_clicked")
@@ -364,6 +364,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def bar6(self, *args):
         modifyFont(self, -10)
         updateFont(self)
+        apply_text_tags(self)
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)
         save_app_settings(self.settings)
@@ -372,6 +373,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def bar7(self, *args):
         modifyFont(self, 10)
         updateFont(self)
+        apply_text_tags(self)
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)
         save_app_settings(self.settings)

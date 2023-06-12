@@ -1,4 +1,4 @@
-application_id = 'com.github.nokse22.teleprompter'
+application_id = 'io.github.nokse22.teleprompter'
 
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')
 install_data(

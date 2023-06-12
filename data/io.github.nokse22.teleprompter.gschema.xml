@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="teleprompter">
-	<schema id="com.github.nokse22.teleprompter" path="/com/github/nokse22/teleprompter/">
+	<schema id="io.github.nokse22.teleprompter" path="/io/github/nokse22/teleprompter/">
 
 	  <key name="font" type="s">
-      <default>'Cantarell 80'</default>
+      <default>'Cantarell 40'</default>
       <summary>The font used</summary>
       <description>The font used for displaying text.</description>
     </key>
 
     <key name="text" type="s">
-      <default>'#ff0000'</default>
+      <default>'#62A0EA'</default>
       <summary>The font color</summary>
       <description>The font color</description>
     </key>
 
 	  <key name="background" type="s">
-      <default>'#ff0000'</default>
+      <default>'#242424'</default>
       <summary>The background color</summary>
       <description>The background color</description>
     </key>
 
 	  <key name="speed" type="i">
-      <default>10</default>
+      <default>100</default>
       <summary>The speed</summary>
       <description>The speed</description>
     </key>
@@ -33,7 +33,7 @@
     </key>
 
 	  <key name="highlight" type="s">
-      <default>'#ff0000'</default>
+      <default>'#ED333B'</default>
       <summary>The slow speed</summary>
       <description>The slow speed</description>
     </key>

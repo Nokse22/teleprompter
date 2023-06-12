@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+	<id>io.github.nokse22.teleprompter.desktop</id>
+	<name>Teleprompter</name>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0-or-later</project_license>
+	<description>
+	  <p>A simple app to read scrolling text from your screen. It has an adaptive layout to work on smartphones too.</p>
+	</description>
+
+	<content_rating type="oars-1.0">
+  </content_rating>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+  <launchable type="desktop-id">io.github.nokse22.teleprompter.desktop</launchable>
+  <url type="homepage">https://github.com/Nokse22/teleprompter</url>
+  <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
+  <releases>
+	  <release version="0.1.0" date="2023-06-18">
+		  <description>
+			  <p>First release</p>
+		  </description>
+	  </release>
+  </releases>
+
+	<screenshots>
+    <screenshot type="default">
+      <image>https://github.com/Nokse22/teleprompter/data/resources/Screenshot%201.png</image>
+      <image>https://github.com/Nokse22/teleprompter/data/resources/Screenshot%202.png</image>
+    </screenshot>
+  </screenshots>
+
+</component>

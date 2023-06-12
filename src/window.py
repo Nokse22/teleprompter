@@ -48,9 +48,8 @@ def save_app_settings(settings):
     gio_settings.set_int("slow-speed", settings.slowSpeed * 10)
 
 def on_file_selected(dialog, response, self):
-    if response == Gtk.ResponseType.OK:
-        # filename = file_obj.get_path() if file_obj else None
-        # print("Selected file: {}".format(filename))
+    print(response)
+    if response == -3:
         selected_file = dialog.get_file()
         if selected_file:
             file_path = selected_file.get_path()
@@ -79,23 +78,39 @@ def on_file_selected(dialog, response, self):
         dialog.destroy()
 
 def show_file_chooser_dialog(self):
-    dialog = Gtk.FileChooserDialog(
-        title="Open File",
-        action=Gtk.FileChooserAction.OPEN,
-        transient_for=None
-    )
-    dialog.add_button("Open", Gtk.ResponseType.OK)
-    dialog.add_button("Close", Gtk.ResponseType.CANCEL)
 
-    # Create a filter to display only .txt files
-    filter_txt = Gtk.FileFilter()
-    filter_txt.set_name("Text files")
-    filter_txt.add_pattern("*.txt")
-    dialog.add_filter(filter_txt)
-    dialog.set_filter(filter_txt)
+    # Create a Gtk.FileChooserNative instance
+    dialog = Gtk.FileChooserNative(
+        title="Open File",
+        transient_for=None,
+        action=Gtk.FileChooserAction.OPEN,
+    )
+
+    dialog.set_accept_label("Open")
+    dialog.set_cancel_label("Cancel")
+
+    # Show the dialog and get the response
+    response = dialog.show()
 
     dialog.connect("response", on_file_selected, self)
-    dialog.show()
+
+    # dialog = Gtk.FileChooserDialog(
+    #     title="Open File",
+    #     action=Gtk.FileChooserAction.OPEN,
+    #     transient_for=None
+    # )
+    # dialog.add_button("Open", Gtk.ResponseType.OK)
+    # dialog.add_button("Close", Gtk.ResponseType.CANCEL)
+
+    # Create a filter to display only .txt files
+    # filter_txt = Gtk.FileFilter()
+    # filter_txt.set_name("Text files")
+    # filter_txt.add_pattern("*.txt")
+    # dialog.add_filter(filter_txt)
+    # dialog.set_filter(filter_txt)
+
+    # dialog.connect("response", on_file_selected, self)
+    # dialog.show()
 
 def load_app_settings():
     print("loading")

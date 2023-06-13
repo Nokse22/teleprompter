@@ -21,7 +21,7 @@
         <child type="start">
           <object class="GtkButton" id="fullscreen_button">
             <property name="icon-name">view-fullscreen-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Increase Font Size</property>
+            <property name="tooltip-text" translatable="yes">Toggle Fullscreen</property>
             <signal name="clicked" handler="fullscreen_button_clicked" swapped="no" />
           </object>
         </child>
@@ -109,7 +109,7 @@
                   <child>
                     <object class="GtkButton">
                       <property name="icon-name">value-decrease-symbolic</property>
-                      <property name="tooltip-text">Decrease Speed</property>
+                      <property name="tooltip-text" translatable="yes">Decrease Speed</property>
                       <signal name="clicked" handler="decrease_speed_button_clicked" swapped="no" />
                     </object>
                   </child>
@@ -127,7 +127,7 @@
                   <child>
                     <object class="GtkButton">
                       <property name="icon-name">decrease-font</property>
-                      <property name="tooltip-text">Decrease Font Size</property>
+                      <property name="tooltip-text" translatable="yes">Decrease Font Size</property>
                       <signal name="clicked" handler="decrease_font_button_clicked" swapped="no" />
                     </object>
                   </child>
@@ -217,7 +217,7 @@
                 <child>
                   <object class="GtkButton" id="open_button">
                     <property name="icon-name">document-open-symbolic</property>
-                    <property name="tooltip-text">Open a File</property>
+                    <property name="tooltip-text" translatable="yes">Open a File</property>
                     <signal name="clicked" handler="open_button_clicked" swapped="no" />
                   </object>
                 </child>
@@ -243,7 +243,7 @@
   </child>
   </template>
 <object class="GtkTextBuffer" id="text_buffer">
-    <property name="text">
+    <property name="text" translatable="yes">
 [START]
 This app can be used to read a script from the screen, just paste or open a text file.
 Anything between square brackets like [this] is highlighted.

@@ -4,3 +4,4 @@ data/io.github.nokse22.teleprompter.gschema.xml
 src/main.py
 src/window.py
 src/window.ui
+src/gtk/help-overlay.ui

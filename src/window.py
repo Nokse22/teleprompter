@@ -378,7 +378,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("decrease_font_button_clicked")
     def bar6(self, *args):
-        modifyFont(self, -10)
+        modifyFont(self, -5)
         updateFont(self)
         apply_text_tags(self)
         start = self.text_buffer.get_start_iter()
@@ -387,7 +387,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("increase_font_button_clicked")
     def bar7(self, *args):
-        modifyFont(self, 10)
+        modifyFont(self, 5)
         updateFont(self)
         apply_text_tags(self)
         start = self.text_buffer.get_start_iter()

@@ -25,7 +25,7 @@ A simple Gtk4 app to read scrolling text from your screen, written in python.
 
 ## Installation
 
-### From Flathub (coming soon)
+### From Flathub
 
 Teleprompter is available to download on
 [Flathub](https://flathub.org/apps/details/io.github.nokse22.teleprompter).

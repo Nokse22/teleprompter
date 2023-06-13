@@ -244,8 +244,10 @@ def modifyFont(self, amount):
     font_properties = self.settings.font.split()
     font_size = font_properties[-1]
 
-    # Convert the font size to an integer and increase it by +5 or -5
-    new_font_size = int(font_size) + amount
+    if int(font_size) + amount > 10:
+        new_font_size = int(font_size) + amount
+    else:
+        new_font_size = 10
 
     # Update the font size in the font properties list
     font_properties[-1] = str(new_font_size)
@@ -404,9 +406,4 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             self.fullscreen()
             self.fullscreen_button.set_icon_name("view-restore-symbolic")
             self.fullscreened = True
-
-
-
-
-
 

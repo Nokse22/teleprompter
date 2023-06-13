@@ -192,7 +192,19 @@ class TeleprompterApplication(Adw.Application):
 
     def on_font_changed(self, fontWidget):
         # print("font changed")
-        TeleprompterWindow.settings.font = fontWidget.get_font()
+        font_properties = fontWidget.get_font().split()
+        font_size = font_properties[-1]
+
+        if int(font_size) + amount > 10:
+            new_font_size = int(font_size) + amount
+        else:
+            new_font_size = 10
+
+        # Update the font size in the font properties list
+        font_properties[-1] = str(new_font_size)
+
+        # Construct the updated font string
+        TeleprompterWindow.settings.font = ' '.join(font_properties)
 
     def on_speed_changed(self, sliderWidget, slowSpeedAdj):
         # print("speed changed")

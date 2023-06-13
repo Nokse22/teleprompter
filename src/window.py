@@ -205,7 +205,7 @@ def search_end_highligh(self, start):
         match_start, match_end = match
         return match_end
 
-    return start + 1
+    return None
 
 def updateFont(self):
     tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
@@ -235,7 +235,7 @@ def wordPerMinuteToSpeed(self, speed):
     # Convert the font size to an integer and increase it by +5 or -5
     font = int(font_size)
     width = self.textview.get_allocation().width
-    speed = self.settings.speed * font * 0.1 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
+    speed = self.settings.speed * font * 0.2 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
 
     return speed
 
@@ -306,7 +306,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         self.text_buffer.connect("paste-done", on_text_pasted, self)
 
-        self.text_buffer.connect("insert-text", on_text_inserted, self)
+        self.text_buffer.connect("changed", on_text_inserted, "", 0,0, self)
+        #self.text_buffer.connect("insert-text", on_text_inserted, self)
 
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)

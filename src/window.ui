@@ -21,7 +21,7 @@
         <child type="start">
           <object class="GtkButton" id="fullscreen_button">
             <property name="icon-name">view-fullscreen-symbolic</property>
-            <property name="tooltip-text">Increase Font Size</property>
+            <property name="tooltip-text" translatable="yes">Fullscreen</property>
             <signal name="clicked" handler="fullscreen_button_clicked" swapped="no" />
           </object>
         </child>

@@ -205,7 +205,7 @@ def search_end_highligh(self, start):
         match_start, match_end = match
         return match_end
 
-    return start + 1
+    return start
 
 def updateFont(self):
     tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
@@ -235,7 +235,7 @@ def wordPerMinuteToSpeed(self, speed):
     # Convert the font size to an integer and increase it by +5 or -5
     font = int(font_size)
     width = self.textview.get_allocation().width
-    speed = self.settings.speed * font * 0.1 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
+    speed = self.settings.speed * font * 0.2 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
 
     return speed
 

@@ -13,20 +13,30 @@
 	<content_rating type="oars-1.0">
   </content_rating>
 
-  <supports>
-    <control>pointing</control>
+  <recommends>
     <control>keyboard</control>
+    <control>pointing</control>
     <control>touch</control>
-  </supports>
+    <control>tablet</control>
+  </recommends>
 
   <launchable type="desktop-id">io.github.nokse22.teleprompter.desktop</launchable>
+
   <url type="homepage">https://github.com/Nokse22/teleprompter</url>
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
 
   <releases>
-	  <release version="0.1.1" date="2023-06-11">
+	  <release version="0.1.2" date="2023-06-16">
 		  <description>
-			  <p>First release</p>
+			  <ul>
+					<li>New icon</li>
+					<li>fixed highlighting bugs</li>
+				</ul>
+		  </description>
+	  </release>
+    <release version="0.1.1" date="2023-06-11">
+		  <description>
+			  <p>First release!</p>
 		  </description>
 	  </release>
   </releases>

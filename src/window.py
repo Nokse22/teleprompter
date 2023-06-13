@@ -205,7 +205,7 @@ def search_end_highligh(self, start):
         match_start, match_end = match
         return match_end
 
-    return start
+    return None
 
 def updateFont(self):
     tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
@@ -306,7 +306,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         self.text_buffer.connect("paste-done", on_text_pasted, self)
 
-        self.text_buffer.connect("insert-text", on_text_inserted, self)
+        self.text_buffer.connect("changed", on_text_inserted, "", 0,0, self)
+        #self.text_buffer.connect("insert-text", on_text_inserted, self)
 
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)

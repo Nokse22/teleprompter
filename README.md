@@ -34,7 +34,7 @@ Teleprompter is available to download on
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="data/resources/flathub-badges/download-i.svg">
     <source media="(prefers-color-scheme: light)" srcset="data/resources/flathub-badges/download.svg">
-    <img alt="Download Sticky Notes on Flathub" src="data/resources/flathub-badges/download.svg">
+    <img alt="Download Teleprompter on Flathub" src="data/resources/flathub-badges/download.svg">
   </picture>
 </a>
 

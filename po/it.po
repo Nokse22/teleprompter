@@ -79,9 +79,6 @@ msgstr "Rendi le evidenziature grassette"
 msgid "Generals"
 msgstr "Generali"
 
-#. stylePage = Adw.PreferencesPage(title="Style")
-#. stylePage.set_icon_name("applications-graphics-symbolic")
-#. pref.add(stylePage)
 #: src/main.py:84
 msgid "Scroll Settings"
 msgstr "Impostazioni scorrimento"
@@ -136,11 +133,11 @@ msgstr "Aumenta la Velocità"
 
 #: src/window.ui:112 src/window.ui:191
 msgid "Decrease Speed"
-msgstr "Diminuisci la velocità"
+msgstr "Diminuisci la Velocità"
 
 #: src/window.ui:123 src/window.ui:202
 msgid "Increase Font Size"
-msgstr "Aumenta la velocità"
+msgstr "Aumenta la dimensione del testo"
 
 #: src/window.ui:130 src/window.ui:209
 msgid "Decrease Font Size"
@@ -188,7 +185,7 @@ msgstr ""
 
 #: src/window.ui:266
 msgid "_Preferences"
-msgstr "_ Impostazioni"
+msgstr "_Preferenze"
 
 #: src/window.ui:270
 msgid "_Keyboard Shortcuts"
@@ -209,6 +206,11 @@ msgid "Show Shortcuts"
 msgstr "Mostra Scorciatoie"
 
 #: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr "Mostra Preferenze"
+
+#: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Chiudi"

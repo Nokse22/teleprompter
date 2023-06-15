@@ -24,12 +24,35 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw, Gdk
-from .window import TeleprompterWindow
+from .window import TeleprompterWindow, updateFont
 
-# Create an instance of AdwStyleManager
+import gettext
+import locale
+from os import path
+from os.path import abspath, dirname, join, realpath
+
+# APP = 'teleprompter'
+# WHERE_AM_I = abspath(dirname(realpath(__file__)))
+# LOCALE_DIR = join(WHERE_AM_I, 'po')
+
+# locale.setlocale(locale.LC_ALL, '')
+# locale.bindtextdomain(APP, LOCALE_DIR)
+# gettext.bindtextdomain(APP, LOCALE_DIR)
+# gettext.textdomain(APP)
+
+# desired_language_code = 'it_IT'
+# locale.setlocale(locale.LC_ALL, desired_language_code)
+
+LOCALE_DIR = path.join(path.dirname(__file__).split('teleprompter')[0],'locale')
+print(LOCALE_DIR)
+gettext.bindtextdomain('teleprompter', LOCALE_DIR)
+gettext.textdomain('teleprompter')
+
+# locale.bindtextdomain('teleprompter', LOCALE_DIR)
+# locale.textdomain('teleprompter')
+
+# Set the color scheme to force dark always
 style_manager = Adw.StyleManager.get_default()
-
-# Set the preferred color scheme to dark
 style_manager.set_color_scheme(4)
 
 class TeleprompterApplication(Adw.Application):
@@ -80,10 +103,10 @@ class TeleprompterApplication(Adw.Application):
         # stylePage.set_icon_name("applications-graphics-symbolic")
         # pref.add(stylePage)
 
-        scrollSettingsGroup = Adw.PreferencesGroup(title="Scroll Settings")
+        scrollSettingsGroup = Adw.PreferencesGroup(title=gettext.gettext("Scroll Settings"))
         settingsPage.add(scrollSettingsGroup)
 
-        scrollSpeedRow = Adw.ActionRow(title="Scroll Speed", subtitle="Measured in words per minute")
+        scrollSpeedRow = Adw.ActionRow(title=gettext.gettext("Scroll Speed"), subtitle=gettext.gettext("Measured in words per minute"))
         scrollSettingsGroup.add(scrollSpeedRow)
 
         scrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
@@ -97,7 +120,7 @@ class TeleprompterApplication(Adw.Application):
         scrollSpeedScale.set_adjustment(speed)
 
 
-        slowScrollSpeedRow = Adw.ActionRow(title="Slow Scroll Speed", subtitle="When pressing the spacebar")
+        slowScrollSpeedRow = Adw.ActionRow(title=gettext.gettext("Slow Scroll Speed"), subtitle=gettext.gettext("When pressing the spacebar"))
         # scrollSettingsGroup.add(slowScrollSpeedRow)
 
         slowScrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
@@ -110,17 +133,17 @@ class TeleprompterApplication(Adw.Application):
         speed2.set_value(TeleprompterWindow.settings.slowSpeed)
         slowScrollSpeedScale.set_adjustment(speed2)
 
-        textGroup = Adw.PreferencesGroup(title="Text")
+        textGroup = Adw.PreferencesGroup(title=gettext.gettext("Text"))
         settingsPage.add(textGroup)
 
-        highlightColorPickerRow = Adw.ActionRow(title="Highlight color")
+        highlightColorPickerRow = Adw.ActionRow(title=gettext.gettext("Highlight color"))
         textGroup.add(highlightColorPickerRow)
 
         highlightColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
         highlightColorPicker.set_rgba(TeleprompterWindow.settings.highlightColor)
         highlightColorPickerRow.add_suffix(highlightColorPicker)
 
-        boldHighlight = Adw.ActionRow(title="Bold Highlight")
+        boldHighlight = Adw.ActionRow(title=gettext.gettext("Bold Highlight"))
         textGroup.add(boldHighlight)
 
         boldHighlightSwitch = Gtk.Switch(valign = Gtk.Align.CENTER)
@@ -128,10 +151,10 @@ class TeleprompterApplication(Adw.Application):
 
         boldHighlight.add_suffix(boldHighlightSwitch)
 
-        fontColorPickerRow = Adw.ActionRow(title="Font color")
+        fontColorPickerRow = Adw.ActionRow(title=gettext.gettext("Font color"))
         textGroup.add(fontColorPickerRow)
 
-        fontPickerRow = Adw.ActionRow(title="Font")
+        fontPickerRow = Adw.ActionRow(title=gettext.gettext("Font"))
         textGroup.add(fontPickerRow)
 
         fontPicker = Gtk.FontButton(valign = Gtk.Align.CENTER)

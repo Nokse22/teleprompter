@@ -188,7 +188,7 @@ msgstr ""
 
 #: src/window.ui:266
 msgid "_Preferences"
-msgstr "_ Tercihler"
+msgstr "_Tercihler"
 
 #: src/window.ui:270
 msgid "_Keyboard Shortcuts"

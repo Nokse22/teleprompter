@@ -1,4 +1,4 @@
-# Italian translation of io.github.nokse22.teleprompter.
+# French translation of io.github.nokse22.teleprompter.
 # Copyright (C) 2023 io.github.nokse22.teleprompter's COPYRIGHT HOLDER
 # This file is distributed under the same license as the io.github.nokse22.teleprompter package.
 #

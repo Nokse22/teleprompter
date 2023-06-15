@@ -23,6 +23,12 @@ from gi.repository import Gtk, Gdk
 from gi.repository import Adw
 from gi.repository import Pango, GLib, Gio, cairo
 
+import locale
+from os import path
+
+# desired_language_code = 'it_IT'
+# locale.setlocale(locale.LC_ALL, desired_language_code)
+
 def toHexStr(color):
     text_color = "#{:02X}{:02X}{:02X}".format(
         int(color.red * 255),
@@ -61,20 +67,19 @@ def on_file_selected(dialog, response, self):
                     updateFont(self)
                     start = self.text_buffer.get_start_iter()
                     search_and_mark_highlight(self, start)
-            except OSError as e:
+                    dialog.destroy()
+                    toast = Adw.Toast()
+                    toast.set_title("File successfully opened")
+                    toast.set_timeout(1)
+                    self.overlay.add_toast(toast)
+            except:
                 dialog.destroy()
                 toast = Adw.Toast()
                 toast.set_title("Error reading file")
                 toast.set_timeout(1)
                 self.overlay.add_toast(toast)
 
-        dialog.destroy()
-        toast = Adw.Toast()
-        toast.set_title("File successfully opened")
-        toast.set_timeout(1)
-        self.overlay.add_toast(toast)
-
-    if response == Gtk.ResponseType.CANCEL:
+    else:
         dialog.destroy()
 
 def show_file_chooser_dialog(self):
@@ -113,7 +118,7 @@ def show_file_chooser_dialog(self):
     # dialog.show()
 
 def load_app_settings():
-    print("loading")
+    # print("loading")
     schema_id = "io.github.nokse22.teleprompter"
 
     # Create a Gio.Settings object for the schema
@@ -277,6 +282,12 @@ def on_text_inserted(text_buffer, loc, text, lenght, self):
     start = self.text_buffer.get_start_iter()
     search_and_mark_highlight(self, start)
 
+def on_window_focus_in(window, event):
+    # Check if the window is the main window
+    if window.get_application().get_active_window() == window:
+        # Window has regained focus and is now the main window
+        print("Window is the main window again")
+
 @Gtk.Template(resource_path='/io/github/nokse22/teleprompter/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
@@ -290,15 +301,13 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     overlay = Gtk.Template.Child("overlay")
 
     playing = False
+    fullscreened = False
 
     settings = AppSettings()
-
     settings = load_app_settings()
 
     text_buffer = Gtk.Template.Child("text_buffer")
     textview = Gtk.Template.Child("text_view")
-
-    fullscreened = False
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -308,14 +317,11 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         self.text_buffer.connect("paste-done", on_text_pasted, self)
 
-        self.text_buffer.connect("changed", on_text_inserted, "", 0,0, self)
+        self.text_buffer.connect("changed", on_text_inserted, "", 0, 0, self)
         #self.text_buffer.connect("insert-text", on_text_inserted, self)
 
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)
-
-        #self.text_buffer.connect("changed", apply_text_tags, self.text_buffer)
-        #update(self)
 
     @Gtk.Template.Callback("play_button_clicked")
     def bar1(self, *args):

@@ -32,7 +32,7 @@ from os import path
 from os.path import abspath, dirname, join, realpath
 
 LOCALE_DIR = path.join(path.dirname(__file__).split('teleprompter')[0],'locale')
-print(LOCALE_DIR)
+# print(LOCALE_DIR)
 gettext.bindtextdomain('teleprompter', LOCALE_DIR)
 gettext.textdomain('teleprompter')
 

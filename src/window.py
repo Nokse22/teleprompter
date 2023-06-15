@@ -53,6 +53,8 @@ def save_app_settings(settings):
     gio_settings.set_int("speed", settings.speed * 10)
     gio_settings.set_int("slow-speed", settings.slowSpeed * 10)
 
+    gio_settings.set_boolean("bold-highlight", settings.boldHighlight)
+
 def on_file_selected(dialog, response, self):
     print(response)
     if response == -3:
@@ -325,9 +327,11 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("play_button_clicked")
     def bar1(self, *args):
+        updateFont(self)
         apply_text_tags(self)
         start = self.text_buffer.get_start_iter()
         search_and_mark_highlight(self, start)
+        save_app_settings(self.settings)
 
         if not self.playing:
             self.start_button1.set_icon_name("media-playback-pause-symbolic")

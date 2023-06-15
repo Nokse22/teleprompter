@@ -29,14 +29,15 @@
 	  <release version="0.1.2" date="2023-06-16">
 		  <description>
 			  <ul>
-					<li>New icon</li>
-					<li>fixed highlighting bugs</li>
+					<li>New icon 🎉</li>
+					<li>Fixed highlighting bugs</li>
 			    <li>Added Turkish translation (Sabri Ünal)</li>
 			    <li>Added French translation (Irénée Thirion)</li>
 			    <li>Added Italian translation</li>
 			    <li>Fixed some translation issue</li>
 			    <li>Fixed text becoming invisible</li>
 			    <li>Fixed bug when opening unsupported files</li>
+			    <li>Fixed the bold highlight setting not being saved</li>
 				</ul>
 		  </description>
 	  </release>

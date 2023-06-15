@@ -120,7 +120,7 @@ msgid "Font"
 msgstr "Font"
 
 #: src/window.ui:24
-msgid "Fullscreen"
+msgid "Toggle Fullscreen"
 msgstr "Schermo intero"
 
 #: src/window.ui:96 src/window.ui:175
@@ -189,11 +189,11 @@ msgstr "_Preferenze"
 
 #: src/window.ui:270
 msgid "_Keyboard Shortcuts"
-msgstr "_Scorciatoie della Tastiera"
+msgstr "_Scorciatoie"
 
 #: src/window.ui:274
 msgid "_About Teleprompter"
-msgstr "_Riguardo Teleprompter"
+msgstr "_Informazioni su Teleprompter"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"

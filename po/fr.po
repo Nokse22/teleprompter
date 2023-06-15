@@ -123,7 +123,7 @@ msgid "Font"
 msgstr "Police"
 
 #: src/window.ui:24
-msgid "Fullscreen"
+msgid "Toggle Fullscreen"
 msgstr "Plein écran"
 
 #: src/window.ui:96 src/window.ui:175

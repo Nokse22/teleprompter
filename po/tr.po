@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.nokse22.teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-13 17:46+0300\n"
-"PO-Revision-Date: 2023-06-13 17:47+0300\n"
+"POT-Creation-Date: 2023-06-15 22:53+0300\n"
+"PO-Revision-Date: 2023-06-15 22:59+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -36,9 +36,45 @@ msgstr ""
 msgid "Display scrolling text on your screen"
 msgstr "Kayan metni ekranınızda görüntüleyin"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:29
-msgid "First release"
-msgstr "İlk sürüm"
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:32
+msgid "New icon 🎉"
+msgstr "Yeni simge"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:33
+msgid "Fixed highlighting bugs"
+msgstr "Vurgulama hataları düzeltildi"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:34
+msgid "Added Turkish translation (Sabri Ünal)"
+msgstr "Türkçe çeviri eklendi (Sabri Ünal)"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:35
+msgid "Added French translation (Irénée Thirion)"
+msgstr "Fransızca çeviri eklendi (Irénée Thirion)"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:36
+msgid "Added Italian translation"
+msgstr "İtalyanca çeviri eklendi"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:37
+msgid "Fixed some translation issue"
+msgstr "Kimi çeviri hataları düzeltildi"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:38
+msgid "Fixed text becoming invisible"
+msgstr "Metinlerin görünmez olması hatası düzeltildi"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:39
+msgid "Fixed bug when opening unsupported files"
+msgstr "Desteklenmeyen dosya açılırken yaşanan sorun düzeltildi"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:40
+msgid "Fixed the bold highlight setting not being saved"
+msgstr "Koyu vurgulama ayarının kaydedilmemesi hatası düzeltildi"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:46
+msgid "First release!"
+msgstr "İlk sürüm!"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:7
 msgid "The font used"
@@ -75,56 +111,52 @@ msgstr "Yavaş hız"
 msgid "Also bold all the highlight"
 msgstr "Tüm vurguları kalınlaştır"
 
-#: src/main.py:76
-msgid "Generals"
-msgstr "Genel"
-
 #. stylePage = Adw.PreferencesPage(title="Style")
 #. stylePage.set_icon_name("applications-graphics-symbolic")
 #. pref.add(stylePage)
-#: src/main.py:84
+#: src/main.py:91
 msgid "Scroll Settings"
 msgstr "Kaydırma Ayarları"
 
-#: src/main.py:87
+#: src/main.py:94
 msgid "Scroll Speed"
 msgstr "Kaydırma Hızı"
 
-#: src/main.py:87
+#: src/main.py:94
 msgid "Measured in words per minute"
 msgstr "Dakikada kelime cinsinden ölçülür"
 
-#: src/main.py:101
+#: src/main.py:108
 msgid "Slow Scroll Speed"
 msgstr "Yavaş Kaydırma Hızı"
 
-#: src/main.py:101
+#: src/main.py:108
 msgid "When pressing the spacebar"
 msgstr "Boşluk çubuğuna basıldığında"
 
-#: src/main.py:114
+#: src/main.py:121
 msgid "Text"
 msgstr "Metin"
 
-#: src/main.py:117
+#: src/main.py:124
 msgid "Highlight color"
 msgstr "Vurgu rengi"
 
-#: src/main.py:124
+#: src/main.py:131
 msgid "Bold Highlight"
-msgstr "Kalın Vurgu"
+msgstr "Kalın vurgu"
 
-#: src/main.py:132
+#: src/main.py:139
 msgid "Font color"
 msgstr "Yazı tipi rengi"
 
-#: src/main.py:135
+#: src/main.py:142
 msgid "Font"
 msgstr "Yazı tipi"
 
 #: src/window.ui:24
 msgid "Toggle Fullscreen"
-msgstr "Tam Ekran"
+msgstr "Tam Ekranı Aç/Kapat"
 
 #: src/window.ui:96 src/window.ui:175
 msgid "Start/Stop"
@@ -210,5 +242,13 @@ msgstr "Kısayolları Göster"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr "Tercihleri Göster"
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Çık"
+
+#~ msgid "Generals"
+#~ msgstr "Genel"

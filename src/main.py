@@ -31,25 +31,10 @@ import locale
 from os import path
 from os.path import abspath, dirname, join, realpath
 
-# APP = 'teleprompter'
-# WHERE_AM_I = abspath(dirname(realpath(__file__)))
-# LOCALE_DIR = join(WHERE_AM_I, 'po')
-
-# locale.setlocale(locale.LC_ALL, '')
-# locale.bindtextdomain(APP, LOCALE_DIR)
-# gettext.bindtextdomain(APP, LOCALE_DIR)
-# gettext.textdomain(APP)
-
-# desired_language_code = 'it_IT'
-# locale.setlocale(locale.LC_ALL, desired_language_code)
-
 LOCALE_DIR = path.join(path.dirname(__file__).split('teleprompter')[0],'locale')
 print(LOCALE_DIR)
 gettext.bindtextdomain('teleprompter', LOCALE_DIR)
 gettext.textdomain('teleprompter')
-
-# locale.bindtextdomain('teleprompter', LOCALE_DIR)
-# locale.textdomain('teleprompter')
 
 # Set the color scheme to force dark always
 style_manager = Adw.StyleManager.get_default()

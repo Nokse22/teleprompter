@@ -36,7 +36,7 @@
 			    <li>Added Italian translation</li>
 			    <li>Fixed some translation issue</li>
 			    <li>Fixed text becoming invisible</li>
-			    <li>Fixed bug when opening unsupported file</li>
+			    <li>Fixed bug when opening unsupported files</li>
 				</ul>
 		  </description>
 	  </release>

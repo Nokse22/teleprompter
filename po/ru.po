@@ -1,190 +1,186 @@
-# Turkish translation of io.github.nokse22.teleprompter.
-# Copyright (C) 2023 io.github.nokse22.teleprompter's COPYRIGHT HOLDER
-# This file is distributed under the same license as the io.github.nokse22.teleprompter package.
-#
-# Sabri Ünal <libreajans@gmail.com>, 2023.
+# Russian translation for Teleprompter.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Сергей Ворон <voron@duck.com>, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: io.github.nokse22.teleprompter\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 22:53+0300\n"
-"PO-Revision-Date: 2023-06-15 22:59+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <takim@gnome.org.tr>\n"
-"Language: tr\n"
+"POT-Creation-Date: 2023-06-22 15:33+0300\n"
+"PO-Revision-Date: 2023-06-22 15:49+0300\n"
+"Last-Translator: Сергей Ворон <voron@duck.com>\n"
+"Language-Team: \n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: data/io.github.nokse22.teleprompter.desktop.in:3
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:4
 msgid "Teleprompter"
-msgstr "Teleprompter"
+msgstr "Телесуфлер"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:8
 msgid ""
 "A simple app to read scrolling text from your screen. It has an adaptive "
 "layout to work on smartphones too."
 msgstr ""
-"Ekranınızdan kayan metni okumak için basit bir uygulama. Akıllı telefonlarda "
-"da çalışmak için uyarlanabilir düzene sahiptir."
+"Простое приложение для чтения прокручиваемого текста с экрана. Оно также "
+"имеет адаптивный макет для работы на смартфонах."
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:11
 msgid "Display scrolling text on your screen"
-msgstr "Kayan metni ekranınızda görüntüleyin"
+msgstr "Отображение прокручиваемого текста на экране"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:32
 msgid "New icon 🎉"
-msgstr "Yeni simge"
+msgstr "Новая иконка 🎉"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:33
 msgid "Fixed highlighting bugs"
-msgstr "Vurgulama hataları düzeltildi"
+msgstr "Исправлены ошибки выделения"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:34
 msgid "Added Turkish translation (Sabri Ünal)"
-msgstr "Türkçe çeviri eklendi (Sabri Ünal)"
+msgstr "Добавлен Турецкий перевод (Sabri Ünal)"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:35
 msgid "Added French translation (Irénée Thirion)"
-msgstr "Fransızca çeviri eklendi (Irénée Thirion)"
+msgstr "Добавлен Французский перевод (Irénée Thirion)"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:36
 msgid "Added Italian translation"
-msgstr "İtalyanca çeviri eklendi"
+msgstr "Добавлен Итальянский перевод"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:37
 msgid "Fixed some translation issue"
-msgstr "Kimi çeviri hataları düzeltildi"
+msgstr "Исправлены некоторые проблемы с переводом"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:38
 msgid "Fixed text becoming invisible"
-msgstr "Metinlerin görünmez olması hatası düzeltildi"
+msgstr "Исправлена ошибка, из-за которой текст становился невидимым"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:39
 msgid "Fixed bug when opening unsupported files"
-msgstr "Desteklenmeyen dosya açılırken yaşanan sorun düzeltildi"
+msgstr "Исправлена ошибка при открытии неподдерживаемых файлов"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:40
 msgid "Fixed the bold highlight setting not being saved"
-msgstr "Koyu vurgulama ayarının kaydedilmemesi hatası düzeltildi"
+msgstr ""
+"Исправлена ​​ошибка, из-за которой настройка жирного выделения не сохранялась"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:46
 msgid "First release!"
-msgstr "İlk sürüm!"
+msgstr "Первый релиз!"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:7
 msgid "The font used"
-msgstr "Kullanılan yazı tipi"
+msgstr "Используемый шрифт"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:8
 msgid "The font used for displaying text."
-msgstr "Metin görüntelemek için kullanılan yazı tipi."
+msgstr "Шрифт, используемый для отображения текста."
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:13
 #: data/io.github.nokse22.teleprompter.gschema.xml:14
 msgid "The font color"
-msgstr "Yazı tipi rengi"
+msgstr "Цвет шрифта"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:19
 #: data/io.github.nokse22.teleprompter.gschema.xml:20
 msgid "The background color"
-msgstr "Arka plan rengi"
+msgstr "Цвет фона"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:25
 #: data/io.github.nokse22.teleprompter.gschema.xml:26
 msgid "The speed"
-msgstr "Hız"
+msgstr "Скорость"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:31
 #: data/io.github.nokse22.teleprompter.gschema.xml:32
 #: data/io.github.nokse22.teleprompter.gschema.xml:37
 #: data/io.github.nokse22.teleprompter.gschema.xml:38
 msgid "The slow speed"
-msgstr "Yavaş hız"
+msgstr "Медленная скорость"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:43
 #: data/io.github.nokse22.teleprompter.gschema.xml:44
 msgid "Also bold all the highlight"
-msgstr "Tüm vurguları kalınlaştır"
+msgstr "Также жирным шрифтом все выделения"
 
-#. stylePage = Adw.PreferencesPage(title="Style")
-#. stylePage.set_icon_name("applications-graphics-symbolic")
-#. pref.add(stylePage)
 #: src/main.py:91
 msgid "Scroll Settings"
-msgstr "Kaydırma Ayarları"
+msgstr "Настройки прокрутки"
 
 #: src/main.py:94
 msgid "Scroll Speed"
-msgstr "Kaydırma Hızı"
+msgstr "Скорость прокрутки"
 
 #: src/main.py:94
 msgid "Measured in words per minute"
-msgstr "Dakikada kelime cinsinden ölçülür"
+msgstr "Измеряется в словах в минуту"
 
 #: src/main.py:108
 msgid "Slow Scroll Speed"
-msgstr "Yavaş Kaydırma Hızı"
+msgstr "Медленная скорость прокрутки"
 
 #: src/main.py:108
 msgid "When pressing the spacebar"
-msgstr "Boşluk çubuğuna basıldığında"
+msgstr "При нажатии пробела"
 
 #: src/main.py:121
 msgid "Text"
-msgstr "Metin"
+msgstr "Текст"
 
 #: src/main.py:124
 msgid "Highlight color"
-msgstr "Vurgu rengi"
+msgstr "Цвет выделения"
 
 #: src/main.py:131
 msgid "Bold Highlight"
-msgstr "Kalın vurgu"
+msgstr "Жирное выделение"
 
 #: src/main.py:139
 msgid "Font color"
-msgstr "Yazı tipi rengi"
+msgstr "Цвет шрифта"
 
 #: src/main.py:142
 msgid "Font"
-msgstr "Yazı tipi"
+msgstr "Шрифт"
 
 #: src/window.ui:24
 msgid "Toggle Fullscreen"
-msgstr "Tam Ekranı Aç/Kapat"
+msgstr "Включить полноэкранный режим"
 
 #: src/window.ui:96 src/window.ui:175
 msgid "Start/Stop"
-msgstr "Başlat/Durdur"
+msgstr "Старт/Стоп"
 
 #: src/window.ui:105 src/window.ui:184
 msgid "Increase Speed"
-msgstr "Hızı Artır"
+msgstr "Увеличить скорость"
 
 #: src/window.ui:112 src/window.ui:191
 msgid "Decrease Speed"
-msgstr "Hızı Azalt"
+msgstr "Уменьшить скорость"
 
 #: src/window.ui:123 src/window.ui:202
 msgid "Increase Font Size"
-msgstr "Yazı Tipi Boyutunu Artır"
+msgstr "Увеличить размер шрифта"
 
 #: src/window.ui:130 src/window.ui:209
 msgid "Decrease Font Size"
-msgstr "Yazı Tipi Boyutunu Azalt"
+msgstr "Уменьшить размер шрифта"
 
 #: src/window.ui:141 src/window.ui:220
 msgid "Open a File"
-msgstr "Dosya Aç"
+msgstr "Открыть файл"
 
 #: src/window.ui:148 src/window.ui:227
 msgid "Paste from Clipboard"
-msgstr "Panodan Yapıştır"
+msgstr "Вставить из буфера обмена"
 
 #: src/window.ui:246
 msgid ""
@@ -205,13 +201,15 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"[BAŞLAT]\n"
-"Bu uygulama ekrandan metin okumak için kullanılabilir, bir metin dosyasını "
-"yapıştırmanız veya açmanız yeterlidir.\n"
-"[bu] gibi köşeli parantezler arasına alınmış metinler vurgulanır.\n"
+"[СТАРТ]\n"
+"Это приложение можно использовать для чтения сценария с экрана, просто "
+"вставьте или откройте текстовый файл.\n"
+"Все, что заключено в квадратные скобки, например [это], выделяется.\n"
 "\n"
-"[Özelleştirme]\n"
-"Yazı tipi, metin rengi ve vurgulamalar özelleştirilebilir.\n"
+"[Настройка]\n"
+"Шрифт, цвет текста и выделения можно настроить.\n"
+"\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -220,35 +218,32 @@ msgstr ""
 
 #: src/window.ui:266
 msgid "_Preferences"
-msgstr "_Tercihler"
+msgstr "_Настройки"
 
 #: src/window.ui:270
 msgid "_Keyboard Shortcuts"
-msgstr "_Klavye Kısayolları"
+msgstr "_Комбинации клавиш"
 
 #: src/window.ui:274
 msgid "_About Teleprompter"
-msgstr "Teleprompter _Hakkında"
+msgstr "_О Телесуфлер"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Genel"
+msgstr "Общие"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Kısayolları Göster"
+msgstr "Показать комбинации клавиш"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Tercihleri Göster"
+msgstr "Показать настройки"
 
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Çık"
-
-#~ msgid "Generals"
-#~ msgstr "Genel"
+msgstr "Выйти"

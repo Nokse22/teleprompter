@@ -67,7 +67,7 @@ class TeleprompterApplication(Adw.Application):
                                 application_name='Teleprompter',
                                 application_icon='io.github.nokse22.teleprompter',
                                 developer_name='Nokse',
-                                version='0.1.2',
+                                version='0.1.3',
                                 developers=['Nokse'],
                                 license_type="GTK_LICENSE_GPL_3_0",
                                 issue_url='https://github.com/Nokse22/teleprompter/issues',
@@ -91,7 +91,7 @@ class TeleprompterApplication(Adw.Application):
         scrollSettingsGroup = Adw.PreferencesGroup(title=gettext.gettext("Scroll Settings"))
         settingsPage.add(scrollSettingsGroup)
 
-        scrollSpeedRow = Adw.ActionRow(title=gettext.gettext("Scroll Speed"), subtitle=gettext.gettext("Measured in words per minute"))
+        scrollSpeedRow = Adw.ActionRow(title=gettext.gettext("Scroll Speed"), subtitle=gettext.gettext("In words per minute (approximately)"))
         scrollSettingsGroup.add(scrollSpeedRow)
 
         scrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)

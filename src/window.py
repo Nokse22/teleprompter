@@ -23,11 +23,15 @@ from gi.repository import Gtk, Gdk
 from gi.repository import Adw
 from gi.repository import Pango, GLib, Gio, cairo
 
+import gettext
 import locale
 from os import path
+from os.path import abspath, dirname, join, realpath
 
-# desired_language_code = 'it_IT'
-# locale.setlocale(locale.LC_ALL, desired_language_code)
+LOCALE_DIR = path.join(path.dirname(__file__).split('teleprompter')[0],'locale')
+# print(LOCALE_DIR)
+gettext.bindtextdomain('teleprompter', LOCALE_DIR)
+gettext.textdomain('teleprompter')
 
 def toHexStr(color):
     text_color = "#{:02X}{:02X}{:02X}".format(
@@ -158,7 +162,14 @@ def autoscroll(self, scrolled_window):
     adjustment.set_value(adjustment.get_value() + wordPerMinuteToSpeed(self, self.settings.speed))
     scrolled_window.set_vadjustment(adjustment)
 
-    # self.progress_scale_adjustment.set_value((self.adj/adjustment.get_upper() - adjustment.get_lower())*100)
+    #print(adjustment.get_value())
+    #print(adjustment.get_upper() - adjustment.get_page_size())
+
+    if adjustment.get_value() == adjustment.get_upper() - adjustment.get_page_size():
+        self.playing = False
+        self.start_button1.set_icon_name("media-playback-start-symbolic")
+        self.start_button2.set_icon_name("media-playback-start-symbolic")
+        return 0
 
     if not self.playing:
         return 0
@@ -243,6 +254,9 @@ def wordPerMinuteToSpeed(self, speed):
     font = int(font_size)
     width = self.textview.get_allocation().width
     speed = self.settings.speed * font * 0.2 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
+
+    if speed <= 0.25:
+        speed = 0.25
 
     return speed
 

@@ -26,6 +26,17 @@
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
 
   <releases>
+    <release version="0.1.3" date="2023-07-09">
+		  <description>
+			  <ul>
+					<li>Fixed some bugs</li>
+			    <li>Improved some icons</li>
+			    <li>Added Spanish tranlation</li>
+			    <li>Added Russian tranlation (Сергей Ворон)</li>
+			    <li>When the end is reached it stops</li>
+				</ul>
+		  </description>
+	  </release>
 	  <release version="0.1.2" date="2023-06-16">
 		  <description>
 			  <ul>

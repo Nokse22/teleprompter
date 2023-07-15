@@ -1,10 +1,8 @@
-# 
-
-
-<div align="center">
-<img src="data/icons/hicolor/scalable/apps/io.github.nokse22.teleprompter.svg" height="100">
-
-# Teleprompter
+<img height="128" src="data/io.github.nokse22.teleprompter" align="left"/> 
+  
+ # Teleprompter 
+  
+ A simple teleprompter app for GNOME.
 
   [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
   [![made-with-python](https://img.shields.io/badge/Made%20with-Python-ff7b3f.svg)](https://www.python.org/)

@@ -1,4 +1,4 @@
-<img height="128" src="data/io.github.nokse22.teleprompter" align="left"/> 
+<img height="128" src="data/icons/hicolor/scalable/apps/io.github.nokse22.teleprompter" align="left"/> 
   
  # Teleprompter 
   

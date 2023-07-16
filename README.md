@@ -16,8 +16,8 @@ A simple Gtk4 app to read scrolling text from your screen, written in python.
   Has an adaptive layout that let you use it on smartphone too.
   </p>
   <div align="center">
-  <img src="data/resources/Screenshot 1.png" max-height="400"/>
-  <img src="data/resources/Screenshot 2.png" max-height="400"/>
+  <img src="data/resources/Screenshot 1.png" height="400"/>
+  <img src="data/resources/Screenshot 2.png" height="400"/>
   </div>
   
   

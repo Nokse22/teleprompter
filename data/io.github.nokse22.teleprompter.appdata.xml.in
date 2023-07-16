@@ -25,6 +25,10 @@
   <url type="homepage">https://github.com/Nokse22/teleprompter</url>
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
 
+  <custom>
+    <value key="GnomeSoftware::key-colors">[(76, 163, 217), (0, 0, 0)]</value>
+  </custom>
+
   <releases>
     <release version="0.1.3" date="2023-07-09">
 		  <description>

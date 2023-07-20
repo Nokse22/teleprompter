@@ -292,7 +292,7 @@ def  on_text_pasted(text_buffer, clipboard, self):
     apply_text_tags(self)
     updateFont(self)
 
-def on_text_inserted(text_buffer, loc, text, lenght, self):
+def on_text_inserted(text_buffer, loc, text, length, self):
     apply_text_tags(self)
     updateFont(self)
     start = self.text_buffer.get_start_iter()

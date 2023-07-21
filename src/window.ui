@@ -7,7 +7,7 @@
     <property name="default-height">800</property>
     <property name="title">Teleprompter</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkBox" id="box1">
     <property name="orientation">vertical</property>
     <child>
       <object class="GtkHeaderBar">
@@ -37,7 +37,7 @@
       <property name="swipe-to-open">0</property>
       <property name="fold-threshold-policy">minimum</property>
       <property name="content">
-      <object class="GtkBox">
+      <object class="GtkBox"  id="box2">
        <property name="orientation">1</property>
       <child>
       <object class="AdwClamp">
@@ -79,7 +79,7 @@
           bind-property="folded"
           bind-flags="sync-create"/>
               <child>
-                <object class="GtkBox">
+                <object class="GtkBox"  id="box3">
                   <property name="spacing">10</property>
                   <property name="orientation">0</property>
                   <property name="margin-start">10</property>

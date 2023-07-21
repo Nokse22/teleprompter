@@ -24,7 +24,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw, Gdk
-from .window import TeleprompterWindow, updateFont
+from .window import TeleprompterWindow
 
 import gettext
 import locale
@@ -56,10 +56,10 @@ class TeleprompterApplication(Adw.Application):
         We raise the application's main window, creating it if
         necessary.
         """
-        win = self.props.active_window
-        if not win:
-            win = TeleprompterWindow(application=self)
-        win.present()
+        self.win = self.props.active_window
+        if not self.win:
+            self.win = TeleprompterWindow(application=self)
+        self.win.present()
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
@@ -67,7 +67,7 @@ class TeleprompterApplication(Adw.Application):
                                 application_name='Teleprompter',
                                 application_icon='io.github.nokse22.teleprompter',
                                 developer_name='Nokse',
-                                version='0.1.3',
+                                version='0.1.4',
                                 developers=['Nokse'],
                                 license_type="GTK_LICENSE_GPL_3_0",
                                 issue_url='https://github.com/Nokse22/teleprompter/issues',
@@ -101,7 +101,7 @@ class TeleprompterApplication(Adw.Application):
 
         scrollSpeedRow.add_suffix(scrollSpeedScale)
         speed = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
-        speed.set_value(TeleprompterWindow.settings.speed)
+        speed.set_value(self.win.settings.speed)
         scrollSpeedScale.set_adjustment(speed)
 
 
@@ -114,8 +114,8 @@ class TeleprompterApplication(Adw.Application):
         slowScrollSpeedScale.set_draw_value(True)
 
         slowScrollSpeedRow.add_suffix(slowScrollSpeedScale)
-        speed2 = Gtk.Adjustment(upper=TeleprompterWindow.settings.speed / 2, step_increment=1, lower=5)
-        speed2.set_value(TeleprompterWindow.settings.slowSpeed)
+        speed2 = Gtk.Adjustment(upper=self.win.settings.speed / 2, step_increment=1, lower=5)
+        speed2.set_value(self.win.settings.slowSpeed)
         slowScrollSpeedScale.set_adjustment(speed2)
 
         textGroup = Adw.PreferencesGroup(title=gettext.gettext("Text"))
@@ -125,14 +125,14 @@ class TeleprompterApplication(Adw.Application):
         textGroup.add(highlightColorPickerRow)
 
         highlightColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
-        highlightColorPicker.set_rgba(TeleprompterWindow.settings.highlightColor)
+        highlightColorPicker.set_rgba(self.win.settings.highlightColor)
         highlightColorPickerRow.add_suffix(highlightColorPicker)
 
         boldHighlight = Adw.ActionRow(title=gettext.gettext("Bold Highlight"))
         textGroup.add(boldHighlight)
 
         boldHighlightSwitch = Gtk.Switch(valign = Gtk.Align.CENTER)
-        boldHighlightSwitch.set_active(TeleprompterWindow.settings.boldHighlight)
+        boldHighlightSwitch.set_active(self.win.settings.boldHighlight)
 
         boldHighlight.add_suffix(boldHighlightSwitch)
 
@@ -143,11 +143,11 @@ class TeleprompterApplication(Adw.Application):
         textGroup.add(fontPickerRow)
 
         fontPicker = Gtk.FontButton(valign = Gtk.Align.CENTER)
-        fontPicker.set_font(TeleprompterWindow.settings.font)
+        fontPicker.set_font(self.win.settings.font)
         fontPickerRow.add_suffix(fontPicker)
 
         fontColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
-        fontColorPicker.set_rgba(TeleprompterWindow.settings.textColor)
+        fontColorPicker.set_rgba(self.win.settings.textColor)
         fontColorPickerRow.add_suffix(fontColorPicker)
 
 
@@ -158,7 +158,7 @@ class TeleprompterApplication(Adw.Application):
         # backgroundGroup.add(backgroundColorPickerRow)
 
         # backgroundColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
-        # backgroundColorPicker.set_rgba(TeleprompterWindow.settings.backgroundColor)
+        # backgroundColorPicker.set_rgba(self.win.settings.backgroundColor)
         # backgroundColorPickerRow.add_suffix(backgroundColorPicker)
 
         pref.present()
@@ -188,23 +188,33 @@ class TeleprompterApplication(Adw.Application):
 
     def on_background_color_changed(self, colorWidget):
         # print("background color changed")
-        TeleprompterWindow.settings.backgroundColor = colorWidget.get_rgba()
+        self.win.settings.backgroundColor = colorWidget.get_rgba()
 
     def on_text_color_changed(self, colorWidget):
         # print("font color changed")
-        TeleprompterWindow.settings.textColor = colorWidget.get_rgba()
+        self.win.settings.textColor = colorWidget.get_rgba()
+
+        self.win.apply_text_tags()
+        start = self.win.text_buffer.get_start_iter()
+        self.win.search_and_mark_highlight(start)
+        self.win.save_app_settings(self.win.settings)
 
     def on_highlight_color_changed(self, colorWidget):
         # print("highlight color changed")
-        TeleprompterWindow.settings.highlightColor = colorWidget.get_rgba()
+        self.win.settings.highlightColor = colorWidget.get_rgba()
+
+        self.win.apply_text_tags()
+        start = self.win.text_buffer.get_start_iter()
+        self.win.search_and_mark_highlight(start)
+        self.win.save_app_settings(self.win.settings)
 
     def on_font_changed(self, fontWidget):
         # print("font changed")
         font_properties = fontWidget.get_font().split()
         font_size = font_properties[-1]
 
-        if int(font_size) + amount > 10:
-            new_font_size = int(font_size) + amount
+        if int(font_size) > 10:
+            new_font_size = int(font_size)
         else:
             new_font_size = 10
 
@@ -212,25 +222,41 @@ class TeleprompterApplication(Adw.Application):
         font_properties[-1] = str(new_font_size)
 
         # Construct the updated font string
-        TeleprompterWindow.settings.font = ' '.join(font_properties)
+        self.win.settings.font = ' '.join(font_properties)
+
+        self.win.updateFont()
+        self.win.apply_text_tags()
+        start = self.win.text_buffer.get_start_iter()
+        self.win.search_and_mark_highlight(start)
+        self.win.save_app_settings(self.win.settings)
 
     def on_speed_changed(self, sliderWidget, slowSpeedAdj):
         # print("speed changed")
         speed1 = sliderWidget.get_value()
-        TeleprompterWindow.settings.speed = speed1
+        self.win.settings.speed = speed1
         if slowSpeedAdj.get_value() >= speed1 / 2:
             slowSpeedAdj.set_value(speed1 / 2)
             slowSpeedAdj.set_upper(sliderWidget.get_value() / 2)
         else:
             slowSpeedAdj.set_upper(sliderWidget.get_value() / 2)
 
+        self.win.save_app_settings(self.win.settings)
+
     def on_slow_speed_changed(self, sliderWidget):
         # print("slow speed changed")
-        TeleprompterWindow.settings.slowSpeed = sliderWidget.get_value()
+        self.win.settings.slowSpeed = sliderWidget.get_value()
+
+        self.win.save_app_settings(self.win.settings)
 
     def on_bold_highlight_set(self, switch, foo):
-        TeleprompterWindow.settings.boldHighlight = not switch.get_state()
+        self.win.settings.boldHighlight = not switch.get_state()
         print(switch.get_state())
+
+        self.win.updateFont()
+        self.win.apply_text_tags()
+        start = self.win.text_buffer.get_start_iter()
+        self.win.search_and_mark_highlight(start)
+        self.win.save_app_settings(self.win.settings)
 
 def main(version):
     """The application's entry point."""

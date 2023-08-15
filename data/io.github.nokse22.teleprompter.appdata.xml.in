@@ -4,6 +4,7 @@
 	<name>Teleprompter</name>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+  <developer_name>Nokse</developer_name>
 	<description>
 	  <p>A simple app to read scrolling text from your screen. It has an adaptive layout to work on smartphones too.</p>
 	</description>
@@ -30,6 +31,14 @@
   </custom>
 
   <releases>
+    <release version="0.1.5" date="2023-08-15">
+		  <description>
+			  <ul>
+					<li>Added Dutch translation (Heimen Stoffels)</li>
+			    <li>Fixed bugs</li>
+				</ul>
+		  </description>
+	  </release>
     <release version="0.1.4" date="2023-07-22">
 		  <description>
 			  <ul>

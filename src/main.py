@@ -67,7 +67,7 @@ class TeleprompterApplication(Adw.Application):
                                 application_name='Teleprompter',
                                 application_icon='io.github.nokse22.teleprompter',
                                 developer_name='Nokse',
-                                version='0.1.4',
+                                version='0.1.5',
                                 developers=['Nokse'],
                                 license_type="GTK_LICENSE_GPL_3_0",
                                 issue_url='https://github.com/Nokse22/teleprompter/issues',

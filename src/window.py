@@ -158,7 +158,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         dialog = Gtk.FileChooserNative(
             title="Open File",
-            transient_for=None,
+            transient_for=self,
             action=Gtk.FileChooserAction.OPEN,
         )
 

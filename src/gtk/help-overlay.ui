@@ -27,6 +27,38 @@
                 <property name="action-name">app.quit</property>
               </object>
             </child>
+
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Makes the window transparent</property>
+                <property name="action-name">app.transparent</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Increase Font Size</property>
+                <property name="action-name">app.increase-font</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Decrease Font Size</property>
+                <property name="action-name">app.decrease-font</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Increase speed</property>
+                <property name="action-name">app.increase-speed</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Decrease speed</property>
+                <property name="action-name">app.decrease-speed</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

@@ -46,9 +46,92 @@ class TeleprompterApplication(Adw.Application):
     def __init__(self):
         super().__init__(application_id='io.github.nokse22.teleprompter',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+
+        css = '''
+        .hb-color{
+            background:#242424ff;
+            border-radius: 14px;
+        }
+        .hb-color-fs{
+            background:#242424ff;
+        }
+        .bg-color{
+            background:#242424ff;
+            border-radius: 14px;
+            box-shadow:inset 0px 0px 0px 1px #373737;
+        }
+        .bg-color-fs{
+            background:#242424ff;
+        }
+        .tr-color{
+            border-radius: 14px;
+            box-shadow:inset 0px 0px 0px 10px #242424;
+            color: white;
+        }
+        .tr-color-fs{
+            color: white;
+        }
+        '''
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_data(css, -1)
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(),
+            css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action, ['<primary>comma'])
+        self.create_action('transparent', self.on_transparent_action, ['<primary>t'])
+
+        self.create_action('increase-font', self.on_increase_font, ['<primary>plus'])
+        self.create_action('decrease-font', self.on_decrease_font, ['<primary>minus'])
+
+        self.create_action('increase-speed', self.on_transparent_action, ['<primary>q'])
+        self.create_action('decrease-speed', self.on_transparent_action, ['<primary>w'])
+
+    def on_increase_font(self, widget=None, _=None):
+        self.win.modifyFont(5)
+        self.win.updateFont()
+        self.win.save_app_settings(self.win.settings)
+
+    def on_decrease_font(self, widget=None, _=None):
+        self.win.modifyFont(-5)
+        self.win.updateFont()
+        self.win.save_app_settings(self.win.settings)
+
+    def on_transparent_action(self, widget=None, _=None):
+        if not self.win.transparent:
+            if self.win.is_maximized() or self.win.is_fullscreen():
+                self.win.box1.remove_css_class("bg-color")
+                self.win.box1.add_css_class("tr-color-fs")
+                self.win.box1.remove_css_class("bg-color-fs")
+                self.win.headerbar.add_css_class("hb-color-fs")
+                self.win.transparent = True
+            else:
+                self.win.box1.add_css_class("tr-color")
+                self.win.box1.remove_css_class("bg-color")
+                self.win.headerbar.add_css_class("hb-color")
+                self.win.transparent = True
+
+        else:
+            if self.win.is_maximized() or self.win.is_fullscreen():
+                self.win.box1.add_css_class("bg-color-fs")
+                self.win.box1.remove_css_class("tr-color-fs")
+                self.win.transparent = False
+
+            else:
+                self.win.box1.remove_css_class("tr-color")
+                self.win.box1.add_css_class("bg-color")
+
+                self.win.transparent = False
+            self.win.headerbar.remove_css_class("hb-color")
+            self.win.headerbar.remove_css_class("hb-color-fs")
+
+            # self.win.box1.add_css_class("bg-color")
+            # self.win.box1.remove_css_class("tr-color")
+            # self.win.transparent = False
 
     def do_activate(self):
         """Called when the application is activated.
@@ -161,6 +244,17 @@ class TeleprompterApplication(Adw.Application):
         # backgroundColorPicker.set_rgba(self.win.settings.backgroundColor)
         # backgroundColorPickerRow.add_suffix(backgroundColorPicker)
 
+        transparentGroup = Adw.PreferencesGroup(title=gettext.gettext("Transparent"))
+        settingsPage.add(transparentGroup)
+
+        transparentRow = Adw.ActionRow(title=gettext.gettext("Make the window transparent"))
+        transparentGroup.add(transparentRow)
+
+        transparentSwitch = Gtk.Switch(valign = Gtk.Align.CENTER)
+        transparentSwitch.set_active(self.win.transparent)
+
+        transparentRow.add_suffix(transparentSwitch)
+
         pref.present()
 
         # backgroundColorPicker.connect("color-set", self.on_background_color_changed)
@@ -170,6 +264,8 @@ class TeleprompterApplication(Adw.Application):
         scrollSpeedScale.connect("value-changed", self.on_speed_changed, speed2)
         slowScrollSpeedScale.connect("value-changed", self.on_slow_speed_changed)
         boldHighlightSwitch.connect("state-set", self.on_bold_highlight_set)
+
+        transparentSwitch.connect("state-set", self.on_transparent_switch_set)
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -185,6 +281,9 @@ class TeleprompterApplication(Adw.Application):
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
+
+    def on_transparent_switch_set(self, switch, arg):
+        self.on_transparent_action()
 
     def on_background_color_changed(self, colorWidget):
         # print("background color changed")
@@ -209,7 +308,6 @@ class TeleprompterApplication(Adw.Application):
         self.win.save_app_settings(self.win.settings)
 
     def on_font_changed(self, fontWidget):
-        # print("font changed")
         font_properties = fontWidget.get_font().split()
         font_size = font_properties[-1]
 
@@ -231,7 +329,6 @@ class TeleprompterApplication(Adw.Application):
         self.win.save_app_settings(self.win.settings)
 
     def on_speed_changed(self, sliderWidget, slowSpeedAdj):
-        # print("speed changed")
         speed1 = sliderWidget.get_value()
         self.win.settings.speed = speed1
         if slowSpeedAdj.get_value() >= speed1 / 2:
@@ -243,9 +340,7 @@ class TeleprompterApplication(Adw.Application):
         self.win.save_app_settings(self.win.settings)
 
     def on_slow_speed_changed(self, sliderWidget):
-        # print("slow speed changed")
         self.win.settings.slowSpeed = sliderWidget.get_value()
-
         self.win.save_app_settings(self.win.settings)
 
     def on_bold_highlight_set(self, switch, foo):

@@ -6,11 +6,13 @@
     <property name="default-width">900</property>
     <property name="default-height">800</property>
     <property name="title">Teleprompter</property>
+    <property name="css-classes">flat</property>
     <child>
       <object class="GtkBox" id="box1">
-    <property name="orientation">vertical</property>
+        <property name="orientation">vertical</property>
+        <property name="css-classes">bg-color</property>
     <child>
-      <object class="GtkHeaderBar">
+      <object class="AdwHeaderBar" id="headerbar">
         <property name="css-classes">flat</property>
         <child type="end">
           <object class="GtkMenuButton">
@@ -40,15 +42,15 @@
       <object class="GtkBox"  id="box2">
        <property name="orientation">1</property>
       <child>
-      <object class="AdwClamp">
-        <property name="maximum-size">2600</property>
-        <property name="margin-start">0</property>
-        <property name="margin-end">0</property>
-        <property name="tightening-threshold">1000</property>
-        <property name="vexpand">True</property>
+        <object class="GtkScrolledWindow" id="scrolled_window">
+          <property name="hscrollbar-policy">never</property>
+          <property name="vexpand">True</property>
           <child>
-          <object class="GtkScrolledWindow" id="scrolled_window">
-            <property name="hscrollbar-policy">never</property>
+            <object class="AdwClamp">
+            <property name="maximum-size">2600</property>
+            <property name="margin-start">0</property>
+            <property name="margin-end">0</property>
+            <property name="tightening-threshold">1000</property>
             <property name="vexpand">True</property>
             <child>
               <object class="GtkTextView" id="text_view">

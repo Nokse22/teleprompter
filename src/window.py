@@ -59,8 +59,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     overlay = Gtk.Template.Child("overlay")
 
     box1 = Gtk.Template.Child("box1")
-    #print(box1)
-    #box1.append(Gtk.Label(label="test"))
+    headerbar = Gtk.Template.Child("headerbar")
+
+    transparent = False
 
     playing = False
     fullscreened = False
@@ -88,6 +89,28 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         start = self.text_buffer.get_start_iter()
         self.search_and_mark_highlight(start)
+
+        self.connect("notify", self.on_window_state_event)
+
+    def on_window_state_event(self, arg1, arg2):
+        if self.is_maximized() or self.is_fullscreen():
+            if self.transparent:
+                self.box1.remove_css_class("tr-color")
+                self.box1.add_css_class("tr-color-fs")
+                self.headerbar.remove_css_class("hb-color")
+                self.headerbar.add_css_class("hb-color-fs")
+                return
+            self.box1.remove_css_class("bg-color")
+            self.box1.add_css_class("bg-color-fs")
+        else:
+            if self.transparent:
+                self.box1.remove_css_class("tr-color-fs")
+                self.box1.add_css_class("tr-color")
+                self.headerbar.remove_css_class("hb-color-fs")
+                self.headerbar.add_css_class("hb-color")
+                return
+            self.box1.remove_css_class("bg-color-fs")
+            self.box1.add_css_class("bg-color")
 
     def on_text_pasted(self, text_buffer, clipboard):
         self.apply_text_tags()
@@ -158,7 +181,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         dialog = Gtk.FileChooserNative(
             title="Open File",
-            transient_for=None,
+            transient_for=self,
             action=Gtk.FileChooserAction.OPEN,
         )
 

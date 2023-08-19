@@ -50,7 +50,8 @@ class TeleprompterApplication(Adw.Application):
         css = '''
         .hb-color{
             background:#242424ff;
-            border-radius: 14px;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
         }
         .hb-color-fs{
             background:#242424ff;

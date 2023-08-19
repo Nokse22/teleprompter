@@ -92,6 +92,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         self.connect("notify", self.on_window_state_event)
 
+        self.textview.grab_focus()
+
     def on_window_state_event(self, arg1, arg2):
         if self.is_maximized() or self.is_fullscreen():
             if self.transparent:

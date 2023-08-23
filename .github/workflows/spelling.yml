@@ -1,8 +1,8 @@
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
     types: [ "review_requested", "ready_for_review" ]
 name: Spell Check
 jobs:

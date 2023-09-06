@@ -93,7 +93,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.apply_text_tags()
         self.updateFont()
 
-    def on_text_inserted(self, text_buffer, loc, text, lenght):
+    def on_text_inserted(self, text_buffer, loc, text, length):
         self.apply_text_tags()
         self.updateFont()
         start = self.text_buffer.get_start_iter()

@@ -59,6 +59,7 @@ class TeleprompterApplication(Adw.Application):
         self.win = self.props.active_window
         if not self.win:
             self.win = TeleprompterWindow(application=self)
+        self.create_action('play', self.win.bar1, ['<primary>space'])
         self.win.present()
 
     def on_about_action(self, widget, _):

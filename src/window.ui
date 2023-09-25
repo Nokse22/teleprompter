@@ -267,6 +267,14 @@ The font, color of the text and highlights can be customized.
         <attribute name="action">app.preferences</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">Fullscreen</attribute>
+        <attribute name="action">app.fullscreen</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Play/Pause</attribute>
+        <attribute name="action">app.play</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>

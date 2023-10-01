@@ -186,6 +186,12 @@ msgstr ""
 msgid "_Preferences"
 msgstr "_Preferencias"
 
+msgid "Fullscreen"
+msgstr "Pantalla Completa"
+
+msgid "Play/Pause"
+msgstr "Reproducción/Pausa"
+
 #: src/window.ui:270
 msgid "_Keyboard Shortcuts"
 msgstr "_Atajos de teclado"

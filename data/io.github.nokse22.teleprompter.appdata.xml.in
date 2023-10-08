@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
 	<id>io.github.nokse22.teleprompter.desktop</id>
-	<name>Teleprompter</name>
+	<name translatable="no">Teleprompter</name>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
-  <developer_name>Nokse</developer_name>
+	<developer_name translatable="no">Nokse</developer_name>
 	<description>
 	  <p>A simple app to read scrolling text from your screen. It has an adaptive layout to work on smartphones too.</p>
 	</description>

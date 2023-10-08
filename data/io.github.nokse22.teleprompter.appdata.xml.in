@@ -33,7 +33,7 @@
 
   <releases>
     <release version="0.1.5" date="2023-08-15">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>Added Dutch translation (Heimen Stoffels)</li>
 			    <li>Fixed bugs</li>
@@ -41,7 +41,7 @@
 		  </description>
 	  </release>
     <release version="0.1.4" date="2023-07-22">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>Settings are applied right away</li>
 			    <li>Fixed some typos</li>
@@ -50,7 +50,7 @@
 		  </description>
 	  </release>
     <release version="0.1.3" date="2023-07-09">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>Fixed some bugs</li>
 			    <li>Improved some icons</li>
@@ -61,7 +61,7 @@
 		  </description>
 	  </release>
 	  <release version="0.1.2" date="2023-06-16">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>New icon</li>
 					<li>Fixed highlighting bugs</li>
@@ -76,7 +76,7 @@
 		  </description>
 	  </release>
     <release version="0.1.1" date="2023-06-11">
-		  <description>
+		  <description translatable="no">
 			  <p>First release!</p>
 		  </description>
 	  </release>

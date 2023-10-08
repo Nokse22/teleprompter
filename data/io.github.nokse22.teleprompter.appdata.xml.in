@@ -24,6 +24,8 @@
 
   <url type="homepage">https://github.com/Nokse22/teleprompter</url>
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
+  <url type="vcs-browser">https://github.com/Nokse22/teleprompter</url>
+  <url type="translate">https://github.com/Nokse22/teleprompter/po</url>
 
   <custom>
     <value key="GnomeSoftware::key-colors">[(76, 163, 217), (0, 0, 0)]</value>
@@ -86,10 +88,12 @@
 
 	<screenshots>
     <screenshot type="default">
+	  <caption>Teleprompter displaying text on a widescreen</caption>
       <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%201.png</image>
     </screenshot>
 
 	  <screenshot>
+		<caption>Teleprompter displaying text in a narrow screen</caption>
 	    <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%202.png</image>
 	  </screenshot>
   </screenshots>

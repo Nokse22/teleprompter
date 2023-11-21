@@ -63,7 +63,7 @@ class TeleprompterApplication(Adw.Application):
             self.create_action('fullscreen', self.win.bar8, ['F11'])
         self.win.present()
 
-    def on_about_action(self, widget, _):
+    def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='Teleprompter',
@@ -75,6 +75,8 @@ class TeleprompterApplication(Adw.Application):
                                 issue_url='https://github.com/Nokse22/teleprompter/issues',
                                 website='https://github.com/Nokse22/teleprompter',
                                 copyright='© 2023 Noske')
+        # Replace "translator-credits" with your name/username, and optionally an email or URL.
+        about.set_translator_credits(_("translator-credits"))        
         about.present()
 
     def on_preferences_action(self, widget, _):

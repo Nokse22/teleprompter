@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
 	<id>io.github.nokse22.teleprompter.desktop</id>
-	<name>Teleprompter</name>
+	<name translatable="no">Teleprompter</name>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
-  <developer_name>Nokse</developer_name>
+	<developer_name translatable="no">Nokse</developer_name>
 	<description>
 	  <p>A simple app to read scrolling text from your screen. It has an adaptive layout to work on smartphones too.</p>
 	</description>
 
   	<summary>Display scrolling text on your screen</summary>
-	
- 	<developer_name>Nokse</developer_name>
   
 	<content_rating type="oars-1.0"></content_rating>
 	
@@ -26,6 +24,8 @@
 
   <url type="homepage">https://github.com/Nokse22/teleprompter</url>
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
+  <url type="vcs-browser">https://github.com/Nokse22/teleprompter</url>
+  <url type="translate">https://github.com/Nokse22/teleprompter/po</url>
 
   <custom>
     <value key="GnomeSoftware::key-colors">[(76, 163, 217), (0, 0, 0)]</value>
@@ -33,7 +33,7 @@
 
   <releases>
     <release version="0.1.5" date="2023-08-15">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>Added Dutch translation (Heimen Stoffels)</li>
 			    <li>Fixed bugs</li>
@@ -41,7 +41,7 @@
 		  </description>
 	  </release>
     <release version="0.1.4" date="2023-07-22">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>Settings are applied right away</li>
 			    <li>Fixed some typos</li>
@@ -50,7 +50,7 @@
 		  </description>
 	  </release>
     <release version="0.1.3" date="2023-07-09">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>Fixed some bugs</li>
 			    <li>Improved some icons</li>
@@ -61,7 +61,7 @@
 		  </description>
 	  </release>
 	  <release version="0.1.2" date="2023-06-16">
-		  <description>
+		  <description translatable="no">
 			  <ul>
 					<li>New icon</li>
 					<li>Fixed highlighting bugs</li>
@@ -76,7 +76,7 @@
 		  </description>
 	  </release>
     <release version="0.1.1" date="2023-06-11">
-		  <description>
+		  <description translatable="no">
 			  <p>First release!</p>
 		  </description>
 	  </release>
@@ -88,10 +88,12 @@
 
 	<screenshots>
     <screenshot type="default">
+	  <caption>Teleprompter displaying text on a widescreen</caption>
       <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%201.png</image>
     </screenshot>
 
 	  <screenshot>
+		<caption>Teleprompter displaying text in a narrow screen</caption>
 	    <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%202.png</image>
 	  </screenshot>
   </screenshots>

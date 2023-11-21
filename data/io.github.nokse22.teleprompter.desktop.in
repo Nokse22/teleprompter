@@ -1,4 +1,5 @@
 [Desktop Entry]
+# Translators: do not translate the application name
 Name=Teleprompter
 Exec=teleprompter
 Icon=io.github.nokse22.teleprompter

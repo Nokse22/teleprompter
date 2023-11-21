@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 15:33+0300\n"
+"POT-Creation-Date: 2023-10-08 16:59+0300\n"
 "PO-Revision-Date: 2023-06-22 15:49+0300\n"
 "Last-Translator: Сергей Ворон <voron@duck.com>\n"
 "Language-Team: \n"
@@ -17,12 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: data/io.github.nokse22.teleprompter.desktop.in:3
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:4
+#: data/io.github.nokse22.teleprompter.desktop.in:4
 msgid "Teleprompter"
 msgstr "Телесуфлер"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:8
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:9
 msgid ""
 "A simple app to read scrolling text from your screen. It has an adaptive "
 "layout to work on smartphones too."
@@ -30,50 +29,18 @@ msgstr ""
 "Простое приложение для чтения прокручиваемого текста с экрана. Оно также "
 "имеет адаптивный макет для работы на смартфонах."
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:11
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:12
 msgid "Display scrolling text on your screen"
 msgstr "Отображение прокручиваемого текста на экране"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:32
-msgid "New icon 🎉"
-msgstr "Новая иконка 🎉"
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:91
+#, fuzzy
+msgid "Teleprompter displaying text on a widescreen"
+msgstr "Отображение прокручиваемого текста на экране"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:33
-msgid "Fixed highlighting bugs"
-msgstr "Исправлены ошибки выделения"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:34
-msgid "Added Turkish translation (Sabri Ünal)"
-msgstr "Добавлен Турецкий перевод (Sabri Ünal)"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:35
-msgid "Added French translation (Irénée Thirion)"
-msgstr "Добавлен Французский перевод (Irénée Thirion)"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:36
-msgid "Added Italian translation"
-msgstr "Добавлен Итальянский перевод"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:37
-msgid "Fixed some translation issue"
-msgstr "Исправлены некоторые проблемы с переводом"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:38
-msgid "Fixed text becoming invisible"
-msgstr "Исправлена ошибка, из-за которой текст становился невидимым"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:39
-msgid "Fixed bug when opening unsupported files"
-msgstr "Исправлена ошибка при открытии неподдерживаемых файлов"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:40
-msgid "Fixed the bold highlight setting not being saved"
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:96
+msgid "Teleprompter displaying text in a narrow screen"
 msgstr ""
-"Исправлена ​​ошибка, из-за которой настройка жирного выделения не сохранялась"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:46
-msgid "First release!"
-msgstr "Первый релиз!"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:7
 msgid "The font used"
@@ -110,43 +77,47 @@ msgstr "Медленная скорость"
 msgid "Also bold all the highlight"
 msgstr "Также жирным шрифтом все выделения"
 
-#: src/main.py:91
+#: src/main.py:79
+msgid "translator-credits"
+msgstr "Сергей Ворон <voron@duck.com>"
+
+#: src/main.py:95
 msgid "Scroll Settings"
 msgstr "Настройки прокрутки"
 
-#: src/main.py:94
+#: src/main.py:98
 msgid "Scroll Speed"
 msgstr "Скорость прокрутки"
 
-#: src/main.py:94
-msgid "Measured in words per minute"
-msgstr "Измеряется в словах в минуту"
+#: src/main.py:98
+msgid "In words per minute (approximately)"
+msgstr ""
 
-#: src/main.py:108
+#: src/main.py:112
 msgid "Slow Scroll Speed"
 msgstr "Медленная скорость прокрутки"
 
-#: src/main.py:108
+#: src/main.py:112
 msgid "When pressing the spacebar"
 msgstr "При нажатии пробела"
 
-#: src/main.py:121
+#: src/main.py:125
 msgid "Text"
 msgstr "Текст"
 
-#: src/main.py:124
+#: src/main.py:128
 msgid "Highlight color"
 msgstr "Цвет выделения"
 
-#: src/main.py:131
+#: src/main.py:135
 msgid "Bold Highlight"
 msgstr "Жирное выделение"
 
-#: src/main.py:139
+#: src/main.py:143
 msgid "Font color"
 msgstr "Цвет шрифта"
 
-#: src/main.py:142
+#: src/main.py:146
 msgid "Font"
 msgstr "Шрифт"
 
@@ -221,10 +192,20 @@ msgid "_Preferences"
 msgstr "_Настройки"
 
 #: src/window.ui:270
+#, fuzzy
+msgid "Fullscreen"
+msgstr "Включить полноэкранный режим"
+
+#: src/window.ui:274
+msgid "Play/Pause"
+msgstr ""
+
+#: src/window.ui:278
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбинации клавиш"
 
-#: src/window.ui:274
+#. Translators: do not translate the application name
+#: src/window.ui:283
 msgid "_About Teleprompter"
 msgstr "_О Телесуфлер"
 
@@ -247,3 +228,14 @@ msgstr "Показать настройки"
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Выйти"
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Play/Pause"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:38
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Включить полноэкранный режим"

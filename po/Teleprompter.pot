@@ -1,44 +1,39 @@
-# Italian translation of io.github.nokse22.teleprompter.
-# Copyright (C) 2023 io.github.nokse22.teleprompter's COPYRIGHT HOLDER
-# This file is distributed under the same license as the io.github.nokse22.teleprompter package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#
-#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: io.github.nokse22.teleprompter\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-08 16:59+0300\n"
-"PO-Revision-Date: 2023-06-13 23:50+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: it\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
 
 #: data/io.github.nokse22.teleprompter.desktop.in:4
 msgid "Teleprompter"
-msgstr "Teleprompter"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:9
 msgid ""
 "A simple app to read scrolling text from your screen. It has an adaptive "
 "layout to work on smartphones too."
 msgstr ""
-"Una semplice applicazione per leggere un testo che scorre sullo schermo. Ha "
-"un design adattabile per funzionare anche su cellulari."
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:12
 msgid "Display scrolling text on your screen"
-msgstr "Leggi un testo che scorre sullo schermo"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:91
-#, fuzzy
 msgid "Teleprompter displaying text on a widescreen"
-msgstr "Leggi un testo che scorre sullo schermo"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:96
 msgid "Teleprompter displaying text in a narrow screen"
@@ -46,38 +41,38 @@ msgstr ""
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:7
 msgid "The font used"
-msgstr "Il font usato"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:8
 msgid "The font used for displaying text."
-msgstr "Il font usato per mostrare il testo."
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:13
 #: data/io.github.nokse22.teleprompter.gschema.xml:14
 msgid "The font color"
-msgstr "Il colore del testo"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:19
 #: data/io.github.nokse22.teleprompter.gschema.xml:20
 msgid "The background color"
-msgstr "Il colore dello sfondo"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:25
 #: data/io.github.nokse22.teleprompter.gschema.xml:26
 msgid "The speed"
-msgstr "La velocità"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:31
 #: data/io.github.nokse22.teleprompter.gschema.xml:32
 #: data/io.github.nokse22.teleprompter.gschema.xml:37
 #: data/io.github.nokse22.teleprompter.gschema.xml:38
 msgid "The slow speed"
-msgstr "La velocità più lenta"
+msgstr ""
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:43
 #: data/io.github.nokse22.teleprompter.gschema.xml:44
 msgid "Also bold all the highlight"
-msgstr "Rendi le evidenziature grassette"
+msgstr ""
 
 #: src/main.py:79
 msgid "translator-credits"
@@ -85,11 +80,11 @@ msgstr ""
 
 #: src/main.py:95
 msgid "Scroll Settings"
-msgstr "Impostazioni scorrimento"
+msgstr ""
 
 #: src/main.py:98
 msgid "Scroll Speed"
-msgstr "Velocità scorrimento"
+msgstr ""
 
 #: src/main.py:98
 msgid "In words per minute (approximately)"
@@ -97,63 +92,63 @@ msgstr ""
 
 #: src/main.py:112
 msgid "Slow Scroll Speed"
-msgstr "La velocità più lenta"
+msgstr ""
 
 #: src/main.py:112
 msgid "When pressing the spacebar"
-msgstr "Quando si preme la barra spaziatrice"
+msgstr ""
 
 #: src/main.py:125
 msgid "Text"
-msgstr "Testo"
+msgstr ""
 
 #: src/main.py:128
 msgid "Highlight color"
-msgstr "Colore evidenzatura"
+msgstr ""
 
 #: src/main.py:135
 msgid "Bold Highlight"
-msgstr "Rendi l'evidenzatura grassetta"
+msgstr ""
 
 #: src/main.py:143
 msgid "Font color"
-msgstr "Colore del testo"
+msgstr ""
 
 #: src/main.py:146
 msgid "Font"
-msgstr "Font"
+msgstr ""
 
 #: src/window.ui:24
 msgid "Toggle Fullscreen"
-msgstr "Schermo intero"
+msgstr ""
 
 #: src/window.ui:96 src/window.ui:175
 msgid "Start/Stop"
-msgstr "Start/Stop"
+msgstr ""
 
 #: src/window.ui:105 src/window.ui:184
 msgid "Increase Speed"
-msgstr "Aumenta la Velocità"
+msgstr ""
 
 #: src/window.ui:112 src/window.ui:191
 msgid "Decrease Speed"
-msgstr "Diminuisci la Velocità"
+msgstr ""
 
 #: src/window.ui:123 src/window.ui:202
 msgid "Increase Font Size"
-msgstr "Aumenta la dimensione del testo"
+msgstr ""
 
 #: src/window.ui:130 src/window.ui:209
 msgid "Decrease Font Size"
-msgstr "Diminuisci la dimensione del testo"
+msgstr ""
 
 #: src/window.ui:141 src/window.ui:220
 msgid "Open a File"
-msgstr "Apri un File"
+msgstr ""
 
 #: src/window.ui:148 src/window.ui:227
 msgid "Paste from Clipboard"
-msgstr "Incolla"
+msgstr ""
 
 #: src/window.ui:246
 msgid ""
@@ -173,28 +168,14 @@ msgid ""
 "\n"
 "    "
 msgstr ""
-"\n"
-"[Comincia]\n"
-"Questa applicazione può essere usata per leggere un testo dallo schermo, "
-"incolla o apri un file di testo\n"
-"Qualsiasi cosa tra parentesi quadre tipo [così] verrà evidenziata.\n"
-"\n"
-"[Personalizzazione]\n"
-"Il font, colore del testo e evidenziature possono essere modificati.\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"    "
 
 #: src/window.ui:266
 msgid "_Preferences"
-msgstr "_Preferenze"
+msgstr ""
 
 #: src/window.ui:270
-#, fuzzy
 msgid "Fullscreen"
-msgstr "Schermo intero"
+msgstr ""
 
 #: src/window.ui:274
 msgid "Play/Pause"
@@ -202,32 +183,32 @@ msgstr ""
 
 #: src/window.ui:278
 msgid "_Keyboard Shortcuts"
-msgstr "_Scorciatoie"
+msgstr ""
 
 #. Translators: do not translate the application name
 #: src/window.ui:283
 msgid "_About Teleprompter"
-msgstr "_Informazioni su Teleprompter"
+msgstr ""
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Generali"
+msgstr ""
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Mostra Scorciatoie"
+msgstr ""
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Mostra Preferenze"
+msgstr ""
 
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Chiudi"
+msgstr ""
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
@@ -237,4 +218,4 @@ msgstr ""
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Fullscreen"
-msgstr "Schermo intero"
+msgstr ""

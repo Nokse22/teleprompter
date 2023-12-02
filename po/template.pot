@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 19:26+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.nokse22.teleprompter.desktop.in:3
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:4
+msgid "Teleprompter"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:8
+msgid ""
+"A simple app to read scrolling text from your screen. It has an adaptive "
+"layout to work on smartphones too."
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:11
+msgid "Display scrolling text on your screen"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:13
+msgid "Nokse"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:7
+msgid "The font used"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:8
+msgid "The font used for displaying text."
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:13
+#: data/io.github.nokse22.teleprompter.gschema.xml:14
+msgid "The font color"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:19
+#: data/io.github.nokse22.teleprompter.gschema.xml:20
+msgid "The background color"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:25
+#: data/io.github.nokse22.teleprompter.gschema.xml:26
+msgid "The speed"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:31
+#: data/io.github.nokse22.teleprompter.gschema.xml:32
+#: data/io.github.nokse22.teleprompter.gschema.xml:37
+#: data/io.github.nokse22.teleprompter.gschema.xml:38
+msgid "The slow speed"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:43
+#: data/io.github.nokse22.teleprompter.gschema.xml:44
+msgid "Also bold all the highlight"
+msgstr ""
+
+#: src/main.py:175
+msgid "Scroll Settings"
+msgstr ""
+
+#: src/main.py:178
+msgid "Scroll Speed"
+msgstr ""
+
+#: src/main.py:178
+msgid "In words per minute (approximately)"
+msgstr ""
+
+#: src/main.py:192
+msgid "Slow Scroll Speed"
+msgstr ""
+
+#: src/main.py:192
+msgid "When pressing the spacebar"
+msgstr ""
+
+#: src/main.py:205
+msgid "Text"
+msgstr ""
+
+#: src/main.py:208
+msgid "Highlight color"
+msgstr ""
+
+#: src/main.py:215
+msgid "Bold Highlight"
+msgstr ""
+
+#: src/main.py:223
+msgid "Font color"
+msgstr ""
+
+#: src/main.py:226
+msgid "Font"
+msgstr ""
+
+#: src/main.py:248
+msgid "Transparent"
+msgstr ""
+
+#: src/main.py:251
+msgid "Make the window transparent"
+msgstr ""
+
+#: src/window.ui:26
+msgid "Toggle Fullscreen"
+msgstr ""
+
+#: src/window.ui:98 src/window.ui:177
+msgid "Start/Stop"
+msgstr ""
+
+#: src/window.ui:107 src/window.ui:186
+msgid "Increase Speed"
+msgstr ""
+
+#: src/window.ui:114 src/window.ui:193
+msgid "Decrease Speed"
+msgstr ""
+
+#: src/window.ui:125 src/window.ui:204
+msgid "Increase Font Size"
+msgstr ""
+
+#: src/window.ui:132 src/window.ui:211
+msgid "Decrease Font Size"
+msgstr ""
+
+#: src/window.ui:143 src/window.ui:222
+msgid "Open a File"
+msgstr ""
+
+#: src/window.ui:150 src/window.ui:229
+msgid "Paste from Clipboard"
+msgstr ""
+
+#: src/window.ui:248
+msgid ""
+"\n"
+"[START]\n"
+"This app can be used to read a script from the screen, just paste or open a "
+"text file.\n"
+"Anything between square brackets like [this] is highlighted.\n"
+"\n"
+"[Customization]\n"
+"The font, color of the text and highlights can be customized.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"    "
+msgstr ""
+
+#: src/window.ui:268
+msgid "_Preferences"
+msgstr ""
+
+#: src/window.ui:272
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: src/window.ui:276
+msgid "_About Teleprompter"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Makes the window transparent"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Increase Font Size"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Decrease Font Size"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:52
+msgctxt "shortcut window"
+msgid "Increase speed"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:58
+msgctxt "shortcut window"
+msgid "Decrease speed"
+msgstr ""

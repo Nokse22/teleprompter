@@ -47,20 +47,16 @@ class AppSettings:
         self.boldHighlight = True
 
 @Gtk.Template(resource_path='/io/github/nokse22/teleprompter/window.ui')
-class TeleprompterWindow(Adw.ApplicationWindow):
+class TeleprompterWindow(Adw.Window):
     __gtype_name__ = 'TeleprompterWindow'
 
-    open_button = Gtk.Template.Child("open_button")
     scrolled_window = Gtk.Template.Child("scrolled_window")
     start_button1 = Gtk.Template.Child("start_button1")
     start_button2 = Gtk.Template.Child("start_button2")
-    paste_button = Gtk.Template.Child("paste_button")
     fullscreen_button = Gtk.Template.Child("fullscreen_button")
     overlay = Gtk.Template.Child("overlay")
 
-    box1 = Gtk.Template.Child("box1")
-    #print(box1)
-    #box1.append(Gtk.Label(label="test"))
+    main = Gtk.Template.Child("main")
 
     playing = False
     fullscreened = False
@@ -77,7 +73,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.text_buffer.connect("paste-done", self.on_text_pasted)
 
         self.text_buffer.connect("changed", self.on_text_inserted, "", 0, 0)
-        #self.text_buffer.connect("insert-text", self.on_text_inserted, self)
 
         start = self.text_buffer.get_start_iter()
         self.search_and_mark_highlight(start)
@@ -313,8 +308,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         style_provider.load_from_data(css_data, -1)
 
         # Apply the theme to the GTK app
-        context = self.box1.get_style_context()
-        context.add_provider(style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        # context = self.main.get_style_context()
+        # context.add_provider(style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def wordPerMinuteToSpeed(self, speed):
         # Split the font string into font properties and size
@@ -349,6 +344,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("play_button_clicked")
     def bar1(self, *args):
+        print("play")
         if not self.playing:
             self.start_button1.set_icon_name("media-playback-pause-symbolic")
             self.start_button2.set_icon_name("media-playback-pause-symbolic")
@@ -369,12 +365,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("increase_speed_button_clicked")
     def bar3(self, *args):
-        # print("increase speed clicked")
         self.settings.speed += 10
-        #self.save_app_settings(self.settings)
-
-        #start = self.text_buffer.get_start_iter()
-        #self.search_and_mark_highlight(self, start)
 
     @Gtk.Template.Callback("decrease_speed_button_clicked")
     def bar4(self, *args):
@@ -382,7 +373,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.settings.speed -= 10
         if self.settings.speed <= 40:
             self.settings.speed = 40
-        #self.save_app_settings(self.settings)
 
     @Gtk.Template.Callback("paste_button_clicked")
     def bar5(self, *args):

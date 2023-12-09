@@ -16,8 +16,7 @@
       </object>
     </child>
     <child>
-      <object class="AdwToastOverlay" id="overlay">
-        <child>
+
           <object class="AdwToolbarView">
             <property name="bottom-bar-style">raised</property>
             <child type="top">
@@ -197,6 +196,8 @@
                       <property name="vexpand">True</property>
                       <property name="hexpand">True</property>
                         <child>
+                          <object class="AdwToastOverlay" id="overlay">
+                            <child>
                         <object class="GtkScrolledWindow" id="scrolled_window">
                           <property name="hscrollbar-policy">never</property>
                           <property name="vexpand">True</property>
@@ -221,9 +222,9 @@
                     </object>
                   </child>
                 </object>
-              </property>
+              </child>
             </object>
-          </child>
+          </property>
         </object>
       </child>
   </template>

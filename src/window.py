@@ -52,7 +52,6 @@ class TeleprompterWindow(Adw.Window):
 
     scrolled_window = Gtk.Template.Child("scrolled_window")
     start_button1 = Gtk.Template.Child("start_button1")
-    start_button2 = Gtk.Template.Child("start_button2")
     fullscreen_button = Gtk.Template.Child("fullscreen_button")
     overlay = Gtk.Template.Child("overlay")
 
@@ -210,7 +209,6 @@ class TeleprompterWindow(Adw.Window):
         if adjustment.get_value() == adjustment.get_upper() - adjustment.get_page_size():
             self.playing = False
             self.start_button1.set_icon_name("media-playback-start-symbolic")
-            self.start_button2.set_icon_name("media-playback-start-symbolic")
             return 0
 
         if not self.playing:
@@ -347,14 +345,12 @@ class TeleprompterWindow(Adw.Window):
         print("play")
         if not self.playing:
             self.start_button1.set_icon_name("media-playback-pause-symbolic")
-            self.start_button2.set_icon_name("media-playback-pause-symbolic")
             self.playing = True
 
             # Start continuous autoscrolling
             GLib.timeout_add(10, self.autoscroll, self.scrolled_window)
         else:
             self.start_button1.set_icon_name("media-playback-start-symbolic")
-            self.start_button2.set_icon_name("media-playback-start-symbolic")
             self.playing = False
             self.speed = 0
 

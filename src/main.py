@@ -154,20 +154,8 @@ class TeleprompterApplication(Adw.Application):
         fontColorPicker.set_rgba(self.win.settings.textColor)
         fontColorPickerRow.add_suffix(fontColorPicker)
 
-
-        # backgroundGroup = Adw.PreferencesGroup(title="Background")
-        # stylePage.add(backgroundGroup)
-
-        # backgroundColorPickerRow = Adw.ActionRow(title="Background color")
-        # backgroundGroup.add(backgroundColorPickerRow)
-
-        # backgroundColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
-        # backgroundColorPicker.set_rgba(self.win.settings.backgroundColor)
-        # backgroundColorPickerRow.add_suffix(backgroundColorPicker)
-
         pref.present()
 
-        # backgroundColorPicker.connect("color-set", self.on_background_color_changed)
         highlightColorPicker.connect("color-set", self.on_highlight_color_changed)
         fontColorPicker.connect("color-set", self.on_text_color_changed)
         fontPicker.connect("font-set", self.on_font_changed)

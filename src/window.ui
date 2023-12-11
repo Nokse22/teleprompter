@@ -19,7 +19,7 @@
       <object class="AdwBreakpoint">
         <condition>max-height: 460px</condition>
         <setter object="sidebar_controls" property="css-classes">r</setter>
-        <setter object="sidebar_controls" property="margin-start">6</setter>
+        <setter object="sidebar_controls" property="margin-start">8</setter>
         <setter object="start_button2" property="visible">false</setter>
         <setter object="start_button3" property="visible">true</setter>
       </object>

@@ -47,7 +47,7 @@ class AppSettings:
         self.boldHighlight = True
 
 @Gtk.Template(resource_path='/io/github/nokse22/teleprompter/window.ui')
-class TeleprompterWindow(Adw.Window):
+class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
 
     scrolled_window = Gtk.Template.Child("scrolled_window")

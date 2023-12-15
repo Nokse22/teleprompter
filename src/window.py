@@ -310,14 +310,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         # context.add_provider(style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def wordPerMinuteToSpeed(self, speed):
-        # Split the font string into font properties and size
         font_properties = self.settings.font.split()
         font_size = font_properties[-1]
 
-        # Convert the font size to an integer and increase it by +5 or -5
         font = int(font_size)
         width = self.textview.get_allocation().width
-        speed = self.settings.speed * font * 0.2 / width  # self.settings.speed * 4/ ((-font*0.2 + 0.05*width)*font*2.62) # to rework
+        speed = self.settings.speed * font * 0.2 / width
 
         if speed <= 0.25:
             speed = 0.25

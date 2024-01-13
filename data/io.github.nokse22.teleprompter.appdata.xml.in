@@ -10,9 +10,9 @@
 	</description>
 
   	<summary>Stay on track during speeches</summary>
-  
-	<content_rating type="oars-1.0"></content_rating>
-	
+
+	<content_rating type="oars-1.1" />
+
 	  <recommends>
 	    <control>keyboard</control>
 	    <control>pointing</control>
@@ -21,11 +21,12 @@
 	  </recommends>
 
   <launchable type="desktop-id">io.github.nokse22.teleprompter.desktop</launchable>
+  <translation type="gettext">teleprompter</translation>
 
   <url type="homepage">https://github.com/Nokse22/teleprompter</url>
   <url type="bugtracker">https://github.com/Nokse22/teleprompter/issues</url>
   <url type="vcs-browser">https://github.com/Nokse22/teleprompter</url>
-  <url type="translate">https://github.com/Nokse22/teleprompter/po</url>
+  <url type="translate">https://github.com/Nokse22/teleprompter/tree/main/po</url>
 
   <custom>
     <value key="GnomeSoftware::key-colors">[(76, 163, 217), (0, 0, 0)]</value>
@@ -81,10 +82,6 @@
 		  </description>
 	  </release>
   </releases>
-
-  <categories>
-    <category>Utility</category>
-  </categories>
 
 	<screenshots>
     <screenshot type="default">

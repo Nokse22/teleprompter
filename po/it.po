@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: io.github.nokse22.teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-08 16:59+0300\n"
-"PO-Revision-Date: 2023-06-13 23:50+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2024-02-17 15:50+0200\n"
+"Last-Translator: albano Battistella <albanobattistella@gmail.com>\n"
+"Language-Team: it\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,13 +36,12 @@ msgid "Display scrolling text on your screen"
 msgstr "Leggi un testo che scorre sullo schermo"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:91
-#, fuzzy
 msgid "Teleprompter displaying text on a widescreen"
-msgstr "Leggi un testo che scorre sullo schermo"
+msgstr "Teleprompter che visualizza il testo su un ampio schermo"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:96
 msgid "Teleprompter displaying text in a narrow screen"
-msgstr ""
+msgstr "Teleprompter visualizza il testo su uno schermo stretto"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:7
 msgid "The font used"
@@ -81,7 +80,7 @@ msgstr "Rendi le evidenziature grassette"
 
 #: src/main.py:79
 msgid "translator-credits"
-msgstr ""
+msgstr "Albano Battistella"
 
 #: src/main.py:95
 msgid "Scroll Settings"
@@ -93,7 +92,7 @@ msgstr "Velocità scorrimento"
 
 #: src/main.py:98
 msgid "In words per minute (approximately)"
-msgstr ""
+msgstr "In parole al minuto (approssimativamente)"
 
 #: src/main.py:112
 msgid "Slow Scroll Speed"
@@ -192,13 +191,12 @@ msgid "_Preferences"
 msgstr "_Preferenze"
 
 #: src/window.ui:270
-#, fuzzy
 msgid "Fullscreen"
 msgstr "Schermo intero"
 
 #: src/window.ui:274
 msgid "Play/Pause"
-msgstr ""
+msgstr "Avvia/Pausa"
 
 #: src/window.ui:278
 msgid "_Keyboard Shortcuts"
@@ -232,7 +230,7 @@ msgstr "Chiudi"
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Play/Pause"
-msgstr ""
+msgstr "Avvia/Pausa"
 
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"

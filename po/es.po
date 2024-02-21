@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.nokse22.teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-08 16:59+0300\n"
-"PO-Revision-Date: 2023-07-01 22:05-0400\n"
+"POT-Creation-Date: 2023-12-12 18:55+0100\n"
+"PO-Revision-Date: 2024-02-12 10:53-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/io.github.nokse22.teleprompter.desktop.in:4
 msgid "Teleprompter"
@@ -35,13 +35,12 @@ msgid "Display scrolling text on your screen"
 msgstr "Mostrar texto desplazable en su pantalla"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:91
-#, fuzzy
 msgid "Teleprompter displaying text on a widescreen"
-msgstr "Mostrar texto desplazable en su pantalla"
+msgstr "Teleprompter que muestra texto en una pantalla panorámica"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:96
 msgid "Teleprompter displaying text in a narrow screen"
-msgstr ""
+msgstr "Teleprompter que muestra texto en una pantalla estrecha"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:7
 msgid "The font used"
@@ -80,7 +79,7 @@ msgstr "Resaltar en negrita lo destacado"
 
 #: src/main.py:79
 msgid "translator-credits"
-msgstr ""
+msgstr "créditos-traductor"
 
 #: src/main.py:95
 msgid "Scroll Settings"
@@ -92,7 +91,7 @@ msgstr "Velocidad de desplazamiento"
 
 #: src/main.py:98
 msgid "In words per minute (approximately)"
-msgstr ""
+msgstr "En palabras por minuto (aproximadamente)"
 
 #: src/main.py:112
 msgid "Slow Scroll Speed"
@@ -122,39 +121,40 @@ msgstr "Color del la fuente"
 msgid "Font"
 msgstr "Fuente"
 
-#: src/window.ui:24
-msgid "Toggle Fullscreen"
-msgstr "Cambiar a pantalla completa"
-
-#: src/window.ui:96 src/window.ui:175
+#. <property name="icon-name">media-playback-start-symbolic</property>
+#: src/window.ui:42 src/window.ui:70 src/window.ui:149
 msgid "Start/Stop"
 msgstr "Iniciar/Detener"
 
-#: src/window.ui:105 src/window.ui:184
+#: src/window.ui:51 src/window.ui:271
+msgid "Toggle Fullscreen"
+msgstr "Cambiar a pantalla completa"
+
+#: src/window.ui:79 src/window.ui:158
 msgid "Increase Speed"
 msgstr "Aumentar la velocidad"
 
-#: src/window.ui:112 src/window.ui:191
+#: src/window.ui:87 src/window.ui:165
 msgid "Decrease Speed"
 msgstr "Reducir la velocidad"
 
-#: src/window.ui:123 src/window.ui:202
+#: src/window.ui:99 src/window.ui:175
 msgid "Increase Font Size"
 msgstr "Aumentar el tamaño de la letra"
 
-#: src/window.ui:130 src/window.ui:209
+#: src/window.ui:107 src/window.ui:182
 msgid "Decrease Font Size"
 msgstr "Reducir el tamaño de la letra"
 
-#: src/window.ui:141 src/window.ui:220
+#: src/window.ui:119 src/window.ui:192
 msgid "Open a File"
 msgstr "Abrir un archivo"
 
-#: src/window.ui:148 src/window.ui:227
+#: src/window.ui:127 src/window.ui:199
 msgid "Paste from Clipboard"
 msgstr "Pegar desde el portapapeles"
 
-#: src/window.ui:246
+#: src/window.ui:247
 msgid ""
 "\n"
 "[START]\n"
@@ -186,24 +186,20 @@ msgstr ""
 "\n"
 "    "
 
-#: src/window.ui:266
+#: src/window.ui:267
 msgid "_Preferences"
 msgstr "_Preferencias"
 
-#: src/window.ui:270
-msgid "Fullscreen"
-msgstr "Pantalla Completa"
-
-#: src/window.ui:274
+#: src/window.ui:275
 msgid "Play/Pause"
 msgstr "Reproducción/Pausa"
 
-#: src/window.ui:278
+#: src/window.ui:279
 msgid "_Keyboard Shortcuts"
 msgstr "_Atajos de teclado"
 
 #. Translators: do not translate the application name
-#: src/window.ui:283
+#: src/window.ui:284
 msgid "_About Teleprompter"
 msgstr "_Acerca de Teleprompter"
 
@@ -236,3 +232,6 @@ msgstr "Reproducción/Pausa"
 msgctxt "shortcut window"
 msgid "Fullscreen"
 msgstr "Pantalla Completa"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Pantalla Completa"

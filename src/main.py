@@ -65,11 +65,11 @@ class TeleprompterApplication(Adw.Application):
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
+        about = Adw.AboutDialog(
                                 application_name='Teleprompter',
                                 application_icon='io.github.nokse22.teleprompter',
                                 developer_name='Nokse',
-                                version='0.1.6',
+                                version='0.1.7',
                                 developers=['Nokse'],
                                 license_type="GTK_LICENSE_GPL_3_0",
                                 issue_url='https://github.com/Nokse22/teleprompter/issues',
@@ -77,12 +77,12 @@ class TeleprompterApplication(Adw.Application):
                                 copyright='© 2023 Noske')
         # Replace "translator-credits" with your name/username, and optionally an email or URL.
         about.set_translator_credits(_("translator-credits"))        
-        about.present()
+        about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
 
-        pref = Adw.PreferencesWindow()
+        pref = Adw.PreferencesDialog()
 
         settingsPage = Adw.PreferencesPage(title="Generals")
         settingsPage.set_icon_name("applications-system-symbolic")
@@ -154,7 +154,7 @@ class TeleprompterApplication(Adw.Application):
         fontColorPicker.set_rgba(self.win.settings.textColor)
         fontColorPickerRow.add_suffix(fontColorPicker)
 
-        pref.present()
+        pref.present(self.win)
 
         highlightColorPicker.connect("color-set", self.on_highlight_color_changed)
         fontColorPicker.connect("color-set", self.on_text_color_changed)

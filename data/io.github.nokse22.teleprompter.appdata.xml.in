@@ -32,8 +32,8 @@
   <url type="translate">https://github.com/Nokse22/teleprompter/tree/main/po</url>
 
   <branding>
-    <color type="primary" scheme_preference="light">#63b5e7</color>
-    <color type="primary" scheme_preference="dark">#276387</color>
+    <color type="primary" scheme_preference="light">#9e9e9e</color>
+    <color type="primary" scheme_preference="dark">#393939</color>
   </branding>
 
   <custom>
@@ -41,6 +41,12 @@
   </custom>
 
   <releases>
+    <release version="0.1.8" date="2024-03-26">
+		  <description translatable="no">
+			  <p>Updated runtime</p>
+		    <p>Used latest Libadwaita widgets</p>
+		  </description>
+	  </release>
     <release version="0.1.7" date="2024-03-10">
 		  <description translatable="no">
 			  <ul>

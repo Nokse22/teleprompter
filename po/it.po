@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: io.github.nokse22.teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-08 16:59+0300\n"
-"PO-Revision-Date: 2024-02-17 15:50+0200\n"
+"PO-Revision-Date: 2024-04-27 15:50+0100\n"
 "Last-Translator: albano Battistella <albanobattistella@gmail.com>\n"
 "Language-Team: it\n"
 "Language: it\n"
@@ -76,7 +76,7 @@ msgstr "La velocità più lenta"
 #: data/io.github.nokse22.teleprompter.gschema.xml:43
 #: data/io.github.nokse22.teleprompter.gschema.xml:44
 msgid "Also bold all the highlight"
-msgstr "Rendi le evidenziature grassette"
+msgstr "Rendi le evidenziature in grassetto"
 
 #: src/main.py:79
 msgid "translator-credits"
@@ -108,15 +108,15 @@ msgstr "Testo"
 
 #: src/main.py:128
 msgid "Highlight color"
-msgstr "Colore evidenzatura"
+msgstr "Evidenzia colore"
 
 #: src/main.py:135
 msgid "Bold Highlight"
-msgstr "Rendi l'evidenzatura grassetta"
+msgstr "Evidenziazione in grassetto"
 
 #: src/main.py:143
 msgid "Font color"
-msgstr "Colore del testo"
+msgstr "Colore del Font"
 
 #: src/main.py:146
 msgid "Font"
@@ -128,7 +128,7 @@ msgstr "Schermo intero"
 
 #: src/window.ui:96 src/window.ui:175
 msgid "Start/Stop"
-msgstr "Start/Stop"
+msgstr "Avvia/Ferma"
 
 #: src/window.ui:105 src/window.ui:184
 msgid "Increase Speed"
@@ -152,7 +152,7 @@ msgstr "Apri un File"
 
 #: src/window.ui:148 src/window.ui:227
 msgid "Paste from Clipboard"
-msgstr "Incolla"
+msgstr "Incolla dagli Appunti"
 
 #: src/window.ui:246
 msgid ""
@@ -200,7 +200,7 @@ msgstr "Avvia/Pausa"
 
 #: src/window.ui:278
 msgid "_Keyboard Shortcuts"
-msgstr "_Scorciatoie"
+msgstr "_Scorciatoie da tastiera"
 
 #. Translators: do not translate the application name
 #: src/window.ui:283
@@ -210,7 +210,7 @@ msgstr "_Informazioni su Teleprompter"
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Generali"
+msgstr "Generale"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"

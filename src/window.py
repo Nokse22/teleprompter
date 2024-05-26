@@ -55,8 +55,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     fullscreen_button = Gtk.Template.Child("fullscreen_button")
     overlay = Gtk.Template.Child("overlay")
 
-    main = Gtk.Template.Child("main")
-
     playing = False
     fullscreened = False
 
@@ -340,7 +338,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("play_button_clicked")
     def bar1(self, *args):
-        print("play")
+        # print("play")
         if not self.playing:
             self.start_button1.set_icon_name("media-playback-pause-symbolic")
             self.playing = True
@@ -375,7 +373,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         def callback(clipboard, res, data):
             text = clipboard.read_text_finish(res)
-            self.text_buffer.set_text("\n\n" + text + "\n\n\n\n\n\n\n\n\n")
+            self.text_buffer.set_text("\n\n" + text)
             self.apply_text_tags()
             self.updateFont()
             start = self.text_buffer.get_start_iter()

@@ -95,32 +95,12 @@ class TeleprompterApplication(Adw.Application):
         scrollSettingsGroup = Adw.PreferencesGroup(title=gettext.gettext("Scroll Settings"))
         settingsPage.add(scrollSettingsGroup)
 
-        scrollSpeedRow = Adw.ActionRow(title=gettext.gettext("Scroll Speed"), subtitle=gettext.gettext("In words per minute (approximately)"))
+        scrollSpeedRow = Adw.SpinRow(title=gettext.gettext("Scroll Speed"), subtitle=gettext.gettext("In words per minute (approximately)"))
         scrollSettingsGroup.add(scrollSpeedRow)
 
-        scrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
-        scrollSpeedScale.set_size_request(200, -1)
-        scrollSpeedScale.set_value_pos(0)
-        scrollSpeedScale.set_draw_value(True)
-
-        scrollSpeedRow.add_suffix(scrollSpeedScale)
-        speed = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
-        speed.set_value(self.win.settings.speed)
-        scrollSpeedScale.set_adjustment(speed)
-
-
-        slowScrollSpeedRow = Adw.ActionRow(title=gettext.gettext("Slow Scroll Speed"), subtitle=gettext.gettext("When pressing the spacebar"))
-        # scrollSettingsGroup.add(slowScrollSpeedRow)
-
-        slowScrollSpeedScale = Gtk.Scale(valign = Gtk.Align.CENTER)
-        slowScrollSpeedScale.set_size_request(200, -1)
-        slowScrollSpeedScale.set_value_pos(0)
-        slowScrollSpeedScale.set_draw_value(True)
-
-        slowScrollSpeedRow.add_suffix(slowScrollSpeedScale)
-        speed2 = Gtk.Adjustment(upper=self.win.settings.speed / 2, step_increment=1, lower=5)
-        speed2.set_value(self.win.settings.slowSpeed)
-        slowScrollSpeedScale.set_adjustment(speed2)
+        speed_adj = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
+        speed_adj.set_value(self.win.settings.speed)
+        scrollSpeedRow.set_adjustment(speed_adj)
 
         textGroup = Adw.PreferencesGroup(title=gettext.gettext("Text"))
         settingsPage.add(textGroup)
@@ -159,8 +139,8 @@ class TeleprompterApplication(Adw.Application):
         highlightColorPicker.connect("color-set", self.on_highlight_color_changed)
         fontColorPicker.connect("color-set", self.on_text_color_changed)
         fontPicker.connect("font-set", self.on_font_changed)
-        scrollSpeedScale.connect("value-changed", self.on_speed_changed, speed2)
-        slowScrollSpeedScale.connect("value-changed", self.on_slow_speed_changed)
+        speed_adj.connect("value-changed", self.on_speed_changed)
+        # scrollSpeedRow.connect("value-changed", self.on_slow_speed_changed)
         boldHighlightSwitch.connect("state-set", self.on_bold_highlight_set)
 
     def create_action(self, name, callback, shortcuts=None):
@@ -222,15 +202,15 @@ class TeleprompterApplication(Adw.Application):
         self.win.search_and_mark_highlight(start)
         self.win.save_app_settings(self.win.settings)
 
-    def on_speed_changed(self, sliderWidget, slowSpeedAdj):
+    def on_speed_changed(self, speed_adj):
         # print("speed changed")
-        speed1 = sliderWidget.get_value()
-        self.win.settings.speed = speed1
-        if slowSpeedAdj.get_value() >= speed1 / 2:
-            slowSpeedAdj.set_value(speed1 / 2)
-            slowSpeedAdj.set_upper(sliderWidget.get_value() / 2)
-        else:
-            slowSpeedAdj.set_upper(sliderWidget.get_value() / 2)
+        speed = speed_adj.get_value()
+        self.win.settings.speed = speed
+        # if speed_adj.get_value() >= speed1 / 2:
+        #     speed_adj.set_value(speed1 / 2)
+        #     speed_adj.set_upper(sliderWidget.get_value() / 2)
+        # else:
+        #     speed_adj.set_upper(sliderWidget.get_value() / 2)
 
         self.win.save_app_settings(self.win.settings)
 

@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# twlvnn <kraft_werk@tutanota.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: temeprompter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-12 18:55+0100\n"
+"PO-Revision-Date: 2024-05-04 12:10+0200\n"
+"Last-Translator: twlvnn <kraft_werk@tutanota.com>\n"
+"Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 46.0\n"
+
+#: data/io.github.nokse22.teleprompter.desktop.in:4
+msgid "Teleprompter"
+msgstr "Телепромптер"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:9
+msgid ""
+"A simple app to read scrolling text from your screen. It has an adaptive "
+"layout to work on smartphones too."
+msgstr ""
+"Просто приложение за четене на превъртащ се текст от екрана. Има съвместим "
+"потребителски интерфейс и за телефони."
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:12
+msgid "Display scrolling text on your screen"
+msgstr "Показвайте превъртащ се текст на екрана"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:91
+msgid "Teleprompter displaying text on a widescreen"
+msgstr "Телепромптер, показващ текст на широк екран"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:96
+msgid "Teleprompter displaying text in a narrow screen"
+msgstr "Телепромптер, показващ текст на тесен екран"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:7
+msgid "The font used"
+msgstr "Използваният шрифт"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:8
+msgid "The font used for displaying text."
+msgstr "Шрифтът, използван за показване на текст."
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:13
+#: data/io.github.nokse22.teleprompter.gschema.xml:14
+msgid "The font color"
+msgstr "Цвят на шрифта"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:19
+#: data/io.github.nokse22.teleprompter.gschema.xml:20
+msgid "The background color"
+msgstr "Цвят на фона"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:25
+#: data/io.github.nokse22.teleprompter.gschema.xml:26
+msgid "The speed"
+msgstr "Скоростта"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:31
+#: data/io.github.nokse22.teleprompter.gschema.xml:32
+#: data/io.github.nokse22.teleprompter.gschema.xml:37
+#: data/io.github.nokse22.teleprompter.gschema.xml:38
+msgid "The slow speed"
+msgstr "Бавната скорост"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:43
+#: data/io.github.nokse22.teleprompter.gschema.xml:44
+msgid "Also bold all the highlight"
+msgstr "Също така удебелете всичко оцветено"
+
+#: src/main.py:79
+msgid "translator-credits"
+msgstr "twlvnn <kraft_werk@tutanota.com>"
+
+#: src/main.py:95
+msgid "Scroll Settings"
+msgstr "Настройки на превъртане"
+
+#: src/main.py:98
+msgid "Scroll Speed"
+msgstr "Скорост на превъртане"
+
+#: src/main.py:98
+msgid "In words per minute (approximately)"
+msgstr "В думи в минута (приблизително)"
+
+#: src/main.py:112
+msgid "Slow Scroll Speed"
+msgstr "Бавна скорост на превъртане"
+
+#: src/main.py:112
+msgid "When pressing the spacebar"
+msgstr "При натискане на клавиша за интервал"
+
+#: src/main.py:125
+msgid "Text"
+msgstr "Текст, текстов"
+
+#: src/main.py:128
+msgid "Highlight color"
+msgstr "Цвят на оцветяване"
+
+#: src/main.py:135
+msgid "Bold Highlight"
+msgstr "Удебелено оцветяване"
+
+#: src/main.py:143
+msgid "Font color"
+msgstr "Цвят на шрифта"
+
+#: src/main.py:146
+msgid "Font"
+msgstr "Шрифт"
+
+#. <property name="icon-name">media-playback-start-symbolic</property>
+#: src/window.ui:42 src/window.ui:70 src/window.ui:149
+msgid "Start/Stop"
+msgstr "Пускане/Спиране"
+
+#: src/window.ui:51 src/window.ui:271
+msgid "Toggle Fullscreen"
+msgstr "Превключване на цял екран"
+
+#: src/window.ui:79 src/window.ui:158
+msgid "Increase Speed"
+msgstr "Увеличаване на скоростта"
+
+#: src/window.ui:87 src/window.ui:165
+msgid "Decrease Speed"
+msgstr "Намаляване на скоростта"
+
+#: src/window.ui:99 src/window.ui:175
+msgid "Increase Font Size"
+msgstr "Увеличаване на размера на шрифта"
+
+#: src/window.ui:107 src/window.ui:182
+msgid "Decrease Font Size"
+msgstr "Намаляване на размера на шрифта"
+
+#: src/window.ui:119 src/window.ui:192
+msgid "Open a File"
+msgstr "Отваряне на файл"
+
+#: src/window.ui:127 src/window.ui:199
+msgid "Paste from Clipboard"
+msgstr "Поставяне от буфера за обмен"
+
+#: src/window.ui:247
+msgid ""
+"\n"
+"[START]\n"
+"This app can be used to read a script from the screen, just paste or open a "
+"text file.\n"
+"Anything between square brackets like [this] is highlighted.\n"
+"\n"
+"[Customization]\n"
+"The font, color of the text and highlights can be customized.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"    "
+msgstr ""
+"\n"
+"[НАЧАЛО]\n"
+"Това приложение може да се използва за четене на текст от екрана, просто "
+"поставете или отворете текстов файл.\n"
+"Всичко, което е между квадратни скоби като [това], се оцветява.\n"
+"\n"
+"[ПЕРСОНАЛИЗИРАНЕ]\n"
+"Шрифтът, цветът на текста и оцветяванията могат да бъдат персонализирани.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"    "
+
+#: src/window.ui:267
+msgid "_Preferences"
+msgstr "_Настройки"
+
+#: src/window.ui:275
+msgid "Play/Pause"
+msgstr "Пускане/Пауза"
+
+#: src/window.ui:279
+msgid "_Keyboard Shortcuts"
+msgstr "_Клавишни комбинации"
+
+#. Translators: do not translate the application name
+#: src/window.ui:284
+msgid "_About Teleprompter"
+msgstr "_Относно „Телепромптер“"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общи"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показване на клавишните комбинации"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr "Показване на настройките"
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Спиране на програмата"
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Play/Pause"
+msgstr "Пускане/Пауза"
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Цял екран"

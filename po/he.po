@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/gnome-firmware/-/"
 "issues\n"
 "POT-Creation-Date: 2024-08-18 10:28+0000\n"
-"PO-Revision-Date: 2024-09-10 11:14+0300\n"
+"PO-Revision-Date: 2024-09-11 18:57+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -98,7 +98,7 @@ msgstr "במילים לדקה (בקֵרוּב)"
 
 #: src/main.py:112
 msgid "Slow Scroll Speed"
-msgstr "האטת מהירות הגלילה"
+msgstr "האטת הגלילה"
 
 #: src/main.py:112
 msgid "When pressing the spacebar"
@@ -127,7 +127,7 @@ msgstr "גופן"
 #. <property name="icon-name">media-playback-start-symbolic</property>
 #: src/window.ui:42 src/window.ui:70 src/window.ui:149
 msgid "Start/Stop"
-msgstr "התחלה/עצירה"
+msgstr "הפעלה/עצירה"
 
 #: src/window.ui:51 src/window.ui:271
 msgid "Toggle Fullscreen"
@@ -135,19 +135,19 @@ msgstr "שינוי מצב מסך מלא"
 
 #: src/window.ui:79 src/window.ui:158
 msgid "Increase Speed"
-msgstr "האצת המהירות"
+msgstr "האצת הגלילה"
 
 #: src/window.ui:87 src/window.ui:165
 msgid "Decrease Speed"
-msgstr "האטת המהירות"
+msgstr "האטת הגלילה"
 
 #: src/window.ui:99 src/window.ui:175
 msgid "Increase Font Size"
-msgstr "הגדלת גודל הגופן"
+msgstr "הגדלת הגופן"
 
 #: src/window.ui:107 src/window.ui:182
 msgid "Decrease Font Size"
-msgstr "הקטנת גודל הגופן"
+msgstr "הקטנת הגופן"
 
 #: src/window.ui:119 src/window.ui:192
 msgid "Open a File"
@@ -197,7 +197,7 @@ msgstr "_העדפות"
 
 #: src/window.ui:275
 msgid "Play/Pause"
-msgstr "נגינה/השהיה"
+msgstr "הפעלה/השהיה"
 
 #: src/window.ui:279
 msgid "_Keyboard Shortcuts"
@@ -231,7 +231,7 @@ msgstr "יציאה"
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Play/Pause"
-msgstr "נגינה/השהיה"
+msgstr "הפעלה/השהיה"
 
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"

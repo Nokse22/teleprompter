@@ -14,22 +14,10 @@
       <description>The font color</description>
     </key>
 
-	  <key name="background" type="s">
-      <default>'#242424'</default>
-      <summary>The background color</summary>
-      <description>The background color</description>
-    </key>
-
 	  <key name="speed" type="i">
       <default>100</default>
       <summary>The speed</summary>
       <description>The speed</description>
-    </key>
-
-	  <key name="slow-speed" type="i">
-      <default>5</default>
-      <summary>The slow speed</summary>
-      <description>The slow speed</description>
     </key>
 
 	  <key name="highlight" type="s">

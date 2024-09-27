@@ -76,8 +76,10 @@ class TeleprompterApplication(Adw.Application):
         self.win = self.props.active_window
         if not self.win:
             self.win = TeleprompterWindow(application=self)
-            self.create_action('play', self.win.play, ['<primary>space'])
-            self.create_action('fullscreen', self.win.toggle_fullscreen, ['F11'])
+            self.create_action(
+                'play', self.win.play, ['<primary>space'])
+            self.create_action(
+                'fullscreen', self.win.toggle_fullscreen, ['F11'])
         self.win.present()
 
     def on_about_action(self, *args):
@@ -225,26 +227,13 @@ class TeleprompterApplication(Adw.Application):
         self.win.save_app_settings(self.win.settings)
 
     def on_speed_changed(self, speed_adj):
-        # print("speed changed")
         speed = speed_adj.get_value()
         self.win.settings.speed = speed
-        # if speed_adj.get_value() >= speed1 / 2:
-        #     speed_adj.set_value(speed1 / 2)
-        #     speed_adj.set_upper(sliderWidget.get_value() / 2)
-        # else:
-        #     speed_adj.set_upper(sliderWidget.get_value() / 2)
 
-        self.win.save_app_settings(self.win.settings)
-
-    def on_slow_speed_changed(self, sliderWidget):
-        # print("slow speed changed")
-        self.win.settings.slowSpeed = sliderWidget.get_value()
-
-        self.win.save_app_settings(self.win.settings)
+        self.saved_settings.set_int("speed", speed * 10)
 
     def on_bold_highlight_set(self, switch, foo):
         self.win.settings.boldHighlight = not switch.get_state()
-        print(switch.get_state())
 
         self.win.updateFont()
         self.win.apply_text_tags()

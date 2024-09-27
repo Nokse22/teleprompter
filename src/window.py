@@ -29,9 +29,7 @@ class AppSettings:
         self.font = 'Cantarell 40'
         self.textColor = Gdk.RGBA()
         self.textColor.parse("#62A0EA")
-        self.backgroundColor = Gdk.RGBA()
         self.speed = 150
-        self.slowSpeed = 50
         self.highlightColor = Gdk.RGBA()
         self.highlightColor.parse("#ED333B")
         self.boldHighlight = True
@@ -96,8 +94,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.saved_settings.set_string(
             "text", self.toHexStr(settings.textColor))
         self.saved_settings.set_string(
-            "background", self.toHexStr(settings.backgroundColor))
-        self.saved_settings.set_string(
             "highlight", self.toHexStr(settings.highlightColor))
 
         self.saved_settings.set_string(
@@ -105,8 +101,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         self.saved_settings.set_int(
             "speed", settings.speed * 10)
-        self.saved_settings.set_int(
-            "slow-speed", settings.slowSpeed * 10)
 
         self.saved_settings.set_boolean(
             "bold-highlight", settings.boldHighlight)
@@ -154,16 +148,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         color1.parse(self.saved_settings.get_string("text"))
         settings.textColor = color1
 
-        color2.parse(self.saved_settings.get_string("background"))
-        settings.backgroundColor = color2
-
         color3.parse(self.saved_settings.get_string("highlight"))
         settings.highlightColor = color3
 
         settings.font = self.saved_settings.get_string("font")
 
         settings.speed = self.saved_settings.get_int("speed") / 10
-        settings.slowSpeed = self.saved_settings.get_int("slow-speed") / 10
 
         settings.boldHighlight = self.saved_settings.get_boolean(
             "bold-highlight")

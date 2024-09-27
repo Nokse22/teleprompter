@@ -3,7 +3,10 @@
   <gresource prefix="/io/github/nokse22/teleprompter">
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">icons/increase-font.svg</file>
-    <file compressed="true" preprocess="xml-stripblanks">icons/decrease-font.svg</file>
+    <file compressed="true" preprocess="xml-stripblanks">icons/16x16/actions/increase-font-symbolic.svg</file>
+    <file compressed="true" preprocess="xml-stripblanks">icons/16x16/actions/decrease-font-symbolic.svg</file>
+    <file compressed="true" preprocess="xml-stripblanks">icons/16x16/actions/view-fullscreen-symbolic.svg</file>
+
+    <file>style.css</file>
   </gresource>
 </gresources>

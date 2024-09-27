@@ -44,5 +44,9 @@
       <description>Also bold all the highlight</description>
     </key>
 
+	  <key name="theme" type="s">
+      <default>'dark'</default>
+    </key>
+
 	</schema>
 </schemalist>

@@ -16,22 +16,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi
-gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk
 
 from gi.repository import Adw
-from gi.repository import Pango, GLib, Gio, cairo
+from gi.repository import Pango, GLib, Gio
 
-import gettext
-import locale
-from os import path
-from os.path import abspath, dirname, join, realpath
-
-LOCALE_DIR = path.join(path.dirname(__file__).split('teleprompter')[0],'locale')
-# print(LOCALE_DIR)
-gettext.bindtextdomain('teleprompter', LOCALE_DIR)
-gettext.textdomain('teleprompter')
+from gettext import gettext as _
 
 
 class AppSettings:
@@ -46,6 +36,7 @@ class AppSettings:
         self.highlightColor.parse("#ED333B")
         self.boldHighlight = True
 
+
 @Gtk.Template(resource_path='/io/github/nokse22/teleprompter/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
@@ -54,6 +45,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     start_button1 = Gtk.Template.Child("start_button1")
     fullscreen_button = Gtk.Template.Child("fullscreen_button")
     overlay = Gtk.Template.Child("overlay")
+    sidebar_controls = Gtk.Template.Child("sidebar_controls")
 
     playing = False
     fullscreened = False
@@ -63,6 +55,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.saved_settings = Gio.Settings("io.github.nokse22.teleprompter")
 
         self.settings = AppSettings()
         self.settings = self.load_app_settings()
@@ -75,7 +69,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.search_and_mark_highlight(start)
 
         self.apply_text_tags()
-        self.colorBackground()
         self.updateFont()
 
         start = self.text_buffer.get_start_iter()
@@ -100,25 +93,25 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         return text_color
 
     def save_app_settings(self, settings):
-        schema_id = "io.github.nokse22.teleprompter"
-        #print("saving")
+        self.saved_settings.set_string(
+            "text", self.toHexStr(settings.textColor))
+        self.saved_settings.set_string(
+            "background", self.toHexStr(settings.backgroundColor))
+        self.saved_settings.set_string(
+            "highlight", self.toHexStr(settings.highlightColor))
 
-        # Create a Gio.Settings object for the schema
-        gio_settings = Gio.Settings(schema_id)
+        self.saved_settings.set_string(
+            "font", settings.font)
 
-        gio_settings.set_string("text", self.toHexStr(settings.textColor))
-        gio_settings.set_string("background", self.toHexStr(settings.backgroundColor))
-        gio_settings.set_string("highlight", self.toHexStr(settings.highlightColor))
+        self.saved_settings.set_int(
+            "speed", settings.speed * 10)
+        self.saved_settings.set_int(
+            "slow-speed", settings.slowSpeed * 10)
 
-        gio_settings.set_string("font", settings.font)
-
-        gio_settings.set_int("speed", settings.speed * 10)
-        gio_settings.set_int("slow-speed", settings.slowSpeed * 10)
-
-        gio_settings.set_boolean("bold-highlight", settings.boldHighlight)
+        self.saved_settings.set_boolean(
+            "bold-highlight", settings.boldHighlight)
 
     def on_file_selected(self, dialog, response):
-        #print(response)
         if response == -3:
             selected_file = dialog.get_file()
             if selected_file:
@@ -126,7 +119,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
                 try:
                     with open(file_path, 'r') as file:
                         file_contents = file.read()
-                        self.text_buffer.set_text("\n\n\n\n\n\n\n\n\n" + file_contents + "\n\n\n\n\n\n\n\n\n\n\n")
+                        self.text_buffer.set_text(file_contents)
                         self.apply_text_tags()
                         self.updateFont()
                         start = self.text_buffer.get_start_iter()
@@ -136,7 +129,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
                         toast.set_title("File successfully opened")
                         toast.set_timeout(1)
                         self.overlay.add_toast(toast)
-                except:
+                except Exception:
                     dialog.destroy()
                     toast = Adw.Toast()
                     toast.set_title("Error reading file")
@@ -147,64 +140,60 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             dialog.destroy()
 
     def show_file_chooser_dialog(self):
-
-        dialog = Gtk.FileChooserNative(
-            title="Open File",
-            transient_for=self,
-            action=Gtk.FileChooserAction.OPEN,
+        dialog = Gtk.FileDialog(
+            title=_("Open File"),
         )
 
-        dialog.set_accept_label("Open")
-        dialog.set_cancel_label("Cancel")
+        dialog.open(self, None, self.on_open_file_response)
 
-        # Show the dialog and get the response
-        response = dialog.show()
+    def on_open_file_response(self, dialog, response):
+        try:
+            file = dialog.open_finish(response)
 
-        dialog.connect("response", self.on_file_selected)
+            if file:
+                filepath = file.get_path()
+                self.loading_file = True
+                self.window_settings.set_setting("load-type", None, False)
+                self.logger.info("open file response")
+                self.load_file(filepath=filepath)
+        except Exception:
+            return
 
     def load_app_settings(self):
-        # print("loading")
-        schema_id = "io.github.nokse22.teleprompter"
-
-        # Create a Gio.Settings object for the schema
-        gio_settings = Gio.Settings(schema_id)
-
-        # Retrieve the settings values
         settings = AppSettings()
 
         color1 = Gdk.RGBA()
         color2 = Gdk.RGBA()
         color3 = Gdk.RGBA()
 
-        color1.parse(gio_settings.get_string("text"))
+        color1.parse(self.saved_settings.get_string("text"))
         settings.textColor = color1
 
-        color2.parse(gio_settings.get_string("background"))
+        color2.parse(self.saved_settings.get_string("background"))
         settings.backgroundColor = color2
 
-        color3.parse(gio_settings.get_string("highlight"))
+        color3.parse(self.saved_settings.get_string("highlight"))
         settings.highlightColor = color3
 
-        settings.font = gio_settings.get_string("font")
+        settings.font = self.saved_settings.get_string("font")
 
-        settings.speed = gio_settings.get_int("speed") / 10
-        settings.slowSpeed = gio_settings.get_int("slow-speed") / 10
+        settings.speed = self.saved_settings.get_int("speed") / 10
+        settings.slowSpeed = self.saved_settings.get_int("slow-speed") / 10
 
-        settings.boldHighlight = gio_settings.get_boolean("bold-highlight")
-
-        #print("settings loaded")
+        settings.boldHighlight = self.saved_settings.get_boolean(
+            "bold-highlight")
 
         return settings
 
     def autoscroll(self, scrolled_window):
         adjustment = scrolled_window.get_vadjustment()
-        adjustment.set_value(adjustment.get_value() + self.wordPerMinuteToSpeed(self.settings.speed))
+        adjustment.set_value(
+            adjustment.get_value() + self.wordPerMinuteToSpeed(
+                self.settings.speed))
         scrolled_window.set_vadjustment(adjustment)
 
-        #print(adjustment.get_value())
-        #print(adjustment.get_upper() - adjustment.get_page_size())
-
-        if adjustment.get_value() == adjustment.get_upper() - adjustment.get_page_size():
+        if (adjustment.get_value() ==
+                adjustment.get_upper() - adjustment.get_page_size()):
             self.playing = False
             self.start_button1.set_icon_name("media-playback-start-symbolic")
             return 0
@@ -215,20 +204,19 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             return 1
 
     def apply_text_tags(self):
-        # print("apply tags")
-
         start_iter = self.text_buffer.get_start_iter()
         end_iter = Gtk.TextIter()
 
         tag_color1 = Gtk.TextTag()
-        tag_color1.set_property("foreground", self.toHexStr(self.settings.textColor))
+        tag_color1.set_property(
+            "foreground", self.toHexStr(self.settings.textColor))
         self.text_buffer.get_tag_table().add(tag_color1)
 
         tag_color2 = Gtk.TextTag()
-        tag_color2.set_property("foreground", self.toHexStr(self.settings.highlightColor))
+        tag_color2.set_property(
+            "foreground", self.toHexStr(self.settings.highlightColor))
         self.text_buffer.get_tag_table().add(tag_color2)
 
-        # Get the text buffer's start and end iterators
         start_iter = self.text_buffer.get_start_iter()
         end_iter = self.text_buffer.get_end_iter()
 
@@ -239,18 +227,22 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         text = "["
 
         tag_color2 = Gtk.TextTag()
-        tag_color2.set_property("foreground", self.toHexStr(self.settings.highlightColor))
-        if self.settings.boldHighlight: tag_color2.set_property("weight", Pango.Weight.BOLD)
+        tag_color2.set_property(
+            "foreground", self.toHexStr(self.settings.highlightColor))
+
+        if self.settings.boldHighlight:
+            tag_color2.set_property("weight", Pango.Weight.BOLD)
+
         self.text_buffer.get_tag_table().add(tag_color2)
 
         match = start.forward_search(text, 0, end)
 
         if match is not None:
             match_start, match_end = match
-            #match_end.forward_char()
             match_end_highlight = self.search_end_highlight(match_end)
-            if match_end_highlight != None:
-                self.text_buffer.apply_tag(tag_color2, match_start, match_end_highlight)
+            if match_end_highlight is not None:
+                self.text_buffer.apply_tag(
+                    tag_color2, match_start, match_end_highlight)
             self.search_and_mark_highlight(match_end)
 
     def search_end_highlight(self, start):
@@ -274,38 +266,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         return None
 
     def updateFont(self):
-        tag = self.text_buffer.create_tag(None, font_desc=Pango.FontDescription(self.settings.font))
+        tag = self.text_buffer.create_tag(
+            None, font_desc=Pango.FontDescription(self.settings.font))
 
         # Apply the tag to the entire text buffer
-        self.text_buffer.apply_tag(tag, self.text_buffer.get_start_iter(), self.text_buffer.get_end_iter())
-
-    def colorBackground(self):
-        css_data = """
-            textview {{
-                background-color: #00000000;
-            }}
-        """.format(c2 = self.toHexStr(self.settings.backgroundColor))
-
-        style_provider = Gtk.CssProvider()
-        style_provider.load_from_data(css_data, -1)
-
-        # Apply the theme to the GTK app
-        context = self.textview.get_style_context()
-        context.add_provider(style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
-    def colorAppBackground(self):
-        css_data = """
-            box {{
-                background-color: #ff0000;
-            }}
-        """.format(c2 = self.toHexStr(self.settings.backgroundColor))
-
-        style_provider = Gtk.CssProvider()
-        style_provider.load_from_data(css_data, -1)
-
-        # Apply the theme to the GTK app
-        # context = self.main.get_style_context()
-        # context.add_provider(style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        self.text_buffer.apply_tag(
+            tag, self.text_buffer.get_start_iter(), self.text_buffer.get_end_iter())
 
     def wordPerMinuteToSpeed(self, speed):
         font_properties = self.settings.font.split()
@@ -337,7 +303,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.settings.font = ' '.join(font_properties)
 
     @Gtk.Template.Callback("play_button_clicked")
-    def bar1(self, *args):
+    def play(self, *args):
         # print("play")
         if not self.playing:
             self.start_button1.set_icon_name("media-playback-pause-symbolic")
@@ -351,29 +317,26 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             self.speed = 0
 
     @Gtk.Template.Callback("open_button_clicked")
-    def bar2(self, *args):
-        # print("open button clicked")
+    def open_button_clicked(self, *args):
         self.show_file_chooser_dialog()
 
     @Gtk.Template.Callback("increase_speed_button_clicked")
-    def bar3(self, *args):
+    def increase_speed_button_clicked(self, *args):
         self.settings.speed += 10
 
     @Gtk.Template.Callback("decrease_speed_button_clicked")
-    def bar4(self, *args):
-        # print("decrease speed clicked")
+    def decrease_speed_button_clicked(self, *args):
         self.settings.speed -= 10
         if self.settings.speed <= 40:
             self.settings.speed = 40
 
     @Gtk.Template.Callback("paste_button_clicked")
-    def bar5(self, *args):
-        # I spent one entire evening trying to make this work...
+    def paste_button_clicked(self, *args):
         clipboard = Gdk.Display().get_default().get_clipboard()
 
         def callback(clipboard, res, data):
             text = clipboard.read_text_finish(res)
-            self.text_buffer.set_text("\n\n" + text)
+            self.text_buffer.set_text(text)
             self.apply_text_tags()
             self.updateFont()
             start = self.text_buffer.get_start_iter()
@@ -384,10 +347,10 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             self.overlay.add_toast(toast)
 
         data = {}
-        res = clipboard.read_text_async(None, callback, data)
+        clipboard.read_text_async(None, callback, data)
 
     @Gtk.Template.Callback("decrease_font_button_clicked")
-    def bar6(self, *args):
+    def decrease_font_button_clicked(self, *args):
         self.modifyFont(-5)
         self.updateFont()
         self.apply_text_tags()
@@ -396,7 +359,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.save_app_settings(self.settings)
 
     @Gtk.Template.Callback("increase_font_button_clicked")
-    def bar7(self, *args):
+    def increase_font_button_clicked(self, *args):
         self.modifyFont(5)
         self.updateFont()
         self.apply_text_tags()
@@ -405,7 +368,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.save_app_settings(self.settings)
 
     @Gtk.Template.Callback("fullscreen_button_clicked")
-    def bar8(self, *args):
+    def toggle_fullscreen(self, *args):
         if self.fullscreened:
             self.unfullscreen()
             self.fullscreen_button.set_icon_name("view-fullscreen-symbolic")
@@ -415,3 +378,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             self.fullscreen_button.set_icon_name("view-restore-symbolic")
             self.fullscreened = True
 
+    @Gtk.Template.Callback("on_apply_breakpoint")
+    def on_apply_breakpoint(self, *args):
+        self.sidebar_controls.remove_css_class("card")
+        self.sidebar_controls.remove_css_class("overlay_toolbar")
+
+    @Gtk.Template.Callback("on_unapply_breakpoint")
+    def on_unapply_breakpoint(self, *args):
+        self.sidebar_controls.add_css_class("card")
+        self.sidebar_controls.add_css_class("overlay_toolbar")

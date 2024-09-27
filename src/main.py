@@ -18,27 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
-import gi
 
-gi.require_version('Gtk', '4.0')
-gi.require_version('Adw', '1')
-
-from gi.repository import Gtk, Gio, Adw, Gdk
+from gi.repository import Gtk, Gio, Adw, GLib
 from .window import TeleprompterWindow
 
-import gettext
-import locale
-from os import path
-from os.path import abspath, dirname, join, realpath
+from gettext import gettext as _
 
-LOCALE_DIR = path.join(path.dirname(__file__).split('teleprompter')[0],'locale')
-# print(LOCALE_DIR)
-gettext.bindtextdomain('teleprompter', LOCALE_DIR)
-gettext.textdomain('teleprompter')
-
-# Set the color scheme to force dark always
-style_manager = Adw.StyleManager.get_default()
-style_manager.set_color_scheme(4)
 
 class TeleprompterApplication(Adw.Application):
     """The main application singleton class."""
@@ -46,9 +31,41 @@ class TeleprompterApplication(Adw.Application):
     def __init__(self):
         super().__init__(application_id='io.github.nokse22.teleprompter',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action, ['<primary>comma'])
+        self.create_action(
+            'quit', lambda *_: self.quit(), ['<primary>q'])
+        self.create_action(
+            'about', self.on_about_action)
+        self.create_action(
+            'preferences', self.on_preferences_action, ['<primary>comma'])
+
+        self.saved_settings = Gio.Settings("io.github.nokse22.teleprompter")
+
+        theme_action = Gio.SimpleAction.new_stateful(
+            "theme",
+            GLib.VariantType.new("s"),
+            GLib.Variant("s", self.saved_settings.get_string("theme")),
+        )
+        theme_action.connect("activate", self.on_theme_setting_changed)
+
+        self.add_action(theme_action)
+
+        self.update_theme()
+
+    def on_theme_setting_changed(self, action, state):
+        action.set_state(state)
+        self.saved_settings.set_string("theme", state.get_string())
+
+        self.update_theme()
+
+    def update_theme(self):
+        manager = Adw.StyleManager().get_default()
+        match self.saved_settings.get_string("theme"):
+            case "follow":
+                manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
+            case "light":
+                manager.set_color_scheme(Adw.ColorScheme.FORCE_LIGHT)
+            case "dark":
+                manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
 
     def do_activate(self):
         """Called when the application is activated.
@@ -59,24 +76,24 @@ class TeleprompterApplication(Adw.Application):
         self.win = self.props.active_window
         if not self.win:
             self.win = TeleprompterWindow(application=self)
-            self.create_action('play', self.win.bar1, ['<primary>space'])
-            self.create_action('fullscreen', self.win.bar8, ['F11'])
+            self.create_action('play', self.win.play, ['<primary>space'])
+            self.create_action('fullscreen', self.win.toggle_fullscreen, ['F11'])
         self.win.present()
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
-                                application_name='Teleprompter',
-                                application_icon='io.github.nokse22.teleprompter',
-                                developer_name='Nokse',
-                                version='0.1.8',
-                                developers=['Nokse'],
-                                license_type="GTK_LICENSE_GPL_3_0",
-                                issue_url='https://github.com/Nokse22/teleprompter/issues',
-                                website='https://github.com/Nokse22/teleprompter',
-                                copyright='© 2023 Noske')
+            application_name='Teleprompter',
+            application_icon='io.github.nokse22.teleprompter',
+            developer_name='Nokse',
+            version='1.0.0',
+            developers=['Nokse'],
+            license_type="GTK_LICENSE_GPL_3_0",
+            issue_url='https://github.com/Nokse22/teleprompter/issues',
+            website='https://github.com/Nokse22/teleprompter',
+            copyright='© 2023 Noske')
         # Replace "translator-credits" with your name/username, and optionally an email or URL.
-        about.set_translator_credits(_("translator-credits"))        
+        about.set_translator_credits(_("translator-credits"))
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
@@ -105,17 +122,18 @@ class TeleprompterApplication(Adw.Application):
         textGroup = Adw.PreferencesGroup(title=gettext.gettext("Text"))
         settingsPage.add(textGroup)
 
-        highlightColorPickerRow = Adw.ActionRow(title=gettext.gettext("Highlight color"))
+        highlightColorPickerRow = Adw.ActionRow(
+            title=gettext.gettext("Highlight color"))
         textGroup.add(highlightColorPickerRow)
 
-        highlightColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
+        highlightColorPicker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
         highlightColorPicker.set_rgba(self.win.settings.highlightColor)
         highlightColorPickerRow.add_suffix(highlightColorPicker)
 
         boldHighlight = Adw.ActionRow(title=gettext.gettext("Bold Highlight"))
         textGroup.add(boldHighlight)
 
-        boldHighlightSwitch = Gtk.Switch(valign = Gtk.Align.CENTER)
+        boldHighlightSwitch = Gtk.Switch(valign=Gtk.Align.CENTER)
         boldHighlightSwitch.set_active(self.win.settings.boldHighlight)
 
         boldHighlight.add_suffix(boldHighlightSwitch)
@@ -126,22 +144,26 @@ class TeleprompterApplication(Adw.Application):
         fontPickerRow = Adw.ActionRow(title=gettext.gettext("Font"))
         textGroup.add(fontPickerRow)
 
-        fontPicker = Gtk.FontButton(valign = Gtk.Align.CENTER)
+        fontPicker = Gtk.FontButton(valign=Gtk.Align.CENTER)
         fontPicker.set_font(self.win.settings.font)
         fontPickerRow.add_suffix(fontPicker)
 
-        fontColorPicker = Gtk.ColorButton(valign = Gtk.Align.CENTER)
+        fontColorPicker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
         fontColorPicker.set_rgba(self.win.settings.textColor)
         fontColorPickerRow.add_suffix(fontColorPicker)
 
         pref.present(self.win)
 
-        highlightColorPicker.connect("color-set", self.on_highlight_color_changed)
-        fontColorPicker.connect("color-set", self.on_text_color_changed)
-        fontPicker.connect("font-set", self.on_font_changed)
-        speed_adj.connect("value-changed", self.on_speed_changed)
-        # scrollSpeedRow.connect("value-changed", self.on_slow_speed_changed)
-        boldHighlightSwitch.connect("state-set", self.on_bold_highlight_set)
+        highlightColorPicker.connect(
+            "color-set", self.on_highlight_color_changed)
+        fontColorPicker.connect(
+            "color-set", self.on_text_color_changed)
+        fontPicker.connect(
+            "font-set", self.on_font_changed)
+        speed_adj.connect(
+            "value-changed", self.on_speed_changed)
+        boldHighlightSwitch.connect(
+            "state-set", self.on_bold_highlight_set)
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -229,6 +251,7 @@ class TeleprompterApplication(Adw.Application):
         start = self.win.text_buffer.get_start_iter()
         self.win.search_and_mark_highlight(start)
         self.win.save_app_settings(self.win.settings)
+
 
 def main(version):
     """The application's entry point."""

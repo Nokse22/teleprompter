@@ -96,41 +96,41 @@ class TeleprompterApplication(Adw.Application):
         about.set_translator_credits(_("translator-credits"))
         about.present(self.props.active_window)
 
-    def on_preferences_action(self, widget, _):
+    def on_preferences_action(self, *args):
         """Callback for the app.preferences action."""
 
         pref = Adw.PreferencesDialog()
 
-        settingsPage = Adw.PreferencesPage(title="Generals")
+        settingsPage = Adw.PreferencesPage(
+            title=_("Generals"))
         settingsPage.set_icon_name("applications-system-symbolic")
         pref.add(settingsPage)
 
-        # stylePage = Adw.PreferencesPage(title="Style")
-        # stylePage.set_icon_name("applications-graphics-symbolic")
-        # pref.add(stylePage)
-
-        scrollSettingsGroup = Adw.PreferencesGroup(title=gettext.gettext("Scroll Settings"))
+        scrollSettingsGroup = Adw.PreferencesGroup(
+            title=_("Scroll Settings"))
         settingsPage.add(scrollSettingsGroup)
 
-        scrollSpeedRow = Adw.SpinRow(title=gettext.gettext("Scroll Speed"), subtitle=gettext.gettext("In words per minute (approximately)"))
+        scrollSpeedRow = Adw.SpinRow(
+            title=_("Scroll Speed"),
+            subtitle=_("In words per minute (approximately)"))
         scrollSettingsGroup.add(scrollSpeedRow)
 
         speed_adj = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
         speed_adj.set_value(self.win.settings.speed)
         scrollSpeedRow.set_adjustment(speed_adj)
 
-        textGroup = Adw.PreferencesGroup(title=gettext.gettext("Text"))
+        textGroup = Adw.PreferencesGroup(title=_("Text"))
         settingsPage.add(textGroup)
 
         highlightColorPickerRow = Adw.ActionRow(
-            title=gettext.gettext("Highlight color"))
+            title=_("Highlight color"))
         textGroup.add(highlightColorPickerRow)
 
         highlightColorPicker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
         highlightColorPicker.set_rgba(self.win.settings.highlightColor)
         highlightColorPickerRow.add_suffix(highlightColorPicker)
 
-        boldHighlight = Adw.ActionRow(title=gettext.gettext("Bold Highlight"))
+        boldHighlight = Adw.ActionRow(title=_("Bold Highlight"))
         textGroup.add(boldHighlight)
 
         boldHighlightSwitch = Gtk.Switch(valign=Gtk.Align.CENTER)
@@ -138,10 +138,10 @@ class TeleprompterApplication(Adw.Application):
 
         boldHighlight.add_suffix(boldHighlightSwitch)
 
-        fontColorPickerRow = Adw.ActionRow(title=gettext.gettext("Font color"))
+        fontColorPickerRow = Adw.ActionRow(title=_("Font color"))
         textGroup.add(fontColorPickerRow)
 
-        fontPickerRow = Adw.ActionRow(title=gettext.gettext("Font"))
+        fontPickerRow = Adw.ActionRow(title=_("Font"))
         textGroup.add(fontPickerRow)
 
         fontPicker = Gtk.FontButton(valign=Gtk.Align.CENTER)

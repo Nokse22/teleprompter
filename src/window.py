@@ -111,11 +111,18 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.saved_settings.set_boolean(
             "bold-highlight", settings.boldHighlight)
 
-    def on_file_selected(self, dialog, response):
-        if response == -3:
-            selected_file = dialog.get_file()
-            if selected_file:
-                file_path = selected_file.get_path()
+    def show_file_chooser_dialog(self):
+        dialog = Gtk.FileDialog(
+            title=_("Open File"),
+        )
+
+        dialog.open(self, None, self.on_open_file_response)
+
+    def on_open_file_response(self, dialog, response):
+        try:
+            file = dialog.open_finish(response)
+            if file:
+                file_path = file.get_path()
                 try:
                     with open(file_path, 'r') as file:
                         file_contents = file.read()
@@ -130,32 +137,10 @@ class TeleprompterWindow(Adw.ApplicationWindow):
                         toast.set_timeout(1)
                         self.overlay.add_toast(toast)
                 except Exception:
-                    dialog.destroy()
                     toast = Adw.Toast()
                     toast.set_title("Error reading file")
                     toast.set_timeout(1)
                     self.overlay.add_toast(toast)
-
-        else:
-            dialog.destroy()
-
-    def show_file_chooser_dialog(self):
-        dialog = Gtk.FileDialog(
-            title=_("Open File"),
-        )
-
-        dialog.open(self, None, self.on_open_file_response)
-
-    def on_open_file_response(self, dialog, response):
-        try:
-            file = dialog.open_finish(response)
-
-            if file:
-                filepath = file.get_path()
-                self.loading_file = True
-                self.window_settings.set_setting("load-type", None, False)
-                self.logger.info("open file response")
-                self.load_file(filepath=filepath)
         except Exception:
             return
 

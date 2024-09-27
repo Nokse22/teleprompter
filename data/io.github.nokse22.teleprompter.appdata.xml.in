@@ -36,11 +36,18 @@
     <color type="primary" scheme_preference="dark">#393939</color>
   </branding>
 
-  <custom>
-    <value key="GnomeSoftware::key-colors">[(99, 181, 231), (39, 99, 135)]</value>
-  </custom>
-
   <releases>
+    <release version="1.0.0" date="2024-09-27">
+		  <description translate="no">
+			  <p>Updated runtime to GNOME 47</p>
+		    <p>Added light theme support</p>
+		    <p>Improved design</p>
+		    <p>Fixed bug opening files</p>
+		    <p>Added Hebrew translation (Yosef Or Boczko)</p>
+		    <p>Added Hindi translation (Scrambled777)</p>
+		    <p>Added Bulgarian translation (Scrambled777)</p>
+		  </description>
+	  </release>
     <release version="0.1.8" date="2024-03-26">
 		  <description translate="no">
 			  <p>Updated runtime</p>

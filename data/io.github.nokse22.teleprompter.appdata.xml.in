@@ -37,6 +37,12 @@
   </branding>
 
   <releases>
+    <release version="1.0.1" date="2024-09-29">
+		  <description translate="no">
+			  <p>Fixed translations</p>
+		    <p>Updated screenshots</p>
+		  </description>
+	  </release>
     <release version="1.0.0" date="2024-09-27">
 		  <description translate="no">
 			  <p>Updated runtime to GNOME 47</p>
@@ -128,13 +134,18 @@
 
 	<screenshots>
     <screenshot type="default">
-	  <caption>Teleprompter displaying text on a widescreen</caption>
-      <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%201.png</image>
+	    <caption>Teleprompter displaying text on a widescreen</caption>
+      <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/screenshot%201.png</image>
     </screenshot>
 
 	  <screenshot>
-		<caption>Teleprompter displaying text in a narrow screen</caption>
-	    <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/Screenshot%202.png</image>
+		  <caption>Teleprompter displaying text on a widescreen with dark theme</caption>
+	    <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/screenshot%202.png</image>
+	  </screenshot>
+
+	  <screenshot>
+	    <caption>Teleprompter displaying text in a narrow screen</caption>
+	    <image>https://raw.githubusercontent.com/Nokse22/teleprompter/main/data/resources/screenshot%203.png</image>
 	  </screenshot>
   </screenshots>
 

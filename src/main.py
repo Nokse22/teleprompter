@@ -35,8 +35,8 @@ gettext.textdomain('teleprompter')
 class TeleprompterApplication(Adw.Application):
     """The main application singleton class."""
 
-    def __init_gettext(self):
-        super().__init_gettext(application_id='io.github.nokse22.teleprompter',
+    def __init__(self):
+        super().__init__(application_id='io.github.nokse22.teleprompter',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action(
             'quit', lambda *_: self.quit(), ['<primary>q'])
@@ -102,7 +102,7 @@ class TeleprompterApplication(Adw.Application):
             website='https://github.com/Nokse22/teleprompter',
             copyright='© 2023 Noske')
         # Replace "translator-credits" with your name/username, and optionally an email or URL.
-        about.set_translator_credits(gettext("translator-credits"))
+        about.set_translator_credits(gettext.gettext("translator-credits"))
         about.present(self.props.active_window)
 
     def on_preferences_action(self, *args):
@@ -111,35 +111,35 @@ class TeleprompterApplication(Adw.Application):
         pref = Adw.PreferencesDialog()
 
         settingsPage = Adw.PreferencesPage(
-            title=gettext("Generals"))
+            title=gettext.gettext("Generals"))
         settingsPage.set_icon_name("applications-system-symbolic")
         pref.add(settingsPage)
 
         scrollSettingsGroup = Adw.PreferencesGroup(
-            title=gettext("Scroll Settings"))
+            title=gettext.gettext("Scroll Settings"))
         settingsPage.add(scrollSettingsGroup)
 
         scrollSpeedRow = Adw.SpinRow(
-            title=gettext("Scroll Speed"),
-            subtitle=gettext("In words per minute (approximately)"))
+            title=gettext.gettext("Scroll Speed"),
+            subtitle=gettext.gettext("In words per minute (approximately)"))
         scrollSettingsGroup.add(scrollSpeedRow)
 
         speed_adj = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
         speed_adj.set_value(self.win.settings.speed)
         scrollSpeedRow.set_adjustment(speed_adj)
 
-        textGroup = Adw.PreferencesGroup(title=gettext("Text"))
+        textGroup = Adw.PreferencesGroup(title=gettext.gettext("Text"))
         settingsPage.add(textGroup)
 
         highlightColorPickerRow = Adw.ActionRow(
-            title=gettext("Highlight color"))
+            title=gettext.gettext("Highlight color"))
         textGroup.add(highlightColorPickerRow)
 
         highlightColorPicker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
         highlightColorPicker.set_rgba(self.win.settings.highlightColor)
         highlightColorPickerRow.add_suffix(highlightColorPicker)
 
-        boldHighlight = Adw.ActionRow(title=gettext("Bold Highlight"))
+        boldHighlight = Adw.ActionRow(title=gettext.gettext("Bold Highlight"))
         textGroup.add(boldHighlight)
 
         boldHighlightSwitch = Gtk.Switch(valign=Gtk.Align.CENTER)
@@ -147,10 +147,10 @@ class TeleprompterApplication(Adw.Application):
 
         boldHighlight.add_suffix(boldHighlightSwitch)
 
-        fontColorPickerRow = Adw.ActionRow(title=gettext("Font color"))
+        fontColorPickerRow = Adw.ActionRow(title=gettext.gettext("Font color"))
         textGroup.add(fontColorPickerRow)
 
-        fontPickerRow = Adw.ActionRow(title=gettext("Font"))
+        fontPickerRow = Adw.ActionRow(title=gettext.gettext("Font"))
         textGroup.add(fontPickerRow)
 
         fontPicker = Gtk.FontButton(valign=Gtk.Align.CENTER)

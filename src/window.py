@@ -16,10 +16,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, Pango, GLib, Gio, Adw
 
-from gi.repository import Adw
-from gi.repository import Pango, GLib, Gio
+from .scroll_text_view import TeleprompterScrollTextView
 
 from gettext import gettext as _
 
@@ -35,21 +34,18 @@ class AppSettings:
         self.boldHighlight = True
 
 
-@Gtk.Template(resource_path='/io/github/nokse22/teleprompter/window.ui')
+@Gtk.Template(resource_path='/io/github/nokse22/teleprompter/gtk/window.ui')
 class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
 
-    scrolled_window = Gtk.Template.Child("scrolled_window")
-    start_button1 = Gtk.Template.Child("start_button1")
-    fullscreen_button = Gtk.Template.Child("fullscreen_button")
-    overlay = Gtk.Template.Child("overlay")
-    sidebar_controls = Gtk.Template.Child("sidebar_controls")
+    scroll_text_view = Gtk.Template.Child()
+    start_button1 = Gtk.Template.Child()
+    fullscreen_button = Gtk.Template.Child()
+    overlay = Gtk.Template.Child()
+    sidebar_controls = Gtk.Template.Child()
 
     playing = False
     fullscreened = False
-
-    text_buffer = Gtk.Template.Child("text_buffer")
-    textview = Gtk.Template.Child("text_view")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -59,6 +55,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.settings = AppSettings()
         self.settings = self.load_app_settings()
 
+        self.text_buffer = self.scroll_text_view.get_buffer()
+        self.scrolled_window = self.scroll_text_view.get_scrolled_window()
+
+        self.scroll_text_view.hmirror = self.saved_settings.get_boolean("hmirror")
+        self.scroll_text_view.vmirror = self.saved_settings.get_boolean("vmirror")
+
         self.text_buffer.connect("paste-done", self.on_text_pasted)
 
         self.text_buffer.connect("changed", self.on_text_inserted, "", 0, 0)
@@ -67,22 +69,22 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.search_and_mark_highlight(start)
 
         self.apply_text_tags()
-        self.updateFont()
+        self.update_font()
 
         start = self.text_buffer.get_start_iter()
         self.search_and_mark_highlight(start)
 
     def on_text_pasted(self, text_buffer, clipboard):
         self.apply_text_tags()
-        self.updateFont()
+        self.update_font()
 
     def on_text_inserted(self, text_buffer, loc, text, length):
         self.apply_text_tags()
-        self.updateFont()
+        self.update_font()
         start = self.text_buffer.get_start_iter()
         self.search_and_mark_highlight(start)
 
-    def toHexStr(self, color):
+    def color_to_hex(self, color):
         text_color = "#{:02X}{:02X}{:02X}".format(
             int(color.red * 255),
             int(color.green * 255),
@@ -92,9 +94,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     def save_app_settings(self, settings):
         self.saved_settings.set_string(
-            "text", self.toHexStr(settings.textColor))
+            "text", self.color_to_hex(settings.textColor))
         self.saved_settings.set_string(
-            "highlight", self.toHexStr(settings.highlightColor))
+            "highlight", self.color_to_hex(settings.highlightColor))
 
         self.saved_settings.set_string(
             "font", settings.font)
@@ -122,7 +124,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
                         file_contents = file.read()
                         self.text_buffer.set_text(file_contents)
                         self.apply_text_tags()
-                        self.updateFont()
+                        self.update_font()
                         start = self.text_buffer.get_start_iter()
                         self.search_and_mark_highlight(start)
                         dialog.destroy()
@@ -163,7 +165,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def autoscroll(self, scrolled_window):
         adjustment = scrolled_window.get_vadjustment()
         adjustment.set_value(
-            adjustment.get_value() + self.wordPerMinuteToSpeed(
+            adjustment.get_value() + self.wpm_to_speed(
                 self.settings.speed))
         scrolled_window.set_vadjustment(adjustment)
 
@@ -184,12 +186,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         tag_color1 = Gtk.TextTag()
         tag_color1.set_property(
-            "foreground", self.toHexStr(self.settings.textColor))
+            "foreground", self.color_to_hex(self.settings.textColor))
         self.text_buffer.get_tag_table().add(tag_color1)
 
         tag_color2 = Gtk.TextTag()
         tag_color2.set_property(
-            "foreground", self.toHexStr(self.settings.highlightColor))
+            "foreground", self.color_to_hex(self.settings.highlightColor))
         self.text_buffer.get_tag_table().add(tag_color2)
 
         start_iter = self.text_buffer.get_start_iter()
@@ -203,7 +205,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         tag_color2 = Gtk.TextTag()
         tag_color2.set_property(
-            "foreground", self.toHexStr(self.settings.highlightColor))
+            "foreground", self.color_to_hex(self.settings.highlightColor))
 
         if self.settings.boldHighlight:
             tag_color2.set_property("weight", Pango.Weight.BOLD)
@@ -240,7 +242,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             return None
         return None
 
-    def updateFont(self):
+    def update_font(self):
         tag = self.text_buffer.create_tag(
             None, font_desc=Pango.FontDescription(self.settings.font))
 
@@ -248,12 +250,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.text_buffer.apply_tag(
             tag, self.text_buffer.get_start_iter(), self.text_buffer.get_end_iter())
 
-    def wordPerMinuteToSpeed(self, speed):
+    def wpm_to_speed(self, speed):
         font_properties = self.settings.font.split()
         font_size = font_properties[-1]
 
         font = int(font_size)
-        width = self.textview.get_allocation().width
+        width = self.scroll_text_view.get_width()
         speed = self.settings.speed * font * 0.2 / width
 
         if speed <= 0.25:
@@ -261,7 +263,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         return speed
 
-    def modifyFont(self, amount):
+    def change_font_size(self, amount):
         # Split the font string into font properties and size
         font_properties = self.settings.font.split()
         font_size = font_properties[-1]
@@ -313,7 +315,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             text = clipboard.read_text_finish(res)
             self.text_buffer.set_text(text)
             self.apply_text_tags()
-            self.updateFont()
+            self.update_font()
             start = self.text_buffer.get_start_iter()
             self.search_and_mark_highlight(start)
             toast = Adw.Toast()
@@ -326,8 +328,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("decrease_font_button_clicked")
     def decrease_font_button_clicked(self, *args):
-        self.modifyFont(-5)
-        self.updateFont()
+        self.change_font_size(-5)
+        self.update_font()
         self.apply_text_tags()
         start = self.text_buffer.get_start_iter()
         self.search_and_mark_highlight(start)
@@ -335,8 +337,8 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("increase_font_button_clicked")
     def increase_font_button_clicked(self, *args):
-        self.modifyFont(5)
-        self.updateFont()
+        self.change_font_size(5)
+        self.update_font()
         self.apply_text_tags()
         start = self.text_buffer.get_start_iter()
         self.search_and_mark_highlight(start)

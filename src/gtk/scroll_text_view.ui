@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.92.1 -->
+<interface>
+  <!-- interface-name scroll_text.ui -->
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="TeleprompterScrollTextView" parent="AdwBin">
+    <child>
+      <object class="GtkScrolledWindow" id="scrolled_window">
+        <property name="hexpand">true</property>
+        <property name="hscrollbar-policy">never</property>
+        <property name="vexpand">true</property>
+        <style>
+          <class name="undershoot-top"/>
+          <class name="undershoot-bottom"/>
+        </style>
+        <child>
+          <object class="GtkViewport">
+            <property name="scroll-to-focus">false</property>
+            <child>
+              <object class="AdwClamp">
+                <property name="hexpand">true</property>
+                <property name="maximum-size">2600</property>
+                <property name="tightening-threshold">1000</property>
+                <property name="vexpand">true</property>
+                <child>
+                  <object class="TeleprompterTextView" id="text_view"/>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

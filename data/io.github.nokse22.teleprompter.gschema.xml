@@ -4,36 +4,34 @@
 
 	  <key name="font" type="s">
       <default>'Cantarell 40'</default>
-      <summary>The font used</summary>
-      <description>The font used for displaying text.</description>
     </key>
 
     <key name="text" type="s">
       <default>'#62A0EA'</default>
-      <summary>The font color</summary>
-      <description>The font color</description>
     </key>
 
 	  <key name="speed" type="i">
       <default>100</default>
-      <summary>The speed</summary>
-      <description>The speed</description>
     </key>
 
 	  <key name="highlight" type="s">
       <default>'#ED333B'</default>
-      <summary>The slow speed</summary>
-      <description>The slow speed</description>
     </key>
 
 	  <key name="bold-highlight" type="b">
       <default>true</default>
-      <summary>Also bold all the highlight</summary>
-      <description>Also bold all the highlight</description>
     </key>
 
 	  <key name="theme" type="s">
       <default>'dark'</default>
+    </key>
+
+	  <key name="vmirror" type="b">
+      <default>false</default>
+    </key>
+
+	  <key name="hmirror" type="b">
+      <default>false</default>
     </key>
 
 	</schema>

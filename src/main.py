@@ -23,6 +23,7 @@ from gi.repository import Gtk, Gio, Adw, GLib
 from .window import TeleprompterWindow
 
 import gettext
+from gettext import gettext as _
 
 from os import path
 
@@ -53,10 +54,39 @@ class TeleprompterApplication(Adw.Application):
             GLib.Variant("s", self.saved_settings.get_string("theme")),
         )
         theme_action.connect("activate", self.on_theme_setting_changed)
-
         self.add_action(theme_action)
 
+        vmirror_action = Gio.SimpleAction.new_stateful(
+            "vmirror",
+            None,
+            GLib.Variant("b", self.saved_settings.get_boolean("vmirror")),
+        )
+        vmirror_action.connect("activate", self.on_v_mirror)
+        self.add_action(vmirror_action)
+
+        hmirror_action = Gio.SimpleAction.new_stateful(
+            "hmirror",
+            None,
+            GLib.Variant("b", self.saved_settings.get_boolean("hmirror")),
+        )
+        hmirror_action.connect("activate", self.on_h_mirror)
+        self.add_action(hmirror_action)
+
         self.update_theme()
+
+    def on_v_mirror(self, action, state):
+        new_state = not action.get_state().get_boolean()
+        action.set_state(GLib.Variant.new_boolean(new_state))
+        self.saved_settings.set_boolean("vmirror", new_state)
+
+        self.win.scroll_text_view.vmirror = new_state
+
+    def on_h_mirror(self, action, state):
+        new_state = not action.get_state().get_boolean()
+        action.set_state(GLib.Variant.new_boolean(new_state))
+        self.saved_settings.set_boolean("hmirror", new_state)
+
+        self.win.scroll_text_view.hmirror = new_state
 
     def on_theme_setting_changed(self, action, state):
         action.set_state(state)
@@ -102,7 +132,7 @@ class TeleprompterApplication(Adw.Application):
             website='https://github.com/Nokse22/teleprompter',
             copyright='© 2023 Noske')
         # Replace "translator-credits" with your name/username, and optionally an email or URL.
-        about.set_translator_credits(gettext.gettext("translator-credits"))
+        about.set_translator_credits(_("translator-credits"))
         about.present(self.props.active_window)
 
     def on_preferences_action(self, *args):
@@ -110,68 +140,68 @@ class TeleprompterApplication(Adw.Application):
 
         pref = Adw.PreferencesDialog()
 
-        settingsPage = Adw.PreferencesPage(
-            title=gettext.gettext("Generals"))
-        settingsPage.set_icon_name("applications-system-symbolic")
-        pref.add(settingsPage)
+        preferences_page = Adw.PreferencesPage(
+            title=_("Generals"))
+        preferences_page.set_icon_name("applications-system-symbolic")
+        pref.add(preferences_page)
 
-        scrollSettingsGroup = Adw.PreferencesGroup(
-            title=gettext.gettext("Scroll Settings"))
-        settingsPage.add(scrollSettingsGroup)
+        scroll_settings_group = Adw.PreferencesGroup(
+            title=_("Scroll Settings"))
+        preferences_page.add(scroll_settings_group)
 
-        scrollSpeedRow = Adw.SpinRow(
-            title=gettext.gettext("Scroll Speed"),
-            subtitle=gettext.gettext("In words per minute (approximately)"))
-        scrollSettingsGroup.add(scrollSpeedRow)
+        scroll_speed_row = Adw.SpinRow(
+            title=_("Scroll Speed"),
+            subtitle=_("In words per minute (approximately)"))
+        scroll_settings_group.add(scroll_speed_row)
 
         speed_adj = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
         speed_adj.set_value(self.win.settings.speed)
-        scrollSpeedRow.set_adjustment(speed_adj)
+        scroll_speed_row.set_adjustment(speed_adj)
 
-        textGroup = Adw.PreferencesGroup(title=gettext.gettext("Text"))
-        settingsPage.add(textGroup)
+        text_group = Adw.PreferencesGroup(title=_("Text"))
+        preferences_page.add(text_group)
 
-        highlightColorPickerRow = Adw.ActionRow(
-            title=gettext.gettext("Highlight color"))
-        textGroup.add(highlightColorPickerRow)
+        highlight_color_picker_row = Adw.ActionRow(
+            title=_("Highlight color"))
+        text_group.add(highlight_color_picker_row)
 
-        highlightColorPicker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
-        highlightColorPicker.set_rgba(self.win.settings.highlightColor)
-        highlightColorPickerRow.add_suffix(highlightColorPicker)
+        highlight_color_picker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
+        highlight_color_picker.set_rgba(self.win.settings.highlightColor)
+        highlight_color_picker_row.add_suffix(highlight_color_picker)
 
-        boldHighlight = Adw.ActionRow(title=gettext.gettext("Bold Highlight"))
-        textGroup.add(boldHighlight)
+        bold_highlight_row = Adw.ActionRow(title=_("Bold Highlight"))
+        text_group.add(bold_highlight_row)
 
-        boldHighlightSwitch = Gtk.Switch(valign=Gtk.Align.CENTER)
-        boldHighlightSwitch.set_active(self.win.settings.boldHighlight)
+        bold_highlight_switch = Gtk.Switch(valign=Gtk.Align.CENTER)
+        bold_highlight_switch.set_active(self.win.settings.bold_highlight_row)
 
-        boldHighlight.add_suffix(boldHighlightSwitch)
+        bold_highlight_row.add_suffix(bold_highlight_switch)
 
-        fontColorPickerRow = Adw.ActionRow(title=gettext.gettext("Font color"))
-        textGroup.add(fontColorPickerRow)
+        font_color_picker_row = Adw.ActionRow(title=_("Font color"))
+        text_group.add(font_color_picker_row)
 
-        fontPickerRow = Adw.ActionRow(title=gettext.gettext("Font"))
-        textGroup.add(fontPickerRow)
+        font_picker_row = Adw.ActionRow(title=_("Font"))
+        text_group.add(font_picker_row)
 
-        fontPicker = Gtk.FontButton(valign=Gtk.Align.CENTER)
-        fontPicker.set_font(self.win.settings.font)
-        fontPickerRow.add_suffix(fontPicker)
+        font_picker = Gtk.FontButton(valign=Gtk.Align.CENTER)
+        font_picker.set_font(self.win.settings.font)
+        font_picker_row.add_suffix(font_picker)
 
-        fontColorPicker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
-        fontColorPicker.set_rgba(self.win.settings.textColor)
-        fontColorPickerRow.add_suffix(fontColorPicker)
+        font_color_picker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
+        font_color_picker.set_rgba(self.win.settings.textColor)
+        font_color_picker_row.add_suffix(font_color_picker)
 
         pref.present(self.win)
 
-        highlightColorPicker.connect(
+        highlight_color_picker.connect(
             "color-set", self.on_highlight_color_changed)
-        fontColorPicker.connect(
+        font_color_picker.connect(
             "color-set", self.on_text_color_changed)
-        fontPicker.connect(
+        font_picker.connect(
             "font-set", self.on_font_changed)
         speed_adj.connect(
             "value-changed", self.on_speed_changed)
-        boldHighlightSwitch.connect(
+        bold_highlight_switch.connect(
             "state-set", self.on_bold_highlight_set)
 
     def create_action(self, name, callback, shortcuts=None):
@@ -227,7 +257,7 @@ class TeleprompterApplication(Adw.Application):
         # Construct the updated font string
         self.win.settings.font = ' '.join(font_properties)
 
-        self.win.updateFont()
+        self.win.update_font()
         self.win.apply_text_tags()
         start = self.win.text_buffer.get_start_iter()
         self.win.search_and_mark_highlight(start)
@@ -240,9 +270,9 @@ class TeleprompterApplication(Adw.Application):
         self.saved_settings.set_int("speed", speed * 10)
 
     def on_bold_highlight_set(self, switch, foo):
-        self.win.settings.boldHighlight = not switch.get_state()
+        self.win.settings.bold_highlight_row = not switch.get_state()
 
-        self.win.updateFont()
+        self.win.update_font()
         self.win.apply_text_tags()
         start = self.win.text_buffer.get_start_iter()
         self.win.search_and_mark_highlight(start)

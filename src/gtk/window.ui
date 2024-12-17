@@ -8,6 +8,7 @@
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <property name="title" translatable="yes">Teleprompter</property>
+    <signal name="notify::fullscreened" handler="on_fullscreened_changed"/>
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 480px</condition>

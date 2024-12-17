@@ -56,37 +56,46 @@ class TeleprompterApplication(Adw.Application):
         theme_action.connect("activate", self.on_theme_setting_changed)
         self.add_action(theme_action)
 
-        vmirror_action = Gio.SimpleAction.new_stateful(
+        self.vmirror_action = Gio.SimpleAction.new_stateful(
             "vmirror",
             None,
-            GLib.Variant("b", self.saved_settings.get_boolean("vmirror")),
+            GLib.Variant("b", self.saved_settings.get_boolean("vmirror"))
         )
-        vmirror_action.connect("activate", self.on_v_mirror)
-        self.add_action(vmirror_action)
+        self.vmirror_action.connect("activate", self.on_vmirror)
+        self.set_accels_for_action("app.vmirror", ['<primary><shift>V'])
+        self.add_action(self.vmirror_action)
 
-        hmirror_action = Gio.SimpleAction.new_stateful(
+        self.hmirror_action = Gio.SimpleAction.new_stateful(
             "hmirror",
             None,
-            GLib.Variant("b", self.saved_settings.get_boolean("hmirror")),
+            GLib.Variant("b", self.saved_settings.get_boolean("hmirror"))
         )
-        hmirror_action.connect("activate", self.on_h_mirror)
-        self.add_action(hmirror_action)
+        self.hmirror_action.connect("activate", self.on_hmirror)
+        self.set_accels_for_action("app.hmirror", ['<primary><shift>H'])
+        self.add_action(self.hmirror_action)
+
+        self.create_action(
+            'reset-mirrors', self.on_reset_mirrors, ['<primary><shift>R'])
 
         self.update_theme()
 
-    def on_v_mirror(self, action, state):
+    def on_vmirror(self, action, state):
         new_state = not action.get_state().get_boolean()
         action.set_state(GLib.Variant.new_boolean(new_state))
         self.saved_settings.set_boolean("vmirror", new_state)
 
         self.win.scroll_text_view.vmirror = new_state
 
-    def on_h_mirror(self, action, state):
+    def on_hmirror(self, action, state):
         new_state = not action.get_state().get_boolean()
         action.set_state(GLib.Variant.new_boolean(new_state))
         self.saved_settings.set_boolean("hmirror", new_state)
 
         self.win.scroll_text_view.hmirror = new_state
+
+    def on_reset_mirrors(self, *_args):
+        self.vmirror_action.set_state(GLib.Variant.new_boolean(False))
+        self.hmirror_action.set_state(GLib.Variant.new_boolean(False))
 
     def on_theme_setting_changed(self, action, state):
         action.set_state(state)
@@ -140,8 +149,7 @@ class TeleprompterApplication(Adw.Application):
 
         pref = Adw.PreferencesDialog()
 
-        preferences_page = Adw.PreferencesPage(
-            title=_("Generals"))
+        preferences_page = Adw.PreferencesPage(title=_("Generals"))
         preferences_page.set_icon_name("applications-system-symbolic")
         pref.add(preferences_page)
 
@@ -166,14 +174,14 @@ class TeleprompterApplication(Adw.Application):
         text_group.add(highlight_color_picker_row)
 
         highlight_color_picker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
-        highlight_color_picker.set_rgba(self.win.settings.highlightColor)
+        highlight_color_picker.set_rgba(self.win.settings.highlight_color)
         highlight_color_picker_row.add_suffix(highlight_color_picker)
 
         bold_highlight_row = Adw.ActionRow(title=_("Bold Highlight"))
         text_group.add(bold_highlight_row)
 
         bold_highlight_switch = Gtk.Switch(valign=Gtk.Align.CENTER)
-        bold_highlight_switch.set_active(self.win.settings.bold_highlight_row)
+        bold_highlight_switch.set_active(self.win.settings.bold_highlight)
 
         bold_highlight_row.add_suffix(bold_highlight_switch)
 
@@ -220,11 +228,9 @@ class TeleprompterApplication(Adw.Application):
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
     def on_background_color_changed(self, colorWidget):
-        # print("background color changed")
         self.win.settings.backgroundColor = colorWidget.get_rgba()
 
     def on_text_color_changed(self, colorWidget):
-        # print("font color changed")
         self.win.settings.textColor = colorWidget.get_rgba()
 
         self.win.apply_text_tags()
@@ -233,7 +239,6 @@ class TeleprompterApplication(Adw.Application):
         self.win.save_app_settings(self.win.settings)
 
     def on_highlight_color_changed(self, colorWidget):
-        # print("highlight color changed")
         self.win.settings.highlightColor = colorWidget.get_rgba()
 
         self.win.apply_text_tags()
@@ -242,7 +247,6 @@ class TeleprompterApplication(Adw.Application):
         self.win.save_app_settings(self.win.settings)
 
     def on_font_changed(self, fontWidget):
-        # print("font changed")
         font_properties = fontWidget.get_font().split()
         font_size = font_properties[-1]
 
@@ -251,10 +255,8 @@ class TeleprompterApplication(Adw.Application):
         else:
             new_font_size = 10
 
-        # Update the font size in the font properties list
         font_properties[-1] = str(new_font_size)
 
-        # Construct the updated font string
         self.win.settings.font = ' '.join(font_properties)
 
         self.win.update_font()

@@ -27,6 +27,11 @@
                 <property name="action-name">app.quit</property>
               </object>
             </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes" context="shortcut window">Teleprompter</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Play/Pause</property>
@@ -37,6 +42,24 @@
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Fullscreen</property>
                 <property name="action-name">app.fullscreen</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Mirror Horizonatlly</property>
+                <property name="action-name">app.hmirror</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Mirror Vertically</property>
+                <property name="action-name">app.vmirror</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Reset View</property>
+                <property name="action-name">app.reset-mirrors</property>
               </object>
             </child>
           </object>

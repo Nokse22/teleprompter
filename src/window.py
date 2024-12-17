@@ -29,9 +29,9 @@ class AppSettings:
         self.textColor = Gdk.RGBA()
         self.textColor.parse("#62A0EA")
         self.speed = 150
-        self.highlightColor = Gdk.RGBA()
-        self.highlightColor.parse("#ED333B")
-        self.boldHighlight = True
+        self.highlight_color = Gdk.RGBA()
+        self.highlight_color.parse("#ED333B")
+        self.bold_highlight = True
 
 
 @Gtk.Template(resource_path='/io/github/nokse22/teleprompter/gtk/window.ui')
@@ -45,7 +45,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     sidebar_controls = Gtk.Template.Child()
 
     playing = False
-    fullscreened = False
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -62,7 +61,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.scroll_text_view.vmirror = self.saved_settings.get_boolean("vmirror")
 
         self.text_buffer.connect("paste-done", self.on_text_pasted)
-
         self.text_buffer.connect("changed", self.on_text_inserted, "", 0, 0)
 
         start = self.text_buffer.get_start_iter()
@@ -96,7 +94,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.saved_settings.set_string(
             "text", self.color_to_hex(settings.textColor))
         self.saved_settings.set_string(
-            "highlight", self.color_to_hex(settings.highlightColor))
+            "highlight", self.color_to_hex(settings.highlight_color))
 
         self.saved_settings.set_string(
             "font", settings.font)
@@ -105,7 +103,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             "speed", settings.speed * 10)
 
         self.saved_settings.set_boolean(
-            "bold-highlight", settings.boldHighlight)
+            "bold-highlight", settings.bold_highlight)
 
     def show_file_chooser_dialog(self):
         dialog = Gtk.FileDialog(
@@ -144,20 +142,19 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         settings = AppSettings()
 
         color1 = Gdk.RGBA()
-        color2 = Gdk.RGBA()
         color3 = Gdk.RGBA()
 
         color1.parse(self.saved_settings.get_string("text"))
         settings.textColor = color1
 
         color3.parse(self.saved_settings.get_string("highlight"))
-        settings.highlightColor = color3
+        settings.highlight_color = color3
 
         settings.font = self.saved_settings.get_string("font")
 
         settings.speed = self.saved_settings.get_int("speed") / 10
 
-        settings.boldHighlight = self.saved_settings.get_boolean(
+        settings.bold_highlight = self.saved_settings.get_boolean(
             "bold-highlight")
 
         return settings
@@ -191,7 +188,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         tag_color2 = Gtk.TextTag()
         tag_color2.set_property(
-            "foreground", self.color_to_hex(self.settings.highlightColor))
+            "foreground", self.color_to_hex(self.settings.highlight_color))
         self.text_buffer.get_tag_table().add(tag_color2)
 
         start_iter = self.text_buffer.get_start_iter()
@@ -205,9 +202,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         tag_color2 = Gtk.TextTag()
         tag_color2.set_property(
-            "foreground", self.color_to_hex(self.settings.highlightColor))
+            "foreground", self.color_to_hex(self.settings.highlight_color))
 
-        if self.settings.boldHighlight:
+        if self.settings.bold_highlight:
             tag_color2.set_property("weight", Pango.Weight.BOLD)
 
         self.text_buffer.get_tag_table().add(tag_color2)
@@ -225,10 +222,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def search_end_highlight(self, start):
         end = self.text_buffer.get_end_iter()
 
-        # Perform forward search for "]" from the starting position
         match_right = start.forward_search("]", Gtk.TextSearchFlags(0), end)
-
-        # Perform forward search for "[" from the starting position
         match_left = start.forward_search("[", Gtk.TextSearchFlags(0), end)
 
         if match_right is not None:
@@ -246,9 +240,10 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         tag = self.text_buffer.create_tag(
             None, font_desc=Pango.FontDescription(self.settings.font))
 
-        # Apply the tag to the entire text buffer
         self.text_buffer.apply_tag(
-            tag, self.text_buffer.get_start_iter(), self.text_buffer.get_end_iter())
+            tag,
+            self.text_buffer.get_start_iter(),
+            self.text_buffer.get_end_iter())
 
     def wpm_to_speed(self, speed):
         font_properties = self.settings.font.split()
@@ -264,7 +259,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         return speed
 
     def change_font_size(self, amount):
-        # Split the font string into font properties and size
         font_properties = self.settings.font.split()
         font_size = font_properties[-1]
 
@@ -273,15 +267,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         else:
             new_font_size = 10
 
-        # Update the font size in the font properties list
         font_properties[-1] = str(new_font_size)
 
-        # Construct the updated font string
         self.settings.font = ' '.join(font_properties)
 
     @Gtk.Template.Callback("play_button_clicked")
     def play(self, *args):
-        # print("play")
         if not self.playing:
             self.start_button1.set_icon_name("media-playback-pause-symbolic")
             self.playing = True
@@ -346,14 +337,10 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("fullscreen_button_clicked")
     def toggle_fullscreen(self, *args):
-        if self.fullscreened:
+        if self.is_fullscreen():
             self.unfullscreen()
-            self.fullscreen_button.set_icon_name("view-fullscreen-symbolic")
-            self.fullscreened = False
         else:
             self.fullscreen()
-            self.fullscreen_button.set_icon_name("view-restore-symbolic")
-            self.fullscreened = True
 
     @Gtk.Template.Callback("on_apply_breakpoint")
     def on_apply_breakpoint(self, *args):
@@ -364,3 +351,10 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def on_unapply_breakpoint(self, *args):
         self.sidebar_controls.add_css_class("card")
         self.sidebar_controls.add_css_class("overlay_toolbar")
+
+    @Gtk.Template.Callback("on_fullscreened_changed")
+    def on_fullscreened_changed(self, *_args):
+        if self.is_fullscreen():
+            self.fullscreen_button.set_icon_name("view-restore-symbolic")
+        else:
+            self.fullscreen_button.set_icon_name("view-fullscreen-symbolic")

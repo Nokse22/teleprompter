@@ -103,4 +103,4 @@ class TeleprompterScrollTextView(Adw.Bin):
         return self.scrolled_window
 
     def get_width(self):
-        return self.text_view.get_allocation().width
+        return self.text_view._text_view.get_allocation().width

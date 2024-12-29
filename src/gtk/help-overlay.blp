@@ -1,0 +1,58 @@
+using Gtk 4.0;
+
+ShortcutsWindow help_overlay {
+  modal: true;
+
+  ShortcutsSection {
+    section-name: 'shortcuts';
+    max-height: 10;
+
+    ShortcutsGroup {
+      title: C_('shortcut window', 'General');
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Show Shortcuts');
+        action-name: 'win.show-help-overlay';
+      }
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Show Preferences');
+        action-name: 'app.preferences';
+      }
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Quit');
+        action-name: 'app.quit';
+      }
+    }
+
+    ShortcutsGroup {
+      title: C_('shortcut window', 'Teleprompter');
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Play/Pause');
+        action-name: 'app.play';
+      }
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Fullscreen');
+        action-name: 'app.fullscreen';
+      }
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Mirror Horizonatlly');
+        action-name: 'app.hmirror';
+      }
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Mirror Vertically');
+        action-name: 'app.vmirror';
+      }
+
+      ShortcutsShortcut {
+        title: C_('shortcut window', 'Reset View');
+        action-name: 'app.reset-mirrors';
+      }
+    }
+  }
+}

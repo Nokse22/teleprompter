@@ -1,0 +1,28 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $TeleprompterScrollTextView: Adw.Bin {
+  ScrolledWindow scrolled_window {
+    hexpand: true;
+    hscrollbar-policy: never;
+    vexpand: true;
+
+    styles [
+      "undershoot-top",
+      "undershoot-bottom",
+    ]
+
+    Viewport {
+      scroll-to-focus: false;
+
+      Adw.Clamp {
+        hexpand: true;
+        maximum-size: 2600;
+        tightening-threshold: 1000;
+        vexpand: true;
+
+        $TeleprompterTextView text_view {}
+      }
+    }
+  }
+}

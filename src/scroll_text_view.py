@@ -27,6 +27,7 @@ class TeleprompterTextView(Adw.Bin):
 
         self._text_view = Gtk.TextView(
             bottom_margin=300,
+            top_margin=50,
             margin_start=12,
             pixels_above_lines=6,
             pixels_below_lines=6,

@@ -1,0 +1,223 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Maximilian Grunow <git@grunow-rs.de>, 2025.
+#
+#, fuzzy
+
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-29 14:22+0200\n"
+"PO-Revision-Date: 2025-04-07 10:04+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: data/io.github.nokse22.teleprompter.desktop.in:4 src/window.ui:10
+msgid "Teleprompter"
+msgstr "Teleprompter"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:8
+msgid ""
+"A simple app to read scrolling text from your screen. It has an adaptive "
+"layout to work on smartphones too."
+msgstr ""
+"Eine einfache App zum Lesen von Lauftext auf Ihrem Bildschirm. Sie hat ein "
+"adaptives Layout, das auch auf Smartphones funktioniert."
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:11
+msgid "Stay on track during speeches"
+msgstr "Bei Reden den Überblick behalten"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:131
+msgid "Teleprompter displaying text on a widescreen"
+msgstr "Teleprompter zur Anzeige von Text auf einem breiten Bildschirm"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:136
+msgid "Teleprompter displaying text in a narrow screen"
+msgstr "Teleprompter zur Anzeige von Text auf einem schmalen Bildschirm"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:7
+msgid "The font used"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:8
+msgid "The font used for displaying text."
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:13
+#: data/io.github.nokse22.teleprompter.gschema.xml:14
+msgid "The font color"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:19
+#: data/io.github.nokse22.teleprompter.gschema.xml:20
+msgid "The speed"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:25
+#: data/io.github.nokse22.teleprompter.gschema.xml:26
+msgid "The slow speed"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:31
+#: data/io.github.nokse22.teleprompter.gschema.xml:32
+msgid "Also bold all the highlight"
+msgstr ""
+
+#: src/main.py:98
+msgid "translator-credits"
+msgstr ""
+
+#: src/main.py:107
+msgid "Generals"
+msgstr ""
+
+#: src/main.py:112
+msgid "Scroll Settings"
+msgstr "Scroll Einstellungen"
+
+#: src/main.py:116
+msgid "Scroll Speed"
+msgstr "Scroll Geschwindigkeit"
+
+#: src/main.py:117
+msgid "In words per minute (approximately)"
+msgstr "In Wörtern pro Minuten (voraussichtlich)"
+
+#: src/main.py:124
+msgid "Text"
+msgstr "Text"
+
+#: src/main.py:128
+msgid "Highlight color"
+msgstr "Hervorhebungsfarbe"
+
+#: src/main.py:135
+msgid "Bold Highlight"
+msgstr "Hervorhebungen fett darstellen"
+
+#: src/main.py:143
+msgid "Font color"
+msgstr "Schriftfarbe"
+
+#: src/main.py:146
+msgid "Font"
+msgstr "Schriftart"
+
+#: src/window.ui:45 src/window.ui:73 src/window.ui:153
+msgid "Start/Stop"
+msgstr "Start/Stopp"
+
+#: src/window.ui:54 src/window.ui:288
+msgid "Toggle Fullscreen"
+msgstr "Vollbild umschalten"
+
+#: src/window.ui:82 src/window.ui:162
+msgid "Increase Speed"
+msgstr "Geschwindigkeit erhöhen"
+
+#: src/window.ui:90 src/window.ui:170
+msgid "Decrease Speed"
+msgstr "Geschwindigkeit verringern"
+
+#: src/window.ui:102 src/window.ui:181
+msgid "Increase Font Size"
+msgstr "Schrift vergrößern"
+
+#: src/window.ui:110 src/window.ui:189
+msgid "Decrease Font Size"
+msgstr "Schrift verkleinern"
+
+#: src/window.ui:122 src/window.ui:200
+msgid "Open a File"
+msgstr "Datei öffnen"
+
+#: src/window.ui:130 src/window.ui:208
+msgid "Paste from Clipboard"
+msgstr "Aus Zwischenablage einfügen"
+
+#: src/window.ui:261
+msgid ""
+"[START]\n"
+"This app can be used to read a script from the screen, just paste or open a "
+"text file.\n"
+"Anything between square brackets like [this] is highlighted.\n"
+"\n"
+"[Customization]\n"
+"The font, color of the text and highlights can be customized."
+msgstr ""
+"[START]  \n"
+"Diese App kann verwendet werden, um ein Skript vom Bildschirm zu lesen. "
+"Fügen Sie einfach einen Text ein oder öffnen Sie eine Textdatei.  \n"
+"Alles, was zwischen eckigen Klammern wie [dies] steht, wird "
+"hervorgehoben.  \n"
+"\n"
+"[Anpassung]  \n"
+"Die Schriftart, die Farbe des Textes und der Hervorhebungen können "
+"angepasst werden."
+
+#: src/window.ui:273
+msgid "Follow System"
+msgstr "An System anpassen"
+
+#: src/window.ui:278
+msgid "Light Theme"
+msgstr "Hell"
+
+#: src/window.ui:283
+msgid "Dark Theme"
+msgstr "Dunkel"
+
+#: src/window.ui:294
+msgid "Play/Pause"
+msgstr "Play/Pause"
+
+#: src/window.ui:300
+msgid "_Preferences"
+msgstr "_Einstellungen"
+
+#: src/window.ui:304
+msgid "_Keyboard Shortcuts"
+msgstr "_Tastenkombinationen"
+
+#. Translators: do not translate the application name
+#: src/window.ui:309
+msgid "_About Teleprompter"
+msgstr "_Über Teleprompter"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Allgemein"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Tastenkombinationen anzeigen"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr "Einstellungen anzeigen"
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Beenden"
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Play/Pause"
+msgstr "Play/Pause"
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Vollbild"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-29 14:22+0200\n"
+"POT-Creation-Date: 2025-05-10 17:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,9 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.github.nokse22.teleprompter.desktop.in:4 src/window.ui:10
+#. Translators: do not translate the application name
+#: data/io.github.nokse22.teleprompter.desktop.in:3 src/gtk/window.blp:9
+#: src/gtk/window.blp:177
 msgid "Teleprompter"
 msgstr ""
 
@@ -31,180 +33,123 @@ msgstr ""
 msgid "Stay on track during speeches"
 msgstr ""
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:131
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:146
 msgid "Teleprompter displaying text on a widescreen"
 msgstr ""
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:136
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:151
+msgid "Teleprompter displaying text on a widescreen with dark theme"
+msgstr ""
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:156
 msgid "Teleprompter displaying text in a narrow screen"
 msgstr ""
 
-#: data/io.github.nokse22.teleprompter.gschema.xml:7
-msgid "The font used"
-msgstr ""
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:8
-msgid "The font used for displaying text."
-msgstr ""
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:13
-#: data/io.github.nokse22.teleprompter.gschema.xml:14
-msgid "The font color"
-msgstr ""
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:19
-#: data/io.github.nokse22.teleprompter.gschema.xml:20
-msgid "The speed"
-msgstr ""
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:25
-#: data/io.github.nokse22.teleprompter.gschema.xml:26
-msgid "The slow speed"
-msgstr ""
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:31
-#: data/io.github.nokse22.teleprompter.gschema.xml:32
-msgid "Also bold all the highlight"
-msgstr ""
-
-#: src/main.py:98
+#. Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:142
 msgid "translator-credits"
 msgstr ""
 
-#: src/main.py:107
+#: src/main.py:150
 msgid "Generals"
 msgstr ""
 
-#: src/main.py:112
+#: src/main.py:155
 msgid "Scroll Settings"
 msgstr ""
 
-#: src/main.py:116
+#: src/main.py:159
 msgid "Scroll Speed"
 msgstr ""
 
-#: src/main.py:117
+#: src/main.py:160
 msgid "In words per minute (approximately)"
 msgstr ""
 
-#: src/main.py:124
+#: src/main.py:167
 msgid "Text"
 msgstr ""
 
-#: src/main.py:128
+#: src/main.py:171
 msgid "Highlight color"
 msgstr ""
 
-#: src/main.py:135
+#: src/main.py:178
 msgid "Bold Highlight"
 msgstr ""
 
-#: src/main.py:143
+#: src/main.py:182
 msgid "Font color"
 msgstr ""
 
-#: src/main.py:146
+#: src/main.py:185
 msgid "Font"
 msgstr ""
 
-#: src/window.ui:45 src/window.ui:73 src/window.ui:153
-msgid "Start/Stop"
-msgstr ""
-
-#: src/window.ui:54 src/window.ui:288
+#: src/gtk/window.blp:193 src/gtk/window.blp:317
 msgid "Toggle Fullscreen"
 msgstr ""
 
-#: src/window.ui:82 src/window.ui:162
+#: src/gtk/window.blp:200
+msgid "Start/Stop"
+msgstr ""
+
+#: src/gtk/window.blp:223
 msgid "Increase Speed"
 msgstr ""
 
-#: src/window.ui:90 src/window.ui:170
+#: src/gtk/window.blp:234
 msgid "Decrease Speed"
 msgstr ""
 
-#: src/window.ui:102 src/window.ui:181
+#: src/gtk/window.blp:247
 msgid "Increase Font Size"
 msgstr ""
 
-#: src/window.ui:110 src/window.ui:189
+#: src/gtk/window.blp:258
 msgid "Decrease Font Size"
 msgstr ""
 
-#: src/window.ui:122 src/window.ui:200
+#: src/gtk/window.blp:271
 msgid "Open a File"
 msgstr ""
 
-#: src/window.ui:130 src/window.ui:208
+#: src/gtk/window.blp:282
 msgid "Paste from Clipboard"
 msgstr ""
 
-#: src/window.ui:261
-msgid ""
-"[START]\n"
-"This app can be used to read a script from the screen, just paste or open a "
-"text file.\n"
-"Anything between square brackets like [this] is highlighted.\n"
-"\n"
-"[Customization]\n"
-"The font, color of the text and highlights can be customized."
-msgstr ""
-
-#: src/window.ui:273
+#: src/gtk/window.blp:299
 msgid "Follow System"
 msgstr ""
 
-#: src/window.ui:278
+#: src/gtk/window.blp:305
 msgid "Light Theme"
 msgstr ""
 
-#: src/window.ui:283
+#: src/gtk/window.blp:311
 msgid "Dark Theme"
 msgstr ""
 
-#: src/window.ui:294
+#: src/gtk/window.blp:324
 msgid "Play/Pause"
 msgstr ""
 
-#: src/window.ui:300
+#: src/gtk/window.blp:331
+msgid "Mirror Horizontally"
+msgstr ""
+
+#: src/gtk/window.blp:336
+msgid "Mirror Vertically"
+msgstr ""
+
+#: src/gtk/window.blp:343
 msgid "_Preferences"
 msgstr ""
 
-#: src/window.ui:304
+#: src/gtk/window.blp:348
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#. Translators: do not translate the application name
-#: src/window.ui:309
+#: src/gtk/window.blp:353
 msgid "_About Teleprompter"
-msgstr ""
-
-#: src/gtk/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr ""
-
-#: src/gtk/help-overlay.ui:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr ""
-
-#: src/gtk/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Show Preferences"
-msgstr ""
-
-#: src/gtk/help-overlay.ui:26
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr ""
-
-#: src/gtk/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Play/Pause"
-msgstr ""
-
-#: src/gtk/help-overlay.ui:38
-msgctxt "shortcut window"
-msgid "Fullscreen"
 msgstr ""

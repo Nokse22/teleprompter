@@ -44,6 +44,7 @@
 			  <p>Added Horizontal/Vertical Mirroring</p>
 		    <p>Fixed bugs</p>
 		    <p>Updated runtime to GNOME 48</p>
+		    <p>Added German translation</p>
 		  </description>
 	  </release>
     <release version="1.0.1" date="2024-09-29">

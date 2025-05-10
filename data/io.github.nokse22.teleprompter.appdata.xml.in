@@ -16,12 +16,14 @@
     <name translate="no">Nokse</name>
   </developer>
 
-	  <recommends>
-	    <control>keyboard</control>
-	    <control>pointing</control>
-	    <control>touch</control>
-	    <control>tablet</control>
-	  </recommends>
+	<recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
 
   <launchable type="desktop-id">io.github.nokse22.teleprompter.desktop</launchable>
   <translation type="gettext">teleprompter</translation>
@@ -37,9 +39,11 @@
   </branding>
 
   <releases>
-    <release version="1.2.0" date="2024-11-26">
+    <release version="1.1.0" date="2025-05-10">
 		  <description translate="no">
 			  <p>Added Horizontal/Vertical Mirroring</p>
+		    <p>Fixed bugs</p>
+		    <p>Updated runtime to GNOME 48</p>
 		  </description>
 	  </release>
     <release version="1.0.1" date="2024-09-29">

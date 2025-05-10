@@ -13,77 +13,194 @@ template $TeleprompterWindow: Adw.ApplicationWindow {
     condition ("max-width: 480px")
 
     setters {
-      bottom_controls.visible: true;
-      sidebar_controls.visible: false;
-      scroll_text_view.margin-start: "12";
+      multi_layout_view.layout-name: "tall";
+      controls_box.orientation: horizontal;
     }
   }
 
   Adw.Breakpoint {
-    condition ("max-height: 460px")
+    condition ("max-height: 400px")
 
     setters {
-      sidebar_controls.margin-start: 6;
-      start_button2.visible: false;
-      start_button3.visible: true;
-      scroll_text_view.margin-start: "52";
+      multi_layout_view.layout-name: "short";
+      separator_1.visible: false;
+      separator_2.visible: false;
     }
-
-    apply => $on_apply_breakpoint();
-    unapply => $on_unapply_breakpoint();
   }
 
-  Adw.ToolbarView {
-    bottom-bar-style: raised;
-    extend-content-to-top-edge: true;
+  Adw.MultiLayoutView multi_layout_view{
 
-    [top]
-    Revealer {
-      reveal-child : true;
-      child : Adw.HeaderBar {
-        [end]
-        MenuButton {
-          icon-name: "open-menu-symbolic";
-          menu-model: primary_menu;
+    Adw.Layout {
+      name: "wide";
+      content: Adw.ToolbarView {
+        bottom-bar-style: raised;
+        extend-content-to-top-edge: true;
+        top-bar-style: flat;
+        reveal-bottom-bars: true;
+
+        [top]
+        Adw.HeaderBar {
+          title-widget: Adw.LayoutSlot {
+            id: "title-widget";
+          };
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+          }
+
+          [start]
+          Adw.LayoutSlot {
+            id: "fullscreen-button";
+          }
         }
 
-        [start]
-        Button start_button3 {
-          icon-name: bind start_button1.icon-name no-sync-create;
-          tooltip-text: _("Start/Stop");
+        content: Box {
+          Box {
+            spacing: 6;
+            orientation: vertical;
+            valign: center;
+            halign: start;
+            Adw.LayoutSlot {
+              id: "start-button";
+            }
+            Adw.LayoutSlot {
+              id: "controls";
+            }
+          }
+          Adw.LayoutSlot {
+            id: "toast-overlay";
+            Adw.LayoutSlot {
+              id: "scroll-text-view";
+            }
+          }
+        };
+      };
+    }
 
-          styles [
-            "suggested-action"
-          ]
+    Adw.Layout {
+      name: "short";
+      content: Adw.ToolbarView {
+        bottom-bar-style: raised;
+        extend-content-to-top-edge: true;
+        top-bar-style: flat;
+        reveal-bottom-bars: true;
 
-          visible: false;
-          clicked => $play_button_clicked();
+        [top]
+        Adw.HeaderBar {
+          title-widget: Adw.LayoutSlot {
+            id: "title-widget";
+          };
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+          }
+
+          [start]
+          Adw.LayoutSlot {
+            id: "start-button";
+          }
         }
 
-        [start]
-        Button fullscreen_button {
-          icon-name: "view-fullscreen-symbolic";
-          tooltip-text: _("Toggle Fullscreen");
-          clicked => $fullscreen_button_clicked();
+        content: Box {
+          Box {
+            spacing: 6;
+            orientation: vertical;
+            valign: center;
+            halign: start;
+            margin-top: 36;
+            Adw.LayoutSlot {
+              id: "controls";
+            }
+          }
+          Adw.LayoutSlot {
+            id: "toast-overlay";
+            Adw.LayoutSlot {
+              id: "scroll-text-view";
+            }
+          }
+        };
+      };
+    }
+
+    Adw.Layout {
+      name: "tall";
+      content: Adw.ToolbarView {
+        bottom-bar-style: raised_border;
+        extend-content-to-top-edge: true;
+        top-bar-style: flat;
+        reveal-bottom-bars: true;
+
+        [top]
+        Adw.HeaderBar {
+          title-widget: Adw.LayoutSlot {
+            id: "title-widget";
+          };
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+          }
+
+          [start]
+          Adw.LayoutSlot {
+            id: "fullscreen-button";
+          }
+        }
+
+        [bottom]
+        Box {
+          spacing: 6;
+          orientation: horizontal;
+          valign: center;
+          halign: center;
+          Adw.LayoutSlot {
+            id: "start-button";
+          }
+          Adw.LayoutSlot {
+            id: "controls";
+          }
+        }
+
+        Adw.LayoutSlot {
+          id: "scroll-text-view";
         }
       };
     }
 
+    [title-widget]
+    Label title_widget {
+      label: _("Teleprompter");
 
-    [bottom]
-    Box bottom_controls {
-      orientation: horizontal;
-      margin-bottom: 6;
-      margin-top: 6;
-      spacing: 6;
-      valign: center;
-      halign: center;
-      visible: false;
+      styles [
+        "heading"
+      ]
+    }
 
-      Button start_button1 {
+    [scroll-text-view]
+    Adw.ToastOverlay overlay {
+      child: $TeleprompterScrollTextView scroll_text_view {
+      };
+    }
+
+    [fullscreen-button]
+    Button fullscreen_button {
+      icon-name: "view-fullscreen-symbolic";
+      tooltip-text: _("Toggle Fullscreen");
+      clicked => $fullscreen_button_clicked();
+    }
+
+    [start-button]
+    Button start_button {
         icon-name: "media-playback-start-symbolic";
         tooltip-text: _("Start/Stop");
         can-target: true;
+        valign: center;
+        halign: center;
 
         styles [
           "suggested-action"
@@ -91,6 +208,15 @@ template $TeleprompterWindow: Adw.ApplicationWindow {
 
         clicked => $play_button_clicked();
       }
+
+    [controls]
+    Box controls_box{
+      orientation: vertical;
+      margin-bottom: 6;
+      margin-top: 6;
+      margin-start: 6;
+      margin-end: 6;
+      spacing: 6;
 
       Button {
         icon-name: "value-increase-symbolic";
@@ -114,7 +240,7 @@ template $TeleprompterWindow: Adw.ApplicationWindow {
         clicked => $decrease_speed_button_clicked();
       }
 
-      Separator {}
+      Separator separator_1 {}
 
       Button {
         icon-name: "increase-font";
@@ -138,7 +264,7 @@ template $TeleprompterWindow: Adw.ApplicationWindow {
         clicked => $decrease_font_button_clicked();
       }
 
-      Separator {}
+      Separator separator_2 {}
 
       Button {
         icon-name: "document-open-symbolic";
@@ -162,110 +288,6 @@ template $TeleprompterWindow: Adw.ApplicationWindow {
         clicked => $paste_button_clicked();
       }
     }
-
-    content: Overlay {
-      [overlay]
-      Box sidebar_controls {
-        orientation: vertical;
-        spacing: 6;
-        margin-start: 12;
-        valign: center;
-        halign: start;
-
-        styles [
-          "overlay_toolbar",
-          "card",
-        ]
-
-        Button start_button2 {
-          icon-name: bind start_button1.icon-name no-sync-create;
-          tooltip-text: _("Start/Stop");
-          can-target: true;
-
-          styles [
-            "suggested-action"
-          ]
-
-          clicked => $play_button_clicked();
-        }
-
-        Button {
-          icon-name: "value-increase-symbolic";
-          tooltip-text: _("Increase Speed");
-
-          styles [
-            "flat"
-          ]
-
-          clicked => $increase_speed_button_clicked();
-        }
-
-        Button {
-          icon-name: "value-decrease-symbolic";
-          tooltip-text: _("Decrease Speed");
-
-          styles [
-            "flat"
-          ]
-
-          clicked => $decrease_speed_button_clicked();
-        }
-
-        Separator {}
-
-        Button {
-          icon-name: "increase-font-symbolic";
-          tooltip-text: _("Increase Font Size");
-
-          styles [
-            "flat"
-          ]
-
-          clicked => $increase_font_button_clicked();
-        }
-
-        Button {
-          icon-name: "decrease-font-symbolic";
-          tooltip-text: _("Decrease Font Size");
-
-          styles [
-            "flat"
-          ]
-
-          clicked => $decrease_font_button_clicked();
-        }
-
-        Separator {}
-
-        Button {
-          icon-name: "document-open-symbolic";
-          tooltip-text: _("Open a File");
-
-          styles [
-            "flat"
-          ]
-
-          clicked => $open_button_clicked();
-        }
-
-        Button {
-          icon-name: "edit-paste-symbolic";
-          tooltip-text: _("Paste from Clipboard");
-
-          styles [
-            "flat"
-          ]
-
-          clicked => $paste_button_clicked();
-        }
-      }
-
-      Adw.ToastOverlay overlay {
-        $TeleprompterScrollTextView scroll_text_view {
-          margin-start: "72";
-        }
-      }
-    };
   }
 }
 

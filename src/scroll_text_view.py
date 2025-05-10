@@ -29,6 +29,7 @@ class TeleprompterTextView(Adw.Bin):
             bottom_margin=300,
             top_margin=50,
             margin_start=12,
+            margin_end=12,
             pixels_above_lines=6,
             pixels_below_lines=6,
             vexpand=True,
@@ -64,6 +65,8 @@ class TeleprompterScrollTextView(Adw.Bin):
 
         self._mirror = False
 
+        self.scrolled_window.get_vscrollbar().set_margin_top(40)
+
     def do_snapshot(self, snapshot):
         height = self.get_allocation().height
 
@@ -72,14 +75,6 @@ class TeleprompterScrollTextView(Adw.Bin):
             snapshot.scale(1, -1)
 
         self.snapshot_child(self.scrolled_window, snapshot)
-
-    @GObject.Property(type=int, default=-1)
-    def margin_start(self):
-        return self.text_view.get_margin_start()
-
-    @margin_start.setter
-    def margin_start(self, margin):
-        self.text_view.set_margin_start(margin)
 
     @GObject.Property(type=bool, default=False)
     def hmirror(self):
@@ -96,6 +91,13 @@ class TeleprompterScrollTextView(Adw.Bin):
     @vmirror.setter
     def vmirror(self, value):
         self._mirror = value
+
+        if value:
+            self.scrolled_window.get_vscrollbar().set_margin_top(0)
+            self.scrolled_window.get_vscrollbar().set_margin_bottom(40)
+        else:
+            self.scrolled_window.get_vscrollbar().set_margin_top(40)
+            self.scrolled_window.get_vscrollbar().set_margin_bottom(0)
 
     def get_buffer(self):
         return self.text_view._text_view.get_buffer()

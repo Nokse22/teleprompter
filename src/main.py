@@ -97,6 +97,9 @@ class TeleprompterApplication(Adw.Application):
         self.vmirror_action.set_state(GLib.Variant.new_boolean(False))
         self.hmirror_action.set_state(GLib.Variant.new_boolean(False))
 
+        self.win.scroll_text_view.hmirror = False
+        self.win.scroll_text_view.vmirror = False
+
     def on_theme_setting_changed(self, action, state):
         action.set_state(state)
         self.saved_settings.set_string("theme", state.get_string())
@@ -114,11 +117,6 @@ class TeleprompterApplication(Adw.Application):
                 manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
 
     def do_activate(self):
-        """Called when the application is activated.
-
-        We raise the application's main window, creating it if
-        necessary.
-        """
         self.win = self.props.active_window
         if not self.win:
             self.win = TeleprompterWindow(application=self)
@@ -177,13 +175,9 @@ class TeleprompterApplication(Adw.Application):
         highlight_color_picker.set_rgba(self.win.settings.highlight_color)
         highlight_color_picker_row.add_suffix(highlight_color_picker)
 
-        bold_highlight_row = Adw.ActionRow(title=_("Bold Highlight"))
+        bold_highlight_row = Adw.SwitchRow(title=_("Bold Highlight"))
+        bold_highlight_row.set_active(self.win.settings.bold_highlight)
         text_group.add(bold_highlight_row)
-
-        bold_highlight_switch = Gtk.Switch(valign=Gtk.Align.CENTER)
-        bold_highlight_switch.set_active(self.win.settings.bold_highlight)
-
-        bold_highlight_row.add_suffix(bold_highlight_switch)
 
         font_color_picker_row = Adw.ActionRow(title=_("Font color"))
         text_group.add(font_color_picker_row)
@@ -196,7 +190,7 @@ class TeleprompterApplication(Adw.Application):
         font_picker_row.add_suffix(font_picker)
 
         font_color_picker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
-        font_color_picker.set_rgba(self.win.settings.textColor)
+        font_color_picker.set_rgba(self.win.settings.text_color)
         font_color_picker_row.add_suffix(font_color_picker)
 
         pref.present(self.win)
@@ -209,29 +203,18 @@ class TeleprompterApplication(Adw.Application):
             "font-set", self.on_font_changed)
         speed_adj.connect(
             "value-changed", self.on_speed_changed)
-        bold_highlight_switch.connect(
-            "state-set", self.on_bold_highlight_set)
+        bold_highlight_row.connect(
+            "notify::active", self.on_bold_highlight_set)
 
     def create_action(self, name, callback, shortcuts=None):
-        """Add an application action.
-
-        Args:
-            name: the name of the action
-            callback: the function to be called when the action is
-              activated
-            shortcuts: an optional list of accelerators
-        """
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
-    def on_background_color_changed(self, colorWidget):
-        self.win.settings.backgroundColor = colorWidget.get_rgba()
-
     def on_text_color_changed(self, colorWidget):
-        self.win.settings.textColor = colorWidget.get_rgba()
+        self.win.settings.text_color = colorWidget.get_rgba()
 
         self.win.apply_text_tags()
         start = self.win.text_buffer.get_start_iter()
@@ -239,7 +222,7 @@ class TeleprompterApplication(Adw.Application):
         self.win.save_app_settings(self.win.settings)
 
     def on_highlight_color_changed(self, colorWidget):
-        self.win.settings.highlightColor = colorWidget.get_rgba()
+        self.win.settings.highlight_color = colorWidget.get_rgba()
 
         self.win.apply_text_tags()
         start = self.win.text_buffer.get_start_iter()
@@ -271,8 +254,8 @@ class TeleprompterApplication(Adw.Application):
 
         self.saved_settings.set_int("speed", speed * 10)
 
-    def on_bold_highlight_set(self, switch, foo):
-        self.win.settings.bold_highlight_row = not switch.get_state()
+    def on_bold_highlight_set(self, switch, *args):
+        self.win.settings.bold_highlight = switch.get_active()
 
         self.win.update_font()
         self.win.apply_text_tags()

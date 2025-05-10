@@ -26,8 +26,8 @@ from gettext import gettext as _
 class AppSettings:
     def __init__(self):
         self.font = 'Cantarell 40'
-        self.textColor = Gdk.RGBA()
-        self.textColor.parse("#62A0EA")
+        self.text_color = Gdk.RGBA()
+        self.text_color.parse("#62A0EA")
         self.speed = 150
         self.highlight_color = Gdk.RGBA()
         self.highlight_color.parse("#ED333B")
@@ -39,10 +39,10 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'TeleprompterWindow'
 
     scroll_text_view = Gtk.Template.Child()
-    start_button1 = Gtk.Template.Child()
+    start_button = Gtk.Template.Child()
     fullscreen_button = Gtk.Template.Child()
     overlay = Gtk.Template.Child()
-    sidebar_controls = Gtk.Template.Child()
+    title_widget = Gtk.Template.Child()
 
     playing = False
 
@@ -72,6 +72,15 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         start = self.text_buffer.get_start_iter()
         self.search_and_mark_highlight(start)
 
+        self.scroll_text_view.get_scrolled_window().get_vadjustment().connect(
+            "value-changed", self.on_scroll_changed)
+
+    def on_scroll_changed(self, adjustment):
+        if adjustment.get_value() == 0:
+            self.title_widget.set_visible(True)
+        else:
+            self.title_widget.set_visible(False)
+
     def on_text_pasted(self, text_buffer, clipboard):
         self.apply_text_tags()
         self.update_font()
@@ -92,7 +101,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     def save_app_settings(self, settings):
         self.saved_settings.set_string(
-            "text", self.color_to_hex(settings.textColor))
+            "text", self.color_to_hex(settings.text_color))
         self.saved_settings.set_string(
             "highlight", self.color_to_hex(settings.highlight_color))
 
@@ -145,7 +154,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         color3 = Gdk.RGBA()
 
         color1.parse(self.saved_settings.get_string("text"))
-        settings.textColor = color1
+        settings.text_color = color1
 
         color3.parse(self.saved_settings.get_string("highlight"))
         settings.highlight_color = color3
@@ -162,20 +171,19 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def autoscroll(self, scrolled_window):
         adjustment = scrolled_window.get_vadjustment()
         adjustment.set_value(
-            adjustment.get_value() + self.wpm_to_speed(
-                self.settings.speed))
+            adjustment.get_value() + self.wpm_to_speed(self.settings.speed))
         scrolled_window.set_vadjustment(adjustment)
 
         if (adjustment.get_value() ==
                 adjustment.get_upper() - adjustment.get_page_size()):
             self.playing = False
-            self.start_button1.set_icon_name("media-playback-start-symbolic")
-            return 0
+            self.start_button.set_icon_name("media-playback-start-symbolic")
+            return False
 
         if not self.playing:
-            return 0
+            return False
         else:
-            return 1
+            return True
 
     def apply_text_tags(self):
         start_iter = self.text_buffer.get_start_iter()
@@ -183,7 +191,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         tag_color1 = Gtk.TextTag()
         tag_color1.set_property(
-            "foreground", self.color_to_hex(self.settings.textColor))
+            "foreground", self.color_to_hex(self.settings.text_color))
         self.text_buffer.get_tag_table().add(tag_color1)
 
         tag_color2 = Gtk.TextTag()
@@ -274,13 +282,13 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("play_button_clicked")
     def play(self, *args):
         if not self.playing:
-            self.start_button1.set_icon_name("media-playback-pause-symbolic")
+            self.start_button.set_icon_name("media-playback-pause-symbolic")
             self.playing = True
 
             # Start continuous autoscrolling
             GLib.timeout_add(10, self.autoscroll, self.scrolled_window)
         else:
-            self.start_button1.set_icon_name("media-playback-start-symbolic")
+            self.start_button.set_icon_name("media-playback-start-symbolic")
             self.playing = False
             self.speed = 0
 
@@ -341,16 +349,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             self.unfullscreen()
         else:
             self.fullscreen()
-
-    @Gtk.Template.Callback("on_apply_breakpoint")
-    def on_apply_breakpoint(self, *args):
-        self.sidebar_controls.remove_css_class("card")
-        self.sidebar_controls.remove_css_class("overlay_toolbar")
-
-    @Gtk.Template.Callback("on_unapply_breakpoint")
-    def on_unapply_breakpoint(self, *args):
-        self.sidebar_controls.add_css_class("card")
-        self.sidebar_controls.add_css_class("overlay_toolbar")
 
     @Gtk.Template.Callback("on_fullscreened_changed")
     def on_fullscreened_changed(self, *_args):

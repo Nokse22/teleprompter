@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-10 17:48+0200\n"
+"POT-Creation-Date: 2025-05-10 17:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. Translators: do not translate the application name
 #: data/io.github.nokse22.teleprompter.desktop.in:3 src/gtk/window.blp:9
-#: src/gtk/window.blp:177
+#: src/gtk/window.blp:177 src/gtk/help-overlay.blp:30
 msgid "Teleprompter"
 msgstr ""
 
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Dark Theme"
 msgstr ""
 
-#: src/gtk/window.blp:324
+#: src/gtk/window.blp:324 src/gtk/help-overlay.blp:33
 msgid "Play/Pause"
 msgstr ""
 
@@ -138,7 +138,7 @@ msgstr ""
 msgid "Mirror Horizontally"
 msgstr ""
 
-#: src/gtk/window.blp:336
+#: src/gtk/window.blp:336 src/gtk/help-overlay.blp:48
 msgid "Mirror Vertically"
 msgstr ""
 
@@ -152,4 +152,32 @@ msgstr ""
 
 #: src/gtk/window.blp:353
 msgid "_About Teleprompter"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:11
+msgid "General"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:14
+msgid "Show Shortcuts"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:19
+msgid "Show Preferences"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:24
+msgid "Quit"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:38
+msgid "Fullscreen"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:43
+msgid "Mirror Horizonatlly"
+msgstr ""
+
+#: src/gtk/help-overlay.blp:53
+msgid "Reset View"
 msgstr ""

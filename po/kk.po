@@ -1,0 +1,185 @@
+# Teleprompter қолданбасының қазақша аудармасы.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# AnmiTaliDev <anmitali198@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Teleprompter 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-10 17:58+0200\n"
+"PO-Revision-Date: 2025-06-27 12:00+0600\n"
+"Last-Translator: AnmiTaliDev <anmitali198@gmail.com>\n"
+"Language-Team: Kazakh <kk@li.org>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Translators: do not translate the application name
+#: data/io.github.nokse22.teleprompter.desktop.in:3 src/gtk/window.blp:9
+#: src/gtk/window.blp:177 src/gtk/help-overlay.blp:30
+msgid "Teleprompter"
+msgstr "Телесуфлер"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:8
+msgid ""
+"A simple app to read scrolling text from your screen. It has an adaptive "
+"layout to work on smartphones too."
+msgstr ""
+"Экраннан айналып жүретін мәтінді оқуға арналған қарапайым қолданба. Ол "
+"смартфондарда да жұмыс істеу үшін бейімделген макетке ие."
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:11
+msgid "Stay on track during speeches"
+msgstr "Сөйлеу кезінде бағытты сақтаңыз"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:146
+msgid "Teleprompter displaying text on a widescreen"
+msgstr "Кең экранда мәтін көрсетіп тұрған телесуфлер"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:151
+msgid "Teleprompter displaying text on a widescreen with dark theme"
+msgstr "Қараңғы тақырыппен кең экранда мәтін көрсетіп тұрған телесуфлер"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:156
+msgid "Teleprompter displaying text in a narrow screen"
+msgstr "Тар экранда мәтін көрсетіп тұрған телесуфлер"
+
+#. Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:142
+msgid "translator-credits"
+msgstr "AnmiTaliDev <anmitali198@gmail.com>"
+
+#: src/main.py:150
+msgid "Generals"
+msgstr "Жалпы"
+
+#: src/main.py:155
+msgid "Scroll Settings"
+msgstr "Айналдыру параметрлері"
+
+#: src/main.py:159
+msgid "Scroll Speed"
+msgstr "Айналдыру жылдамдығы"
+
+#: src/main.py:160
+msgid "In words per minute (approximately)"
+msgstr "Минутына сөз саны (шамамен)"
+
+#: src/main.py:167
+msgid "Text"
+msgstr "Мәтін"
+
+#: src/main.py:171
+msgid "Highlight color"
+msgstr "Ерекшелеу түсі"
+
+#: src/main.py:178
+msgid "Bold Highlight"
+msgstr "Жуан ерекшелеу"
+
+#: src/main.py:182
+msgid "Font color"
+msgstr "Қаріп түсі"
+
+#: src/main.py:185
+msgid "Font"
+msgstr "Қаріп"
+
+#: src/gtk/window.blp:193 src/gtk/window.blp:317
+msgid "Toggle Fullscreen"
+msgstr "Толық экранды ауыстыру"
+
+#: src/gtk/window.blp:200
+msgid "Start/Stop"
+msgstr "Бастау/Тоқтату"
+
+#: src/gtk/window.blp:223
+msgid "Increase Speed"
+msgstr "Жылдамдықты арттыру"
+
+#: src/gtk/window.blp:234
+msgid "Decrease Speed"
+msgstr "Жылдамдықты азайту"
+
+#: src/gtk/window.blp:247
+msgid "Increase Font Size"
+msgstr "Қаріп өлшемін арттыру"
+
+#: src/gtk/window.blp:258
+msgid "Decrease Font Size"
+msgstr "Қаріп өлшемін азайту"
+
+#: src/gtk/window.blp:271
+msgid "Open a File"
+msgstr "Файлды ашу"
+
+#: src/gtk/window.blp:282
+msgid "Paste from Clipboard"
+msgstr "Буферден қою"
+
+#: src/gtk/window.blp:299
+msgid "Follow System"
+msgstr "Жүйені ілесу"
+
+#: src/gtk/window.blp:305
+msgid "Light Theme"
+msgstr "Ашық тақырып"
+
+#: src/gtk/window.blp:311
+msgid "Dark Theme"
+msgstr "Қараңғы тақырып"
+
+#: src/gtk/window.blp:324 src/gtk/help-overlay.blp:33
+msgid "Play/Pause"
+msgstr "Ойнату/Тоқтату"
+
+#: src/gtk/window.blp:331
+msgid "Mirror Horizontally"
+msgstr "Көлденең айналдыру"
+
+#: src/gtk/window.blp:336 src/gtk/help-overlay.blp:48
+msgid "Mirror Vertically"
+msgstr "Тік айналдыру"
+
+#: src/gtk/window.blp:343
+msgid "_Preferences"
+msgstr "_Баптаулар"
+
+#: src/gtk/window.blp:348
+msgid "_Keyboard Shortcuts"
+msgstr "_Пернетақта жарлықтары"
+
+#: src/gtk/window.blp:353
+msgid "_About Teleprompter"
+msgstr "_Телесуфлер туралы"
+
+#: src/gtk/help-overlay.blp:11
+msgid "General"
+msgstr "Жалпы"
+
+#: src/gtk/help-overlay.blp:14
+msgid "Show Shortcuts"
+msgstr "Жарлықтарды көрсету"
+
+#: src/gtk/help-overlay.blp:19
+msgid "Show Preferences"
+msgstr "Баптауларды көрсету"
+
+#: src/gtk/help.blp:24
+msgid "Quit"
+msgstr "Шығу"
+
+#: src/gtk/help-overlay.blp:38
+msgid "Fullscreen"
+msgstr "Толық экран"
+
+#: src/gtk/help-overlay.blp:43
+msgid "Mirror Horizonatlly"
+msgstr "Көлденең айналдыру"
+
+#: src/gtk/help-overlay.blp:53
+msgid "Reset View"
+msgstr "Көріністі қалпына келтіру"

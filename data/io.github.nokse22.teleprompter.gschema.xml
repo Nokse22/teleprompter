@@ -34,5 +34,17 @@
       <default>false</default>
     </key>
 
+	  <key name="osc-port" type="i">
+      <default>7400</default>
+      <summary>OSC server port</summary>
+      <description>UDP port for OSC communication.</description>
+    </key>
+    
+    <key name="osc-autostart" type="b">
+      <default>false</default>
+      <summary>Auto-start OSC server</summary>
+      <description>Automatically start OSC server when application launches.</description>
+    </key>
+
 	</schema>
 </schemalist>

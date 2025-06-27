@@ -1,6 +1,7 @@
 # main.py
 #
 # Copyright 2023 Nokse
+# Copyright 2025 AnmiTaliDev
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,6 +22,7 @@ import sys
 
 from gi.repository import Gtk, Gio, Adw, GLib
 from .window import TeleprompterWindow
+from .osc_server import OSCServer
 
 import gettext
 from gettext import gettext as _
@@ -77,6 +79,12 @@ class TeleprompterApplication(Adw.Application):
         self.create_action(
             'reset-mirrors', self.on_reset_mirrors, ['<primary><shift>R'])
 
+        # OSC server
+        self.osc_server = None
+        
+        # Action for toggling OSC
+        self.create_action('toggle-osc', self.on_toggle_osc)
+
         self.update_theme()
 
     def on_vmirror(self, action, state):
@@ -116,6 +124,19 @@ class TeleprompterApplication(Adw.Application):
             case "dark":
                 manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
 
+    def on_toggle_osc(self, *args):
+        """Toggle OSC server"""
+        if self.osc_server and self.osc_server.running:
+            self.osc_server.stop()
+            self.osc_server = None
+        else:
+            osc_port = self.saved_settings.get_int("osc-port")
+            if osc_port == 0:
+                osc_port = 7400  # Default port
+            
+            self.osc_server = OSCServer(self.win, osc_port)
+            self.osc_server.start()
+
     def do_activate(self):
         self.win = self.props.active_window
         if not self.win:
@@ -124,7 +145,18 @@ class TeleprompterApplication(Adw.Application):
                 'play', self.win.play, ['<primary>space'])
             self.create_action(
                 'fullscreen', self.win.toggle_fullscreen, ['F11'])
+            
+            # Auto-start OSC server if enabled in settings
+            if self.saved_settings.get_boolean("osc-autostart"):
+                self.on_toggle_osc()
+                
         self.win.present()
+
+    def do_shutdown(self):
+        """Cleanup when application terminates"""
+        if self.osc_server:
+            self.osc_server.stop()
+        super().do_shutdown()
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
@@ -192,6 +224,82 @@ class TeleprompterApplication(Adw.Application):
         font_color_picker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
         font_color_picker.set_rgba(self.win.settings.text_color)
         font_color_picker_row.add_suffix(font_color_picker)
+
+        # New OSC settings page
+        osc_page = Adw.PreferencesPage(title=_("OSC Remote Control"))
+        osc_page.set_icon_name("network-wireless-symbolic")
+        pref.add(osc_page)
+
+        osc_group = Adw.PreferencesGroup(
+            title=_("OSC Settings"),
+            description=_("Open Sound Control allows remote control of the teleprompter"))
+        osc_page.add(osc_group)
+
+        # OSC server toggle
+        osc_enable_row = Adw.SwitchRow(
+            title=_("Enable OSC Server"),
+            subtitle=_("Allow remote control via OSC protocol"))
+        osc_enable_row.set_active(self.osc_server and self.osc_server.running)
+        osc_group.add(osc_enable_row)
+
+        # OSC port
+        osc_port_row = Adw.SpinRow(
+            title=_("OSC Port"),
+            subtitle=_("UDP port for OSC communication"))
+        osc_group.add(osc_port_row)
+
+        port_adj = Gtk.Adjustment(upper=65535, step_increment=1, lower=1024)
+        current_port = self.saved_settings.get_int("osc-port")
+        if current_port == 0:
+            current_port = 7400
+        port_adj.set_value(current_port)
+        osc_port_row.set_adjustment(port_adj)
+
+        # OSC auto-start
+        osc_autostart_row = Adw.SwitchRow(
+            title=_("Auto-start OSC Server"),
+            subtitle=_("Start OSC server automatically when app launches"))
+        osc_autostart_row.set_active(self.saved_settings.get_boolean("osc-autostart"))
+        osc_group.add(osc_autostart_row)
+
+        # OSC commands information
+        osc_info_group = Adw.PreferencesGroup(
+            title=_("OSC Commands"),
+            description=_("Available OSC addresses for remote control"))
+        osc_page.add(osc_info_group)
+
+        commands_text = """/teleprompter/play - Start playback
+/teleprompter/pause - Pause playback  
+/teleprompter/stop - Stop and reset position
+/teleprompter/speed [float] - Set speed in WPM
+/teleprompter/fontsize [int] - Set font size
+/teleprompter/position [float] - Set position (0.0-1.0)
+/teleprompter/fullscreen [bool] - Toggle fullscreen
+/teleprompter/text [string] - Set text content
+/teleprompter/load [string] - Load text file
+/teleprompter/mirror/horizontal [bool] - Mirror horizontally
+/teleprompter/mirror/vertical [bool] - Mirror vertically
+/teleprompter/reset - Reset all settings
+/teleprompter/status - Get current status"""
+
+        osc_commands_row = Adw.ActionRow(title=_("Commands"))
+        osc_info_group.add(osc_commands_row)
+
+        commands_label = Gtk.Label(
+            label=commands_text,
+            selectable=True,
+            wrap=True,
+            margin_start=12,
+            margin_end=12,
+            margin_top=6,
+            margin_bottom=6)
+        commands_label.add_css_class("caption")
+        osc_commands_row.set_child(commands_label)
+
+        # Connect OSC settings handlers
+        osc_enable_row.connect("notify::active", self.on_osc_enable_changed)
+        port_adj.connect("value-changed", self.on_osc_port_changed)
+        osc_autostart_row.connect("notify::active", self.on_osc_autostart_changed)
 
         pref.present(self.win)
 
@@ -262,6 +370,30 @@ class TeleprompterApplication(Adw.Application):
         start = self.win.text_buffer.get_start_iter()
         self.win.search_and_mark_highlight(start)
         self.win.save_app_settings(self.win.settings)
+
+    def on_osc_enable_changed(self, switch, *args):
+        """Handle OSC server enable/disable"""
+        if switch.get_active():
+            if not (self.osc_server and self.osc_server.running):
+                self.on_toggle_osc()
+        else:
+            if self.osc_server and self.osc_server.running:
+                self.on_toggle_osc()
+
+    def on_osc_port_changed(self, port_adj):
+        """Handle OSC port change"""
+        port = int(port_adj.get_value())
+        self.saved_settings.set_int("osc-port", port)
+        
+        # Restart server if it's running
+        if self.osc_server and self.osc_server.running:
+            self.osc_server.stop()
+            self.osc_server = OSCServer(self.win, port)
+            self.osc_server.start()
+
+    def on_osc_autostart_changed(self, switch, *args):
+        """Handle OSC auto-start change"""
+        self.saved_settings.set_boolean("osc-autostart", switch.get_active())
 
 
 def main(version):

@@ -33,8 +33,8 @@ class TeleprompterTextView(Adw.Bin):
             pixels_above_lines=6,
             pixels_below_lines=6,
             vexpand=True,
-            wrap_mode=Gtk.WrapMode.WORD_CHAR
-            )
+            wrap_mode=Gtk.WrapMode.WORD_CHAR,
+        )
 
         self._text_view.add_css_class("transparent")
 
@@ -52,8 +52,7 @@ class TeleprompterTextView(Adw.Bin):
         self.snapshot_child(self._text_view, snapshot)
 
 
-@Gtk.Template(
-    resource_path='/io/github/nokse22/teleprompter/gtk/scroll_text_view.ui')
+@Gtk.Template(resource_path="/io/github/nokse22/teleprompter/gtk/scroll_text_view.ui")
 class TeleprompterScrollTextView(Adw.Bin):
     __gtype_name__ = "TeleprompterScrollTextView"
 

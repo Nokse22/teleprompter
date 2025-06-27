@@ -29,24 +29,24 @@ from gettext import gettext as _
 
 from os import path
 
-LOCALE_DIR = path.join(
-    path.dirname(__file__).split('teleprompter')[0], 'locale')
-gettext.bindtextdomain('teleprompter', LOCALE_DIR)
-gettext.textdomain('teleprompter')
+LOCALE_DIR = path.join(path.dirname(__file__).split("teleprompter")[0], "locale")
+gettext.bindtextdomain("teleprompter", LOCALE_DIR)
+gettext.textdomain("teleprompter")
 
 
 class TeleprompterApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='io.github.nokse22.teleprompter',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+        super().__init__(
+            application_id="io.github.nokse22.teleprompter",
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+        )
+        self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
+        self.create_action("about", self.on_about_action)
         self.create_action(
-            'quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action(
-            'about', self.on_about_action)
-        self.create_action(
-            'preferences', self.on_preferences_action, ['<primary>comma'])
+            "preferences", self.on_preferences_action, ["<primary>comma"]
+        )
 
         self.saved_settings = Gio.Settings("io.github.nokse22.teleprompter")
 
@@ -61,29 +61,30 @@ class TeleprompterApplication(Adw.Application):
         self.vmirror_action = Gio.SimpleAction.new_stateful(
             "vmirror",
             None,
-            GLib.Variant("b", self.saved_settings.get_boolean("vmirror"))
+            GLib.Variant("b", self.saved_settings.get_boolean("vmirror")),
         )
         self.vmirror_action.connect("activate", self.on_vmirror)
-        self.set_accels_for_action("app.vmirror", ['<primary><shift>V'])
+        self.set_accels_for_action("app.vmirror", ["<primary><shift>V"])
         self.add_action(self.vmirror_action)
 
         self.hmirror_action = Gio.SimpleAction.new_stateful(
             "hmirror",
             None,
-            GLib.Variant("b", self.saved_settings.get_boolean("hmirror"))
+            GLib.Variant("b", self.saved_settings.get_boolean("hmirror")),
         )
         self.hmirror_action.connect("activate", self.on_hmirror)
-        self.set_accels_for_action("app.hmirror", ['<primary><shift>H'])
+        self.set_accels_for_action("app.hmirror", ["<primary><shift>H"])
         self.add_action(self.hmirror_action)
 
         self.create_action(
-            'reset-mirrors', self.on_reset_mirrors, ['<primary><shift>R'])
+            "reset-mirrors", self.on_reset_mirrors, ["<primary><shift>R"]
+        )
 
         # OSC server
         self.osc_server = None
-        
+
         # Action for toggling OSC
-        self.create_action('toggle-osc', self.on_toggle_osc)
+        self.create_action("toggle-osc", self.on_toggle_osc)
 
         self.update_theme()
 
@@ -133,7 +134,7 @@ class TeleprompterApplication(Adw.Application):
             osc_port = self.saved_settings.get_int("osc-port")
             if osc_port == 0:
                 osc_port = 7400  # Default port
-            
+
             self.osc_server = OSCServer(self.win, osc_port)
             self.osc_server.start()
 
@@ -141,15 +142,13 @@ class TeleprompterApplication(Adw.Application):
         self.win = self.props.active_window
         if not self.win:
             self.win = TeleprompterWindow(application=self)
-            self.create_action(
-                'play', self.win.play, ['<primary>space'])
-            self.create_action(
-                'fullscreen', self.win.toggle_fullscreen, ['F11'])
-            
+            self.create_action("play", self.win.play, ["<primary>space"])
+            self.create_action("fullscreen", self.win.toggle_fullscreen, ["F11"])
+
             # Auto-start OSC server if enabled in settings
             if self.saved_settings.get_boolean("osc-autostart"):
                 self.on_toggle_osc()
-                
+
         self.win.present()
 
     def do_shutdown(self):
@@ -161,15 +160,16 @@ class TeleprompterApplication(Adw.Application):
     def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
-            application_name='Teleprompter',
-            application_icon='io.github.nokse22.teleprompter',
-            developer_name='Nokse',
-            version='1.1.0',
-            developers=['Nokse'],
+            application_name="Teleprompter",
+            application_icon="io.github.nokse22.teleprompter",
+            developer_name="Nokse",
+            version="1.1.0",
+            developers=["Nokse"],
             license_type="GTK_LICENSE_GPL_3_0",
-            issue_url='https://github.com/Nokse22/teleprompter/issues',
-            website='https://github.com/Nokse22/teleprompter',
-            copyright='© 2023 Noske')
+            issue_url="https://github.com/Nokse22/teleprompter/issues",
+            website="https://github.com/Nokse22/teleprompter",
+            copyright="© 2023 Noske",
+        )
         # Replace "translator-credits" with your name/username, and optionally an email or URL.
         about.set_translator_credits(_("translator-credits"))
         about.present(self.props.active_window)
@@ -183,13 +183,12 @@ class TeleprompterApplication(Adw.Application):
         preferences_page.set_icon_name("applications-system-symbolic")
         pref.add(preferences_page)
 
-        scroll_settings_group = Adw.PreferencesGroup(
-            title=_("Scroll Settings"))
+        scroll_settings_group = Adw.PreferencesGroup(title=_("Scroll Settings"))
         preferences_page.add(scroll_settings_group)
 
         scroll_speed_row = Adw.SpinRow(
-            title=_("Scroll Speed"),
-            subtitle=_("In words per minute (approximately)"))
+            title=_("Scroll Speed"), subtitle=_("In words per minute (approximately)")
+        )
         scroll_settings_group.add(scroll_speed_row)
 
         speed_adj = Gtk.Adjustment(upper=200, step_increment=1, lower=10)
@@ -199,8 +198,7 @@ class TeleprompterApplication(Adw.Application):
         text_group = Adw.PreferencesGroup(title=_("Text"))
         preferences_page.add(text_group)
 
-        highlight_color_picker_row = Adw.ActionRow(
-            title=_("Highlight color"))
+        highlight_color_picker_row = Adw.ActionRow(title=_("Highlight color"))
         text_group.add(highlight_color_picker_row)
 
         highlight_color_picker = Gtk.ColorButton(valign=Gtk.Align.CENTER)
@@ -232,20 +230,24 @@ class TeleprompterApplication(Adw.Application):
 
         osc_group = Adw.PreferencesGroup(
             title=_("OSC Settings"),
-            description=_("Open Sound Control allows remote control of the teleprompter"))
+            description=_(
+                "Open Sound Control allows remote control of the teleprompter"
+            ),
+        )
         osc_page.add(osc_group)
 
         # OSC server toggle
         osc_enable_row = Adw.SwitchRow(
             title=_("Enable OSC Server"),
-            subtitle=_("Allow remote control via OSC protocol"))
+            subtitle=_("Allow remote control via OSC protocol"),
+        )
         osc_enable_row.set_active(self.osc_server and self.osc_server.running)
         osc_group.add(osc_enable_row)
 
         # OSC port
         osc_port_row = Adw.SpinRow(
-            title=_("OSC Port"),
-            subtitle=_("UDP port for OSC communication"))
+            title=_("OSC Port"), subtitle=_("UDP port for OSC communication")
+        )
         osc_group.add(osc_port_row)
 
         port_adj = Gtk.Adjustment(upper=65535, step_increment=1, lower=1024)
@@ -258,14 +260,16 @@ class TeleprompterApplication(Adw.Application):
         # OSC auto-start
         osc_autostart_row = Adw.SwitchRow(
             title=_("Auto-start OSC Server"),
-            subtitle=_("Start OSC server automatically when app launches"))
+            subtitle=_("Start OSC server automatically when app launches"),
+        )
         osc_autostart_row.set_active(self.saved_settings.get_boolean("osc-autostart"))
         osc_group.add(osc_autostart_row)
 
         # OSC commands information
         osc_info_group = Adw.PreferencesGroup(
             title=_("OSC Commands"),
-            description=_("Available OSC addresses for remote control"))
+            description=_("Available OSC addresses for remote control"),
+        )
         osc_page.add(osc_info_group)
 
         commands_text = """/teleprompter/play - Start playback
@@ -292,7 +296,8 @@ class TeleprompterApplication(Adw.Application):
             margin_start=12,
             margin_end=12,
             margin_top=6,
-            margin_bottom=6)
+            margin_bottom=6,
+        )
         commands_label.add_css_class("caption")
         osc_commands_row.set_child(commands_label)
 
@@ -303,16 +308,11 @@ class TeleprompterApplication(Adw.Application):
 
         pref.present(self.win)
 
-        highlight_color_picker.connect(
-            "color-set", self.on_highlight_color_changed)
-        font_color_picker.connect(
-            "color-set", self.on_text_color_changed)
-        font_picker.connect(
-            "font-set", self.on_font_changed)
-        speed_adj.connect(
-            "value-changed", self.on_speed_changed)
-        bold_highlight_row.connect(
-            "notify::active", self.on_bold_highlight_set)
+        highlight_color_picker.connect("color-set", self.on_highlight_color_changed)
+        font_color_picker.connect("color-set", self.on_text_color_changed)
+        font_picker.connect("font-set", self.on_font_changed)
+        speed_adj.connect("value-changed", self.on_speed_changed)
+        bold_highlight_row.connect("notify::active", self.on_bold_highlight_set)
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
@@ -348,7 +348,7 @@ class TeleprompterApplication(Adw.Application):
 
         font_properties[-1] = str(new_font_size)
 
-        self.win.settings.font = ' '.join(font_properties)
+        self.win.settings.font = " ".join(font_properties)
 
         self.win.update_font()
         self.win.apply_text_tags()
@@ -384,7 +384,7 @@ class TeleprompterApplication(Adw.Application):
         """Handle OSC port change"""
         port = int(port_adj.get_value())
         self.saved_settings.set_int("osc-port", port)
-        
+
         # Restart server if it's running
         if self.osc_server and self.osc_server.running:
             self.osc_server.stop()

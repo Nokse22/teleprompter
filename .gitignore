@@ -1,4 +1,5 @@
 _build/
+builddir/
 .flatpak/
 node_modules/
 
@@ -7,3 +8,8 @@ node_modules/
 /.flatpak-builder/
 
 /subprojects/blueprint-compiler
+
+
+# OSC test
+
+test_osc.py

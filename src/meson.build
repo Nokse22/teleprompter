@@ -41,7 +41,8 @@ teleprompter_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'scroll_text_view.py'
+  'scroll_text_view.py',
+  'osc_server.py'
 ]
 
 install_data(teleprompter_sources, install_dir: moduledir)

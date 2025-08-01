@@ -12,7 +12,42 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs2" />
+     id="defs2">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect2"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,3,0,1 @ F,0,0,1,0,3,0,1 @ F,0,0,1,0,3,0,1 @ F,0,0,1,0,3,0,1 | F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1"
+       radius="0"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 | F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1"
+       radius="0"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+  </defs>
   <sodipodi:namedview
      id="namedview2"
      pagecolor="#ffffff"
@@ -23,9 +58,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="true"
-     inkscape:zoom="33.543378"
-     inkscape:cx="9.2864827"
-     inkscape:cy="8.8691127"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="-2.5632621"
+     inkscape:cy="15.821514"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="0"
@@ -47,35 +82,34 @@
        enabled="true"
        visible="true" />
   </sodipodi:namedview>
-  <rect
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;paint-order:stroke fill markers;stroke-dasharray:none"
-     id="rect2"
-     width="14"
-     height="14"
-     x="1"
-     y="1" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
-     d="M 4,4 H 7 M 6,4"
+     style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill-rule:evenodd;stroke-linecap:round;paint-order:stroke fill markers;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+     d="m 0,3 v 10 a 3,3 45 0 0 3,3 h 10 a 3,3 135 0 0 3,-3 V 3 A 3,3 45 0 0 13,0 H 3 A 3,3 135 0 0 0,3 Z M 3,2 h 10 a 1,1 45 0 1 1,1 l 0,10 a 1,1 135 0 1 -1,1 L 3,14 A 1,1 45 0 1 2,13 V 3 A 1,1 135 0 1 3,2 Z"
+     id="rect2"
+     inkscape:path-effect="#path-effect2"
+     inkscape:original-d="M 0,0 V 16 H 16 V 0 Z M 2,2 H 14 V 14 H 2 Z" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
+     d="M 4,5 H 7 M 6,5"
      id="path2"
      sodipodi:nodetypes="cc" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
      d="m 4,8 h 8"
      id="path2-6" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
-     d="m 10,4 h 2"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
+     d="m 10,5 h 2"
      id="path4"
      sodipodi:nodetypes="cc" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
-     d="M 12,12 H 8"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
+     d="M 12,11 H 8"
      id="path2-5"
      sodipodi:nodetypes="cc" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
-     d="M 5,12 H 4"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;paint-order:stroke fill markers"
+     d="M 5,11 H 4"
      id="path4-3"
      sodipodi:nodetypes="cc" />
 </svg>

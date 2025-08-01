@@ -1,0 +1,547 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PreferencesDialog: Adw.PreferencesDialog {
+  Adw.PreferencesPage general_page {
+    title: _("General");
+    icon-name: "applications-system-symbolic";
+
+    Adw.PreferencesGroup scroll_settings_group {
+      title: _("Scroll Settings");
+
+      Adw.SpinRow scroll_speed_row {
+        title: _("Scroll Speed");
+        subtitle: _("In words per minute (approximately)");
+
+        adjustment: Gtk.Adjustment {
+          lower: 10;
+          upper: 200;
+          step-increment: 1;
+        };
+      }
+    }
+
+    Adw.PreferencesGroup text_group {
+      title: _("Text");
+
+      Adw.ActionRow highlight_color_picker_row {
+        title: _("Highlight color");
+
+        [suffix]
+        Gtk.ColorDialogButton highlight_color_picker {
+          valign: center;
+
+          dialog: Gtk.ColorDialog {};
+         }
+      }
+
+      Adw.SwitchRow bold_highlight_row {
+        title: _("Bold Highlight");
+      }
+
+      Adw.ActionRow font_color_picker_row {
+        title: _("Font color");
+
+        [suffix]
+        Gtk.ColorDialogButton font_color_picker {
+          valign: center;
+
+          dialog: Gtk.ColorDialog {};
+        }
+      }
+
+      Adw.ActionRow font_picker_row {
+        title: _("Font");
+
+        [suffix]
+        Gtk.FontDialogButton font_picker {
+          valign: center;
+          dialog: Gtk.FontDialog {};
+        }
+      }
+    }
+  }
+
+  Adw.PreferencesPage osc_page {
+    title: _("OSC Remote Control");
+    icon-name: "network-wireless-symbolic";
+
+    Adw.PreferencesGroup osc_group {
+      title: _("OSC Settings");
+      description: _("Open Sound Control allows remote control of the teleprompter");
+
+      Adw.SwitchRow osc_enable_row {
+        title: _("Enable OSC Server");
+        subtitle: _("Allow remote control via OSC protocol");
+      }
+
+      Adw.SpinRow osc_port_row {
+        title: _("OSC Port");
+        subtitle: _("UDP port for OSC communication");
+
+        adjustment: Gtk.Adjustment {
+          lower: 1024;
+          upper: 65535;
+          step-increment: 1;
+        };
+      }
+
+      Adw.SwitchRow osc_autostart_row {
+        title: _("Auto-start OSC Server");
+        subtitle: _("Start OSC server automatically when app launches");
+      }
+    }
+
+    Adw.PreferencesGroup osc_info_group {
+      title: _("OSC Commands");
+      description: _("Available OSC addresses for remote control");
+
+      Gtk.ListBoxRow osc_commands_row {
+        activatable: false;
+
+        styles [
+          "card",
+        ]
+
+        Gtk.Grid commands_grid {
+          margin-top: 12;
+          margin-bottom: 12;
+          margin-start: 12;
+          margin-end: 12;
+          column-spacing: 24;
+          row-spacing: 6;
+          column-homogeneous: false;
+
+          Gtk.Label {
+            label: "/teleprompter/play";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 0;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Start playback");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 0;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/pause";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 1;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Pause playback");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 1;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/stop";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 2;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Stop and reset position");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 2;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/speed [float]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 3;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Set speed in WPM");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 3;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/fontsize [int]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 4;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Set font size");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 4;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/position [float]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 5;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Set position (0.0-1.0)");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 5;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/fullscreen [bool]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 6;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Toggle fullscreen");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 6;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/text [string]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 7;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Set text content");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 7;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/load [string]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 8;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Load text file");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 8;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/mirror/horizontal [bool]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 9;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Mirror horizontally");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 9;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/mirror/vertical [bool]";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 10;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Mirror vertically");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 10;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/reset";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 11;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Reset all settings");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 11;
+            }
+          }
+
+          Gtk.Label {
+            label: "/teleprompter/status";
+
+            styles [
+              "monospace",
+              "caption",
+            ]
+
+            selectable: true;
+            halign: start;
+
+            layout {
+              column: 0;
+              row: 12;
+            }
+          }
+
+          Gtk.Label {
+            label: _("Get current status");
+
+            styles [
+              "caption",
+              "dimmed",
+            ]
+
+            halign: start;
+
+            layout {
+              column: 1;
+              row: 12;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
+# window.py
 #
-# Copyright 2023 Nokse
+# Copyright 2025 Nokse <nokse@posteo.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,22 +17,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gtk, Gdk, Pango, GLib, Gio, Adw
+from gi.repository import Gtk, Gdk, Pango, GLib, Gio, Adw, GObject
 
 from .scroll_text_view import TeleprompterScrollTextView
 
 from gettext import gettext as _
 
-
-class AppSettings:
-    def __init__(self):
-        self.font = "Cantarell 40"
-        self.text_color = Gdk.RGBA()
-        self.text_color.parse("#62A0EA")
-        self.speed = 150
-        self.highlight_color = Gdk.RGBA()
-        self.highlight_color.parse("#ED333B")
-        self.bold_highlight = True
+GObject.type_register(TeleprompterScrollTextView)
 
 
 @Gtk.Template(resource_path="/io/github/nokse22/teleprompter/gtk/window.ui")
@@ -49,32 +41,31 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.saved_settings = Gio.Settings("io.github.nokse22.teleprompter")
-
-        self.settings = AppSettings()
-        self.settings = self.load_app_settings()
+        self.settings = Gio.Settings("io.github.nokse22.teleprompter")
 
         self.text_buffer = self.scroll_text_view.get_buffer()
         self.scrolled_window = self.scroll_text_view.get_scrolled_window()
 
-        self.scroll_text_view.hmirror = self.saved_settings.get_boolean("hmirror")
-        self.scroll_text_view.vmirror = self.saved_settings.get_boolean("vmirror")
+        # Add text tags
+        self.text_tag = Gtk.TextTag()
+        self.highlight_tag = Gtk.TextTag()
+        self.text_buffer.get_tag_table().add(self.text_tag)
+        self.text_buffer.get_tag_table().add(self.highlight_tag)
+        self.update_text_tags()
 
-        self.text_buffer.connect("paste-done", self.on_text_pasted)
-        self.text_buffer.connect("changed", self.on_text_inserted, "", 0, 0)
+        # Bind mirror settings directly to the scroll text view
+        self.settings.bind("hmirror", self.scroll_text_view, "hmirror", 0)
+        self.settings.bind("vmirror", self.scroll_text_view, "vmirror", 0)
 
-        start = self.text_buffer.get_start_iter()
-        self.search_and_mark_highlight(start)
+        adjustment = self.scroll_text_view.get_scrolled_window().get_vadjustment()
+        adjustment.connect("value-changed", self.on_scroll_changed)
 
-        self.apply_text_tags()
-        self.update_font()
-
-        start = self.text_buffer.get_start_iter()
-        self.search_and_mark_highlight(start)
-
-        self.scroll_text_view.get_scrolled_window().get_vadjustment().connect(
-            "value-changed", self.on_scroll_changed
-        )
+        self.settings.connect("changed::text-color", self.update_text_tags)
+        self.settings.connect("changed::highlight-color", self.update_text_tags)
+        self.settings.connect("changed::font", self.update_text_tags)
+        self.settings.connect("changed::bold-highlight", self.update_text_tags)
+        self.text_buffer.connect("paste-done", self.update_text_tags)
+        self.text_buffer.connect("changed", self.update_text_tags)
 
     def on_scroll_changed(self, adjustment):
         if adjustment.get_value() == 0:
@@ -82,98 +73,43 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         else:
             self.title_widget.set_visible(False)
 
-    def on_text_pasted(self, text_buffer, clipboard):
-        self.apply_text_tags()
-        self.update_font()
-
-    def on_text_inserted(self, text_buffer, loc, text, length):
-        self.apply_text_tags()
-        self.update_font()
-        start = self.text_buffer.get_start_iter()
-        self.search_and_mark_highlight(start)
-
-    def color_to_hex(self, color):
-        text_color = "#{:02X}{:02X}{:02X}".format(
-            int(color.red * 255), int(color.green * 255), int(color.blue * 255)
-        )
-        return text_color
-
-    def save_app_settings(self, settings):
-        self.saved_settings.set_string("text", self.color_to_hex(settings.text_color))
-        self.saved_settings.set_string(
-            "highlight", self.color_to_hex(settings.highlight_color)
-        )
-
-        self.saved_settings.set_string("font", settings.font)
-
-        self.saved_settings.set_int("speed", settings.speed * 10)
-
-        self.saved_settings.set_boolean("bold-highlight", settings.bold_highlight)
-
     def show_file_chooser_dialog(self):
-        dialog = Gtk.FileDialog(
-            title=_("Open File"),
-        )
-
+        dialog = Gtk.FileDialog(title=_("Open File"))
         dialog.open(self, None, self.on_open_file_response)
 
     def on_open_file_response(self, dialog, response):
         try:
             file = dialog.open_finish(response)
-            if file:
-                file_path = file.get_path()
-                try:
-                    with open(file_path, "r") as file:
-                        file_contents = file.read()
-                        self.text_buffer.set_text(file_contents)
-                        self.apply_text_tags()
-                        self.update_font()
-                        start = self.text_buffer.get_start_iter()
-                        self.search_and_mark_highlight(start)
-                        dialog.destroy()
-                        toast = Adw.Toast()
-                        toast.set_title("File successfully opened")
-                        toast.set_timeout(1)
-                        self.overlay.add_toast(toast)
-                except Exception:
-                    toast = Adw.Toast()
-                    toast.set_title("Error reading file")
-                    toast.set_timeout(1)
-                    self.overlay.add_toast(toast)
+            if not file:
+                return
+            file_path = file.get_path()
+            try:
+                with open(file_path, "r") as file:
+                    file_contents = file.read()
+                    self.text_buffer.set_text(file_contents)
+                dialog.destroy()
+                toast = Adw.Toast()
+                toast.set_title("File successfully opened")
+                toast.set_timeout(1)
+                self.overlay.add_toast(toast)
+            except Exception:
+                toast = Adw.Toast()
+                toast.set_title("Error reading file")
+                toast.set_timeout(1)
+                self.overlay.add_toast(toast)
         except Exception:
             return
 
-    def load_app_settings(self):
-        settings = AppSettings()
-
-        color1 = Gdk.RGBA()
-        color3 = Gdk.RGBA()
-
-        color1.parse(self.saved_settings.get_string("text"))
-        settings.text_color = color1
-
-        color3.parse(self.saved_settings.get_string("highlight"))
-        settings.highlight_color = color3
-
-        settings.font = self.saved_settings.get_string("font")
-
-        settings.speed = self.saved_settings.get_int("speed") / 10
-
-        settings.bold_highlight = self.saved_settings.get_boolean("bold-highlight")
-
-        return settings
-
     def autoscroll(self, scrolled_window):
         adjustment = scrolled_window.get_vadjustment()
-        adjustment.set_value(
-            adjustment.get_value() + self.wpm_to_speed(self.settings.speed)
-        )
+        adjustment.set_value(adjustment.get_value() + self.wpm_to_speed())
         scrolled_window.set_vadjustment(adjustment)
 
-        if (
-            adjustment.get_value()
-            == adjustment.get_upper() - adjustment.get_page_size()
-        ):
+        value = adjustment.get_value()
+        upper = adjustment.get_upper()
+        page_size = adjustment.get_page_size()
+
+        if (value == upper - page_size):
             self.playing = False
             self.start_button.set_icon_name("media-playback-start-symbolic")
             return False
@@ -183,40 +119,35 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         else:
             return True
 
-    def apply_text_tags(self):
-        start_iter = self.text_buffer.get_start_iter()
-        end_iter = Gtk.TextIter()
-
-        tag_color1 = Gtk.TextTag()
-        tag_color1.set_property(
-            "foreground", self.color_to_hex(self.settings.text_color)
+    def update_text_tags(self, *args):
+        self.text_tag.set_property(
+            "foreground", self.settings.get_string("text-color")
         )
-        self.text_buffer.get_tag_table().add(tag_color1)
-
-        tag_color2 = Gtk.TextTag()
-        tag_color2.set_property(
-            "foreground", self.color_to_hex(self.settings.highlight_color)
+        self.text_tag.set_property(
+            "font-desc", Pango.FontDescription(self.settings.get_string("font"))
         )
-        self.text_buffer.get_tag_table().add(tag_color2)
 
-        start_iter = self.text_buffer.get_start_iter()
-        end_iter = self.text_buffer.get_end_iter()
+        self.highlight_tag.set_property(
+            "foreground", self.settings.get_string("highlight-color")
+        )
+        if self.settings.get_boolean("bold-highlight"):
+            self.highlight_tag.set_property("weight", Pango.Weight.BOLD)
+        else:
+            self.highlight_tag.set_property("weight", Pango.Weight.NORMAL)
 
-        self.text_buffer.apply_tag(tag_color1, start_iter, end_iter)
+        self.text_buffer.apply_tag(
+            self.text_tag,
+            self.text_buffer.get_start_iter(),
+            self.text_buffer.get_end_iter()
+        )
 
-    def search_and_mark_highlight(self, start):
+        self.search_and_mark_highlight()
+
+    def search_and_mark_highlight(self, start=None):
+        if start is None:
+            start = self.text_buffer.get_start_iter()
         end = self.text_buffer.get_end_iter()
         text = "["
-
-        tag_color2 = Gtk.TextTag()
-        tag_color2.set_property(
-            "foreground", self.color_to_hex(self.settings.highlight_color)
-        )
-
-        if self.settings.bold_highlight:
-            tag_color2.set_property("weight", Pango.Weight.BOLD)
-
-        self.text_buffer.get_tag_table().add(tag_color2)
 
         match = start.forward_search(text, 0, end)
 
@@ -224,7 +155,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             match_start, match_end = match
             match_end_highlight = self.search_end_highlight(match_end)
             if match_end_highlight is not None:
-                self.text_buffer.apply_tag(tag_color2, match_start, match_end_highlight)
+                self.text_buffer.apply_tag(
+                    self.highlight_tag, match_start, match_end_highlight
+                )
             self.search_and_mark_highlight(match_end)
 
     def search_end_highlight(self, start):
@@ -244,22 +177,13 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             return None
         return None
 
-    def update_font(self):
-        tag = self.text_buffer.create_tag(
-            None, font_desc=Pango.FontDescription(self.settings.font)
-        )
-
-        self.text_buffer.apply_tag(
-            tag, self.text_buffer.get_start_iter(), self.text_buffer.get_end_iter()
-        )
-
-    def wpm_to_speed(self, speed):
-        font_properties = self.settings.font.split()
+    def wpm_to_speed(self):
+        font_properties = self.settings.get_string("font").split()
         font_size = font_properties[-1]
 
         font = int(font_size)
         width = self.scroll_text_view.get_width()
-        speed = self.settings.speed * font * 0.2 / width
+        speed = self.settings.get_int("speed") * font * 0.2 / width
 
         if speed <= 0.25:
             speed = 0.25
@@ -267,7 +191,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         return speed
 
     def change_font_size(self, amount):
-        font_properties = self.settings.font.split()
+        font_properties = self.settings.get_string("font").split()
         font_size = font_properties[-1]
 
         if int(font_size) + amount > 10:
@@ -277,7 +201,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         font_properties[-1] = str(new_font_size)
 
-        self.settings.font = " ".join(font_properties)
+        self.settings.set_string("font", " ".join(font_properties))
 
     @Gtk.Template.Callback("play_button_clicked")
     def play(self, *args):
@@ -290,7 +214,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         else:
             self.start_button.set_icon_name("media-playback-start-symbolic")
             self.playing = False
-            self.speed = 0
+            self.settings.set_int("speed", 0)
 
     @Gtk.Template.Callback("open_button_clicked")
     def open_button_clicked(self, *args):
@@ -298,13 +222,14 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback("increase_speed_button_clicked")
     def increase_speed_button_clicked(self, *args):
-        self.settings.speed += 10
+        self.settings.set_int("speed", self.settings.get_int("speed") + 10)
 
     @Gtk.Template.Callback("decrease_speed_button_clicked")
     def decrease_speed_button_clicked(self, *args):
-        self.settings.speed -= 10
-        if self.settings.speed <= 40:
-            self.settings.speed = 40
+        new_speed = self.settings.get_int("speed") - 10
+        if new_speed <= 40:
+            new_speed = 40
+        self.settings.set_int("speed", new_speed)
 
     @Gtk.Template.Callback("paste_button_clicked")
     def paste_button_clicked(self, *args):
@@ -313,10 +238,6 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         def callback(clipboard, res, data):
             text = clipboard.read_text_finish(res)
             self.text_buffer.set_text(text)
-            self.apply_text_tags()
-            self.update_font()
-            start = self.text_buffer.get_start_iter()
-            self.search_and_mark_highlight(start)
             toast = Adw.Toast()
             toast.set_title("Pasted Clipboard Content")
             toast.set_timeout(1)
@@ -328,20 +249,10 @@ class TeleprompterWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("decrease_font_button_clicked")
     def decrease_font_button_clicked(self, *args):
         self.change_font_size(-5)
-        self.update_font()
-        self.apply_text_tags()
-        start = self.text_buffer.get_start_iter()
-        self.search_and_mark_highlight(start)
-        self.save_app_settings(self.settings)
 
     @Gtk.Template.Callback("increase_font_button_clicked")
     def increase_font_button_clicked(self, *args):
         self.change_font_size(5)
-        self.update_font()
-        self.apply_text_tags()
-        start = self.text_buffer.get_start_iter()
-        self.search_and_mark_highlight(start)
-        self.save_app_settings(self.settings)
 
     @Gtk.Template.Callback("fullscreen_button_clicked")
     def toggle_fullscreen(self, *args):

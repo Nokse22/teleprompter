@@ -7,6 +7,7 @@ blueprints = custom_target('blueprints',
     'gtk/window.blp',
     'gtk/scroll_text_view.blp',
     'gtk/help-overlay.blp',
+    'gtk/preferences.blp',
   ),
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
@@ -41,6 +42,7 @@ teleprompter_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'preferences.py',
   'scroll_text_view.py',
   'osc_server.py'
 ]

@@ -20,9 +20,8 @@
 import threading
 import socket
 import struct
-import time
+
 from gi.repository import GLib, Adw
-from gettext import gettext as _
 
 
 class OSCMessage:

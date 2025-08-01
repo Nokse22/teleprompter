@@ -6,7 +6,7 @@
       <default>'Cantarell 40'</default>
     </key>
 
-    <key name="text" type="s">
+    <key name="text-color" type="s">
       <default>'#62A0EA'</default>
     </key>
 
@@ -14,7 +14,7 @@
       <default>100</default>
     </key>
 
-	  <key name="highlight" type="s">
+	  <key name="highlight-color" type="s">
       <default>'#ED333B'</default>
     </key>
 

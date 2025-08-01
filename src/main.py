@@ -74,7 +74,9 @@ class TeleprompterApplication(Adw.Application):
         # Basic actions
         self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
         self.create_action("about", self.on_about_action)
-        self.create_action("preferences", self.on_preferences_action, ["<primary>comma"])
+        self.create_action(
+            "preferences", self.on_preferences_action, ["<primary>comma"]
+        )
 
         # Theme action with state
         theme_action = Gio.SimpleAction.new_stateful(
@@ -105,7 +107,9 @@ class TeleprompterApplication(Adw.Application):
         self.add_action(self.hmirror_action)
 
         # Reset and OSC actions
-        self.create_action("reset-mirrors", self.on_reset_mirrors, ["<primary><shift>R"])
+        self.create_action(
+            "reset-mirrors", self.on_reset_mirrors, ["<primary><shift>R"]
+        )
         self.create_action("toggle-osc", self.on_toggle_osc, ["<primary><shift>O"])
 
     def _on_theme_changed(self, settings, key):

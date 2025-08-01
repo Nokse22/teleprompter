@@ -109,7 +109,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         upper = adjustment.get_upper()
         page_size = adjustment.get_page_size()
 
-        if (value == upper - page_size):
+        if value == upper - page_size:
             self.playing = False
             self.start_button.set_icon_name("media-playback-start-symbolic")
             return False
@@ -120,9 +120,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
             return True
 
     def update_text_tags(self, *args):
-        self.text_tag.set_property(
-            "foreground", self.settings.get_string("text-color")
-        )
+        self.text_tag.set_property("foreground", self.settings.get_string("text-color"))
         self.text_tag.set_property(
             "font-desc", Pango.FontDescription(self.settings.get_string("font"))
         )
@@ -138,7 +136,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         self.text_buffer.apply_tag(
             self.text_tag,
             self.text_buffer.get_start_iter(),
-            self.text_buffer.get_end_iter()
+            self.text_buffer.get_end_iter(),
         )
 
         self.search_and_mark_highlight()

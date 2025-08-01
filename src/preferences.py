@@ -79,9 +79,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.font_color_picker.connect(
             "notify::rgba", self.on_rgba_changed, "text-color"
         )
-        self.font_picker.connect(
-            "notify::font-desc", self.on_font_desc_changed
-        )
+        self.font_picker.connect("notify::font-desc", self.on_font_desc_changed)
 
     def on_font_desc_changed(self, font_button, font_desc):
         self.settings.set_string("font", font_button.get_font_desc().to_string())

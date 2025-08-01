@@ -73,6 +73,7 @@ template $PreferencesDialog: Adw.PreferencesDialog {
       Adw.SwitchRow osc_enable_row {
         title: _("Enable OSC Server");
         subtitle: _("Allow remote control via OSC protocol");
+        action-name: "app.toggle-osc";
       }
 
       Adw.SpinRow osc_port_row {

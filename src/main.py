@@ -67,18 +67,16 @@ class TeleprompterApplication(Adw.Application):
         self.settings.connect("changed::vmirror", self._on_vmirror_changed)
         self.settings.connect("changed::hmirror", self._on_hmirror_changed)
         self.settings.connect("changed::osc-port", self._on_osc_port_changed)
-        self.settings.connect("changed::osc-autostart", self._on_osc_autostart_changed)
 
     def _setup_actions(self):
         """Set up all application actions"""
-        # Basic actions
+
         self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
         self.create_action("about", self.on_about_action)
         self.create_action(
             "preferences", self.on_preferences_action, ["<primary>comma"]
         )
 
-        # Theme action with state
         theme_action = Gio.SimpleAction.new_stateful(
             "theme",
             GLib.VariantType.new("s"),
@@ -87,7 +85,6 @@ class TeleprompterApplication(Adw.Application):
         theme_action.connect("activate", self.on_theme_action_activated)
         self.add_action(theme_action)
 
-        # Mirror actions with state
         self.vmirror_action = Gio.SimpleAction.new_stateful(
             "vmirror",
             None,
@@ -106,11 +103,15 @@ class TeleprompterApplication(Adw.Application):
         self.set_accels_for_action("app.hmirror", ["<primary><shift>H"])
         self.add_action(self.hmirror_action)
 
-        # Reset and OSC actions
         self.create_action(
             "reset-mirrors", self.on_reset_mirrors, ["<primary><shift>R"]
         )
-        self.create_action("toggle-osc", self.on_toggle_osc, ["<primary><shift>O"])
+        self.osc_action = Gio.SimpleAction.new_stateful(
+            "toggle-osc", None, GLib.Variant("b", False)
+        )
+        self.set_accels_for_action("app.toggle-osc", ["<primary><shift>O"])
+        self.osc_action.connect("activate", self.on_toggle_osc)
+        self.add_action(self.osc_action)
 
     def _on_theme_changed(self, settings, key):
         """Handle theme setting change"""
@@ -136,18 +137,12 @@ class TeleprompterApplication(Adw.Application):
 
     def _on_osc_port_changed(self, settings, key):
         """Handle OSC port setting change"""
+        # Restart server if it's running
         if self.osc_server and self.osc_server.running:
-            # Restart server with new port
             self.osc_server.stop()
-            new_port = settings.get_int(key) or 7400  # Default to 7400 if 0
+            new_port = settings.get_int(key) or 7400
             self.osc_server = OSCServer(self.win, new_port)
             self.osc_server.start()
-
-    def _on_osc_autostart_changed(self, settings, key):
-        """Handle OSC autostart setting change"""
-        # This is mainly for preferences UI synchronization
-        # The actual autostart logic runs in do_activate()
-        pass
 
     def on_vmirror_action_activated(self, action, state):
         """Handle vmirror action activation"""
@@ -191,40 +186,20 @@ class TeleprompterApplication(Adw.Application):
         return self.osc_server is not None and self.osc_server.running
 
     def on_toggle_osc(self, *args):
-        """Toggle OSC server on/off"""
+        """Toggle OSC server"""
+
+        self.osc_action.set_state(GLib.Variant("b", not self.osc_enabled))
+
         if self.osc_enabled:
-            self.stop_osc_server()
+            self.osc_server.stop()
+            self.osc_server = None
         else:
-            self.start_osc_server()
+            osc_port = self.settings.get_int("osc-port")
+            if osc_port == 0:
+                osc_port = 7400  # Default port
 
-    def start_osc_server(self):
-        """Start the OSC server"""
-        if self.osc_enabled:
-            return  # Already running
-
-        if not self.win:
-            return  # Window not available yet
-
-        osc_port = self.settings.get_int("osc-port")
-        if osc_port == 0:
-            osc_port = 7400  # Default port
-
-        try:
             self.osc_server = OSCServer(self.win, osc_port)
             self.osc_server.start()
-        except Exception as e:
-            print(f"Failed to start OSC server: {e}")
-            self.osc_server = None
-
-    def stop_osc_server(self):
-        """Stop the OSC server"""
-        if self.osc_server:
-            try:
-                self.osc_server.stop()
-            except Exception as e:
-                print(f"Error stopping OSC server: {e}")
-            finally:
-                self.osc_server = None
 
     def do_activate(self):
         """Called when the application is activated"""
@@ -238,13 +213,14 @@ class TeleprompterApplication(Adw.Application):
 
             # Auto-start OSC server if enabled in settings
             if self.settings.get_boolean("osc-autostart"):
-                self.start_osc_server()
+                self.on_toggle_osc()
 
         self.win.present()
 
     def do_shutdown(self):
         """Cleanup when application terminates"""
-        self.stop_osc_server()
+        if self.osc_server:
+            self.osc_server.stop()
         Adw.Application.do_shutdown(self)
 
     def on_about_action(self, *args):

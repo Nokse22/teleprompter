@@ -21,7 +21,7 @@ import threading
 import socket
 import struct
 
-from gi.repository import GLib, Adw
+from gi.repository import GLib
 
 
 class OSCMessage:
@@ -150,6 +150,8 @@ class OSCServer:
         if self.thread:
             self.thread.join(timeout=2)
 
+        GLib.idle_add(self._show_toast, "OSC Server stopped")
+
     def _run_server(self):
         """Main server loop"""
         while self.running:
@@ -181,10 +183,7 @@ class OSCServer:
 
     def _show_toast(self, message):
         """Show notification in UI"""
-        toast = Adw.Toast()
-        toast.set_title(message)
-        toast.set_timeout(3)
-        self.window.overlay.add_toast(toast)
+        self.window.add_toast(message)
 
     def _send_response(self, addr, address, *args):
         """Send response to client"""

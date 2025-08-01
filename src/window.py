@@ -88,15 +88,9 @@ class TeleprompterWindow(Adw.ApplicationWindow):
                     file_contents = file.read()
                     self.text_buffer.set_text(file_contents)
                 dialog.destroy()
-                toast = Adw.Toast()
-                toast.set_title("File successfully opened")
-                toast.set_timeout(1)
-                self.overlay.add_toast(toast)
+                self.add_toast(_("File successfully opened"))
             except Exception:
-                toast = Adw.Toast()
-                toast.set_title("Error reading file")
-                toast.set_timeout(1)
-                self.overlay.add_toast(toast)
+                self.add_toast(_("Error reading file"))
         except Exception:
             return
 
@@ -201,6 +195,12 @@ class TeleprompterWindow(Adw.ApplicationWindow):
 
         self.settings.set_string("font", " ".join(font_properties))
 
+    def add_toast(self, message):
+        toast = Adw.Toast()
+        toast.set_title(message)
+        toast.set_timeout(3)
+        self.overlay.add_toast(toast)
+
     @Gtk.Template.Callback("play_button_clicked")
     def play(self, *args):
         if not self.playing:
@@ -236,10 +236,7 @@ class TeleprompterWindow(Adw.ApplicationWindow):
         def callback(clipboard, res, data):
             text = clipboard.read_text_finish(res)
             self.text_buffer.set_text(text)
-            toast = Adw.Toast()
-            toast.set_title("Pasted Clipboard Content")
-            toast.set_timeout(1)
-            self.overlay.add_toast(toast)
+            self.add_toast(_("Pasted Clipboard Content"))
 
         data = {}
         clipboard.read_text_async(None, callback, data)

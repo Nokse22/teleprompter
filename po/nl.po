@@ -7,21 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-08 16:59+0300\n"
-"PO-Revision-Date: 2023-08-14 12:37+0200\n"
+"POT-Creation-Date: 2025-05-10 17:58+0200\n"
+"PO-Revision-Date: 2025-11-03 10:18+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.8\n"
 
-#: data/io.github.nokse22.teleprompter.desktop.in:4
+#. Translators: do not translate the application name
+#: data/io.github.nokse22.teleprompter.desktop.in:3 src/gtk/window.blp:9
+#: src/gtk/window.blp:177 src/gtk/help-overlay.blp:30
 msgid "Teleprompter"
 msgstr "Teleprompter"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:9
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:8
 msgid ""
 "A simple app to read scrolling text from your screen. It has an adaptive "
 "layout to work on smartphones too."
@@ -29,201 +31,211 @@ msgstr ""
 "Een eenvoudige toepassing om schuivende tekst op uw scherm te lezen. De "
 "indeling wordt automatisch aangepast bĳ gebruik op smartphones."
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:12
-msgid "Display scrolling text on your screen"
-msgstr "Lees schuivende tekst op uw scherm"
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:11
+msgid "Stay on track during speeches"
+msgstr "Blijf bij tijdens toespraken"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:91
-#, fuzzy
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:146
 msgid "Teleprompter displaying text on a widescreen"
-msgstr "Lees schuivende tekst op uw scherm"
+msgstr "Teleprompter op een breedbeeldscherm"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:96
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:151
+msgid "Teleprompter displaying text on a widescreen with dark theme"
+msgstr "Teleprompter op een breedbeeldscherm met donker thema"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:156
 msgid "Teleprompter displaying text in a narrow screen"
-msgstr ""
+msgstr "Teleprompter op een smal scherm"
 
-#: data/io.github.nokse22.teleprompter.gschema.xml:7
-msgid "The font used"
-msgstr "Lettertype"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:8
-msgid "The font used for displaying text."
-msgstr "Het lettertype van de getoonde tekst."
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:13
-#: data/io.github.nokse22.teleprompter.gschema.xml:14
-msgid "The font color"
-msgstr "Tekstkleur"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:19
-#: data/io.github.nokse22.teleprompter.gschema.xml:20
-msgid "The background color"
-msgstr "Achtergrondkleur"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:25
-#: data/io.github.nokse22.teleprompter.gschema.xml:26
-msgid "The speed"
-msgstr "Snelheid"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:31
-#: data/io.github.nokse22.teleprompter.gschema.xml:32
-#: data/io.github.nokse22.teleprompter.gschema.xml:37
-#: data/io.github.nokse22.teleprompter.gschema.xml:38
-msgid "The slow speed"
-msgstr "Langzaam"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:43
-#: data/io.github.nokse22.teleprompter.gschema.xml:44
-msgid "Also bold all the highlight"
-msgstr "Alle markeringen vetgedrukt maken"
-
-#: src/main.py:79
+#. Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:142
 msgid "translator-credits"
 msgstr "Heimen Stoffels <vistausss@fastmail.com>"
 
-#: src/main.py:95
+#: src/main.py:150
+msgid "Generals"
+msgstr "Algemeen"
+
+#: src/main.py:155
 msgid "Scroll Settings"
 msgstr "Schuifvoorkeuren"
 
-#: src/main.py:98
+#: src/main.py:159
 msgid "Scroll Speed"
 msgstr "Schuifsnelheid"
 
-#: src/main.py:98
+#: src/main.py:160
 msgid "In words per minute (approximately)"
 msgstr "in woorden per minuut (bĳ benadering)"
 
-#: src/main.py:112
-msgid "Slow Scroll Speed"
-msgstr "Langzaam schuiven"
-
-#: src/main.py:112
-msgid "When pressing the spacebar"
-msgstr "Na indrukken van spatiebalk"
-
-#: src/main.py:125
+#: src/main.py:167
 msgid "Text"
 msgstr "Tekst"
 
-#: src/main.py:128
+#: src/main.py:171
 msgid "Highlight color"
 msgstr "Markeerkleur"
 
-#: src/main.py:135
+#: src/main.py:178
 msgid "Bold Highlight"
 msgstr "Vetgedrukte markeringen"
 
-#: src/main.py:143
+#: src/main.py:182
 msgid "Font color"
 msgstr "Tekstkleur"
 
-#: src/main.py:146
+#: src/main.py:185
 msgid "Font"
 msgstr "Lettertype"
 
-#: src/window.ui:24
+#: src/gtk/window.blp:193 src/gtk/window.blp:317
 msgid "Toggle Fullscreen"
 msgstr "Schermvullende weergave aan/uit"
 
-#: src/window.ui:96 src/window.ui:175
+#: src/gtk/window.blp:200
 msgid "Start/Stop"
 msgstr "Starten/Stoppen"
 
-#: src/window.ui:105 src/window.ui:184
+#: src/gtk/window.blp:223
 msgid "Increase Speed"
 msgstr "Snelheid verhogen"
 
-#: src/window.ui:112 src/window.ui:191
+#: src/gtk/window.blp:234
 msgid "Decrease Speed"
 msgstr "Snelheid verlagen"
 
-#: src/window.ui:123 src/window.ui:202
+#: src/gtk/window.blp:247
 msgid "Increase Font Size"
 msgstr "Tekst vergroten"
 
-#: src/window.ui:130 src/window.ui:209
+#: src/gtk/window.blp:258
 msgid "Decrease Font Size"
 msgstr "Tekst verkleinen"
 
-#: src/window.ui:141 src/window.ui:220
+#: src/gtk/window.blp:271
 msgid "Open a File"
 msgstr "Bestand openen"
 
-#: src/window.ui:148 src/window.ui:227
+#: src/gtk/window.blp:282
 msgid "Paste from Clipboard"
 msgstr "Plakken van klembord"
 
-#: src/window.ui:261
-msgid ""
-"[START]\n"
-"This app can be used to read a script from the screen, just paste or open a "
-"text file.\n"
-"Anything between square brackets like [this] is highlighted.\n"
-"\n"
-"[Customization]\n"
-"The font, color of the text and highlights can be customized.\n"
-msgstr ""
-"[STARTEN]\n"
-"Deze toepassing kan worden gebruikt om een script van het scherm te lezen. "
-"Plak of open een tekstbestand.\n"
-"Alle tekst tussen [rechte haken] wordt gemarkeerd.\n"
-"\n"
-"[Aanpassen]\n"
-"Het lettertype, de tekstkleur en markeringen kunnen naar eigen hand worden "
-"gezet.\n"
+#: src/gtk/window.blp:299
+msgid "Follow System"
+msgstr "Systeemthema"
 
-#: src/window.ui:266
+#: src/gtk/window.blp:305
+msgid "Light Theme"
+msgstr "Licht thema"
+
+#: src/gtk/window.blp:311
+msgid "Dark Theme"
+msgstr "Donker thema"
+
+#: src/gtk/window.blp:324 src/gtk/help-overlay.blp:33
+msgid "Play/Pause"
+msgstr "Afspelen/Pauzeren"
+
+#: src/gtk/window.blp:331
+msgid "Mirror Horizontally"
+msgstr "Horizontaal spiegelen"
+
+#: src/gtk/window.blp:336 src/gtk/help-overlay.blp:48
+msgid "Mirror Vertically"
+msgstr "Verticaal spiegelen"
+
+#: src/gtk/window.blp:343
 msgid "_Preferences"
 msgstr "_Voorkeuren"
 
-#: src/window.ui:270
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Schermvullende weergave aan/uit"
-
-#: src/window.ui:274
-msgid "Play/Pause"
-msgstr ""
-
-#: src/window.ui:278
+#: src/gtk/window.blp:348
 msgid "_Keyboard Shortcuts"
 msgstr "_Sneltoetsen"
 
-#. Translators: do not translate the application name
-#: src/window.ui:283
+#: src/gtk/window.blp:353
 msgid "_About Teleprompter"
 msgstr "_Over Teleprompter"
 
-#: src/gtk/help-overlay.ui:11
-msgctxt "shortcut window"
+#: src/gtk/help-overlay.blp:11
 msgid "General"
 msgstr "Algemeen"
 
-#: src/gtk/help-overlay.ui:14
-msgctxt "shortcut window"
+#: src/gtk/help-overlay.blp:14
 msgid "Show Shortcuts"
 msgstr "Sneltoetsen tonen"
 
-#: src/gtk/help-overlay.ui:20
-msgctxt "shortcut window"
+#: src/gtk/help-overlay.blp:19
 msgid "Show Preferences"
 msgstr "Voorkeuren openen"
 
-#: src/gtk/help-overlay.ui:26
-msgctxt "shortcut window"
+#: src/gtk/help-overlay.blp:24
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/gtk/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Play/Pause"
-msgstr ""
-
-#: src/gtk/help-overlay.ui:38
-#, fuzzy
-msgctxt "shortcut window"
+#: src/gtk/help-overlay.blp:38
 msgid "Fullscreen"
-msgstr "Schermvullende weergave aan/uit"
+msgstr "Schermvullende weergave"
+
+#: src/gtk/help-overlay.blp:43
+msgid "Mirror Horizonatlly"
+msgstr "Horizontaal spiegelen"
+
+#: src/gtk/help-overlay.blp:53
+msgid "Reset View"
+msgstr "Standaardweergave"
+
+#~ msgid "Display scrolling text on your screen"
+#~ msgstr "Lees schuivende tekst op uw scherm"
+
+#~ msgid "The font used"
+#~ msgstr "Lettertype"
+
+#~ msgid "The font used for displaying text."
+#~ msgstr "Het lettertype van de getoonde tekst."
+
+#~ msgid "The font color"
+#~ msgstr "Tekstkleur"
+
+#~ msgid "The background color"
+#~ msgstr "Achtergrondkleur"
+
+#~ msgid "The speed"
+#~ msgstr "Snelheid"
+
+#~ msgid "The slow speed"
+#~ msgstr "Langzaam"
+
+#~ msgid "Also bold all the highlight"
+#~ msgstr "Alle markeringen vetgedrukt maken"
+
+#~ msgid "Slow Scroll Speed"
+#~ msgstr "Langzaam schuiven"
+
+#~ msgid "When pressing the spacebar"
+#~ msgstr "Na indrukken van spatiebalk"
+
+#~ msgid ""
+#~ "[START]\n"
+#~ "This app can be used to read a script from the screen, just paste or open "
+#~ "a text file.\n"
+#~ "Anything between square brackets like [this] is highlighted.\n"
+#~ "\n"
+#~ "[Customization]\n"
+#~ "The font, color of the text and highlights can be customized.\n"
+#~ msgstr ""
+#~ "[STARTEN]\n"
+#~ "Deze toepassing kan worden gebruikt om een script van het scherm te "
+#~ "lezen. Plak of open een tekstbestand.\n"
+#~ "Alle tekst tussen [rechte haken] wordt gemarkeerd.\n"
+#~ "\n"
+#~ "[Aanpassen]\n"
+#~ "Het lettertype, de tekstkleur en markeringen kunnen naar eigen hand "
+#~ "worden gezet.\n"
+
+#, fuzzy
+#~ msgctxt "shortcut window"
+#~ msgid "Fullscreen"
+#~ msgstr "Schermvullende weergave aan/uit"
 
 #~ msgid "Nokse"
 #~ msgstr "Nokse"

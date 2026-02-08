@@ -3,6 +3,6 @@ data/io.github.nokse22.teleprompter.appdata.xml.in
 data/io.github.nokse22.teleprompter.gschema.xml
 src/main.py
 src/gtk/window.blp
-src/gtk/help-overlay.blp
+src/gtk/shortcuts.blp
 src/gtk/scroll_text_view.blp
 src/osc_server.py

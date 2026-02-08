@@ -1,0 +1,53 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ShortcutsDialog shortcuts_dialog {
+  Adw.ShortcutsSection {
+    title: _("General");
+
+    Adw.ShortcutsItem {
+      title: _("Show Shortcuts");
+      action-name: "app.shortcuts";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Show Preferences");
+      action-name: "app.preferences";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Quit");
+      action-name: "app.quit";
+    }
+  }
+
+  Adw.ShortcutsSection {
+    title: _("Teleprompter");
+
+    Adw.ShortcutsItem {
+      title: _("Play/Pause");
+      action-name: "app.play";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Fullscreen");
+      action-name: "app.fullscreen";
+    }
+  }
+  Adw.ShortcutsSection {
+    Adw.ShortcutsItem {
+      title: _("Mirror Horizonatlly");
+      action-name: "app.hmirror";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Mirror Vertically");
+      action-name: "app.vmirror";
+    }
+
+    Adw.ShortcutsItem {
+      title: _("Reset View");
+      action-name: "app.reset-mirrors";
+    }
+  }
+}

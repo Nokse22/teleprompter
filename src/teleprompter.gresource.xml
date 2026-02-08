@@ -4,7 +4,7 @@
     <file preprocess="xml-stripblanks">gtk/window.ui</file>
     <file preprocess="xml-stripblanks">gtk/preferences.ui</file>
     <file preprocess="xml-stripblanks">gtk/scroll_text_view.ui</file>
-    <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+    <file preprocess="xml-stripblanks" alias="shortcuts-dialog.ui">gtk/shortcuts.ui</file>
 
     <file compressed="true" preprocess="xml-stripblanks">icons/16x16/actions/increase-font-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/16x16/actions/decrease-font-symbolic.svg</file>

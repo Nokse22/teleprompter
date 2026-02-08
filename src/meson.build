@@ -6,7 +6,7 @@ blueprints = custom_target('blueprints',
   input: files(
     'gtk/window.blp',
     'gtk/scroll_text_view.blp',
-    'gtk/help-overlay.blp',
+    'gtk/shortcuts.blp',
     'gtk/preferences.blp',
   ),
   output: '.',

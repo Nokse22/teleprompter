@@ -1,29 +1,25 @@
 # Turkish translation of io.github.nokse22.teleprompter.
-# Copyright (C) 2023 io.github.nokse22.teleprompter's COPYRIGHT HOLDER
+# Copyright (C) 2023, 2026 io.github.nokse22.teleprompter's COPYRIGHT HOLDER
 # This file is distributed under the same license as the io.github.nokse22.teleprompter package.
 #
-# Sabri Ünal <libreajans@gmail.com>, 2023.
+# Sabri Ünal <yakushabb@gmail.com>, 2023, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.nokse22.teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-08 16:59+0300\n"
-"PO-Revision-Date: 2023-10-08 16:21+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"POT-Creation-Date: 2026-03-18 18:24+0300\n"
+"PO-Revision-Date: 2026-03-18 18:29+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.9\n"
 
-#: data/io.github.nokse22.teleprompter.desktop.in:4
-msgid "Teleprompter"
-msgstr "Teleprompter"
-
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:9
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:8
 msgid ""
 "A simple app to read scrolling text from your screen. It has an adaptive "
 "layout to work on smartphones too."
@@ -31,198 +27,355 @@ msgstr ""
 "Ekranınızdan kayan metni okumak için basit bir uygulama. Akıllı telefonlarda "
 "da çalışmak için uyarlanabilir düzene sahiptir."
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:12
-msgid "Display scrolling text on your screen"
-msgstr "Kayan metni ekranınızda görüntüleyin"
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:11
+msgid "Stay on track during speeches"
+msgstr "Konuşma sırasında dikkatiniz dağılmasın"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:91
-#, fuzzy
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:147
 msgid "Teleprompter displaying text on a widescreen"
-msgstr "Kayan metni ekranınızda görüntüleyin"
+msgstr "Teleprompter, geniş ekranda metin görüntülerken"
 
-#: data/io.github.nokse22.teleprompter.appdata.xml.in:96
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:152
+msgid "Teleprompter displaying text on a widescreen with dark theme"
+msgstr "Teleprompter, koyu temalı geniş ekranda metin görüntülerken"
+
+#: data/io.github.nokse22.teleprompter.appdata.xml.in:157
 msgid "Teleprompter displaying text in a narrow screen"
-msgstr ""
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:7
-msgid "The font used"
-msgstr "Kullanılan yazı tipi"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:8
-msgid "The font used for displaying text."
-msgstr "Metin görüntelemek için kullanılan yazı tipi."
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:13
-#: data/io.github.nokse22.teleprompter.gschema.xml:14
-msgid "The font color"
-msgstr "Yazı tipi rengi"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:19
-#: data/io.github.nokse22.teleprompter.gschema.xml:20
-msgid "The background color"
-msgstr "Arka plan rengi"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:25
-#: data/io.github.nokse22.teleprompter.gschema.xml:26
-msgid "The speed"
-msgstr "Hız"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:31
-#: data/io.github.nokse22.teleprompter.gschema.xml:32
-#: data/io.github.nokse22.teleprompter.gschema.xml:37
-#: data/io.github.nokse22.teleprompter.gschema.xml:38
-msgid "The slow speed"
-msgstr "Yavaş hız"
-
-#: data/io.github.nokse22.teleprompter.gschema.xml:43
-#: data/io.github.nokse22.teleprompter.gschema.xml:44
-msgid "Also bold all the highlight"
-msgstr "Tüm vurguları kalınlaştır"
-
-#: src/main.py:79
-msgid "translator-credits"
-msgstr "Sabri Ünal <libreajans@gmail.com>"
-
-#: src/main.py:95
-msgid "Scroll Settings"
-msgstr "Kaydırma Ayarları"
-
-#: src/main.py:98
-msgid "Scroll Speed"
-msgstr "Kaydırma Hızı"
-
-#: src/main.py:98
-msgid "In words per minute (approximately)"
-msgstr "Dakika başına kelime olarak (yaklaşık)"
-
-#: src/main.py:112
-msgid "Slow Scroll Speed"
-msgstr "Yavaş Kaydırma Hızı"
-
-#: src/main.py:112
-msgid "When pressing the spacebar"
-msgstr "Boşluk çubuğuna basıldığında"
-
-#: src/main.py:125
-msgid "Text"
-msgstr "Metin"
-
-#: src/main.py:128
-msgid "Highlight color"
-msgstr "Vurgu rengi"
-
-#: src/main.py:135
-msgid "Bold Highlight"
-msgstr "Kalın vurgu"
-
-#: src/main.py:143
-msgid "Font color"
-msgstr "Yazı tipi rengi"
-
-#: src/main.py:146
-msgid "Font"
-msgstr "Yazı tipi"
-
-#: src/window.ui:24
-msgid "Toggle Fullscreen"
-msgstr "Tam Ekranı Aç/Kapat"
-
-#: src/window.ui:96 src/window.ui:175
-msgid "Start/Stop"
-msgstr "Başlat/Durdur"
-
-#: src/window.ui:105 src/window.ui:184
-msgid "Increase Speed"
-msgstr "Hızı Artır"
-
-#: src/window.ui:112 src/window.ui:191
-msgid "Decrease Speed"
-msgstr "Hızı Azalt"
-
-#: src/window.ui:123 src/window.ui:202
-msgid "Increase Font Size"
-msgstr "Yazı Tipi Boyutunu Artır"
-
-#: src/window.ui:130 src/window.ui:209
-msgid "Decrease Font Size"
-msgstr "Yazı Tipi Boyutunu Azalt"
-
-#: src/window.ui:141 src/window.ui:220
-msgid "Open a File"
-msgstr "Dosya Aç"
-
-#: src/window.ui:148 src/window.ui:227
-msgid "Paste from Clipboard"
-msgstr "Panodan Yapıştır"
-
-#: src/window.ui:261
-msgid ""
-"[START]\n"
-"This app can be used to read a script from the screen, just paste or open a "
-"text file.\n"
-"Anything between square brackets like [this] is highlighted.\n"
-"\n"
-"[Customization]\n"
-"The font, color of the text and highlights can be customized.\n"
-msgstr ""
-"[BAŞLAT]\n"
-"Bu uygulama ekrandan metin okumak için kullanılabilir, bir metin dosyasını "
-"yapıştırmanız veya açmanız yeterlidir.\n"
-"[bu] gibi köşeli parantezler arasına alınmış metinler vurgulanır.\n"
-"\n"
-"[Özelleştirme]\n"
-"Yazı tipi, metin rengi ve vurgulamalar özelleştirilebilir.\n"
-
-#: src/window.ui:266
-msgid "_Preferences"
-msgstr "_Tercihler"
-
-#: src/window.ui:270
-msgid "Fullscreen"
-msgstr "Tam Ekran"
-
-#: src/window.ui:274
-msgid "Play/Pause"
-msgstr "Oynat/Duraklat"
-
-#: src/window.ui:278
-msgid "_Keyboard Shortcuts"
-msgstr "_Klavye Kısayolları"
+msgstr "Teleprompter, dar ekranda metin görüntülerken"
 
 #. Translators: do not translate the application name
-#: src/window.ui:283
-msgid "_About Teleprompter"
-msgstr "Teleprompter _Hakkında"
+#: data/io.github.nokse22.teleprompter.desktop.in:3 src/gtk/shortcuts.blp:25
+#: src/gtk/window.blp:9 src/gtk/window.blp:177
+msgid "Teleprompter"
+msgstr "Teleprompter"
 
-#: src/gtk/help-overlay.ui:11
-msgctxt "shortcut window"
+#: data/io.github.nokse22.teleprompter.gschema.xml:39
+msgid "OSC server port"
+msgstr "OSC sunucu bağlantı noktası"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:40
+msgid "UDP port for OSC communication."
+msgstr "OSC iletişimi için UDP bağlantı noktası."
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:45
+msgid "Auto-start OSC server"
+msgstr "OSC sunucuyu kendiliğinden başlat"
+
+#: data/io.github.nokse22.teleprompter.gschema.xml:46
+msgid "Automatically start OSC server when application launches."
+msgstr "Uygulama başlatıldığında OSC sunucuyu kendiliğinden başlat."
+
+#: src/gtk/preferences.blp:6 src/gtk/shortcuts.blp:6
 msgid "General"
 msgstr "Genel"
 
-#: src/gtk/help-overlay.ui:14
-msgctxt "shortcut window"
+#: src/gtk/preferences.blp:10
+msgid "Scroll Settings"
+msgstr "Kaydırma Ayarları"
+
+#: src/gtk/preferences.blp:13
+msgid "Scroll Speed"
+msgstr "Kaydırma Hızı"
+
+#: src/gtk/preferences.blp:14
+msgid "In words per minute (approximately)"
+msgstr "Dakika başına kelime olarak (yaklaşık)"
+
+#: src/gtk/preferences.blp:25
+msgid "Text"
+msgstr "Metin"
+
+#: src/gtk/preferences.blp:28
+msgid "Highlight color"
+msgstr "Vurgu rengi"
+
+#: src/gtk/preferences.blp:39
+msgid "Bold Highlight"
+msgstr "Kalın vurgu"
+
+#: src/gtk/preferences.blp:43
+msgid "Font color"
+msgstr "Yazı tipi rengi"
+
+#: src/gtk/preferences.blp:54
+msgid "Font"
+msgstr "Yazı tipi"
+
+#: src/gtk/preferences.blp:66
+msgid "OSC Remote Control"
+msgstr "OSC Uzaktan Kumanda Denetimi"
+
+#: src/gtk/preferences.blp:70
+#| msgid "Scroll Settings"
+msgid "OSC Settings"
+msgstr "OSC Ayarları"
+
+#: src/gtk/preferences.blp:71
+msgid "Open Sound Control allows remote control of the teleprompter"
+msgstr "Open Sound Control, teleprompterin uzaktan denetimini sağlar"
+
+#: src/gtk/preferences.blp:74
+msgid "Enable OSC Server"
+msgstr "OSC Sunucuyu Etkinleştir"
+
+#: src/gtk/preferences.blp:75
+msgid "Allow remote control via OSC protocol"
+msgstr "OSC iletişim kuralıyla uzaktan denetime izin ver"
+
+#: src/gtk/preferences.blp:80
+msgid "OSC Port"
+msgstr "OSC bağlantı noktası"
+
+#: src/gtk/preferences.blp:81
+msgid "UDP port for OSC communication"
+msgstr "OSC iletişimi için UDP bağlantı noktası"
+
+#: src/gtk/preferences.blp:91
+msgid "Auto-start OSC Server"
+msgstr "OSC sunucuyu kendiliğinden başlat"
+
+#: src/gtk/preferences.blp:92
+msgid "Start OSC server automatically when app launches"
+msgstr "Uygulama başlatıldığında OSC sunucuyu kendiliğinden başlat"
+
+#: src/gtk/preferences.blp:97
+msgid "OSC Commands"
+msgstr "OSC Komutları"
+
+#: src/gtk/preferences.blp:98
+msgid "Available OSC addresses for remote control"
+msgstr "Uzaktan kumanda için kullanılabilir OSC adresleri"
+
+#: src/gtk/preferences.blp:134
+msgid "Start playback"
+msgstr "Oynatmayı başlat"
+
+#: src/gtk/preferences.blp:167
+msgid "Pause playback"
+msgstr "Oynatmayı duraklat"
+
+#: src/gtk/preferences.blp:200
+msgid "Stop and reset position"
+msgstr "Durdur ve konumu sıfırla"
+
+#: src/gtk/preferences.blp:233
+msgid "Set speed in WPM"
+msgstr "Hızı WPM (Kelime Başına Dakika) olarak ayarla"
+
+#: src/gtk/preferences.blp:266
+msgid "Set font size"
+msgstr "Yazı tipini belirle"
+
+#: src/gtk/preferences.blp:299
+msgid "Set position (0.0-1.0)"
+msgstr "Konumu ayarla (0.0-1.0)"
+
+#: src/gtk/preferences.blp:332
+msgid "Toggle fullscreen"
+msgstr "Tam ekranı aç/kapat"
+
+#: src/gtk/preferences.blp:365
+msgid "Set text content"
+msgstr "Metin içeriğini ayarla"
+
+#: src/gtk/preferences.blp:398
+msgid "Load text file"
+msgstr "Metin dosyası yükle"
+
+#: src/gtk/preferences.blp:431
+msgid "Mirror horizontally"
+msgstr "Yatay aynala"
+
+#: src/gtk/preferences.blp:464
+msgid "Mirror vertically"
+msgstr "Dikey aynala"
+
+#: src/gtk/preferences.blp:497
+msgid "Reset all settings"
+msgstr "Tüm ayarları sıfırla"
+
+#: src/gtk/preferences.blp:530
+msgid "Get current status"
+msgstr "Geçerli durumu getir"
+
+#: src/gtk/shortcuts.blp:9
 msgid "Show Shortcuts"
 msgstr "Kısayolları Göster"
 
-#: src/gtk/help-overlay.ui:20
-msgctxt "shortcut window"
+#: src/gtk/shortcuts.blp:14
 msgid "Show Preferences"
 msgstr "Tercihleri Göster"
 
-#: src/gtk/help-overlay.ui:26
-msgctxt "shortcut window"
+#: src/gtk/shortcuts.blp:19
 msgid "Quit"
 msgstr "Çık"
 
-#: src/gtk/help-overlay.ui:32
-msgctxt "shortcut window"
+#: src/gtk/shortcuts.blp:28 src/gtk/window.blp:324
 msgid "Play/Pause"
 msgstr "Oynat/Duraklat"
 
-#: src/gtk/help-overlay.ui:38
-msgctxt "shortcut window"
+#: src/gtk/shortcuts.blp:33
 msgid "Fullscreen"
 msgstr "Tam Ekran"
+
+#: src/gtk/shortcuts.blp:39
+msgid "Mirror Horizonatlly"
+msgstr "Yatay Aynala"
+
+#: src/gtk/shortcuts.blp:44 src/gtk/window.blp:343
+msgid "Mirror Vertically"
+msgstr "Dikey Aynala"
+
+#: src/gtk/shortcuts.blp:49
+msgid "Reset View"
+msgstr "Görünümü Sıfırla"
+
+#: src/gtk/window.blp:193 src/gtk/window.blp:317
+msgid "Toggle Fullscreen"
+msgstr "Tam Ekranı Aç/Kapat"
+
+#: src/gtk/window.blp:200
+msgid "Start/Stop"
+msgstr "Başlat/Durdur"
+
+#: src/gtk/window.blp:223
+msgid "Increase Speed"
+msgstr "Hızı Artır"
+
+#: src/gtk/window.blp:234
+msgid "Decrease Speed"
+msgstr "Hızı Azalt"
+
+#: src/gtk/window.blp:247
+msgid "Increase Font Size"
+msgstr "Yazı Tipi Boyutunu Artır"
+
+#: src/gtk/window.blp:258
+msgid "Decrease Font Size"
+msgstr "Yazı Tipi Boyutunu Azalt"
+
+#: src/gtk/window.blp:271
+msgid "Open a File"
+msgstr "Dosya Aç"
+
+#: src/gtk/window.blp:282
+msgid "Paste from Clipboard"
+msgstr "Panodan Yapıştır"
+
+#: src/gtk/window.blp:299
+msgid "Follow System"
+msgstr "Sistemi İzle"
+
+#: src/gtk/window.blp:305
+msgid "Light Theme"
+msgstr "Açık Tema"
+
+#: src/gtk/window.blp:311
+msgid "Dark Theme"
+msgstr "Koyu Tema"
+
+#: src/gtk/window.blp:331
+msgid "Toggle OSC Server"
+msgstr "OSC Sunucuyu Aç/Kapat"
+
+#: src/gtk/window.blp:338
+msgid "Mirror Horizontally"
+msgstr "Yatay Aynala"
+
+#: src/gtk/window.blp:350
+msgid "_Preferences"
+msgstr "_Tercihler"
+
+#: src/gtk/window.blp:355
+msgid "_Keyboard Shortcuts"
+msgstr "_Klavye Kısayolları"
+
+#: src/gtk/window.blp:360
+msgid "_About Teleprompter"
+msgstr "Teleprompter _Hakkında"
+
+#: src/main.py:240
+msgid "Donate with Ko-Fi"
+msgstr "Ko-Fi ile bağış yap"
+
+#: src/main.py:241
+msgid "Donate with Github"
+msgstr "Github ile bağış yap"
+
+#: src/main.py:242
+msgid "translator-credits"
+msgstr "Sabri Ünal <yakushabb@gmail.com>"
+
+#: src/window.py:77
+msgid "Open File"
+msgstr "Dosya Aç"
+
+#: src/window.py:91
+msgid "File successfully opened"
+msgstr "Dosya açıldı"
+
+#: src/window.py:93
+msgid "Error reading file"
+msgstr "Dosya okunurken hata"
+
+#: src/window.py:239
+msgid "Pasted Clipboard Content"
+msgstr "Pano İçeriği Yapıştırıldı"
+
+#~ msgid "Generals"
+#~ msgstr "Genel"
+
+#~ msgid "Display scrolling text on your screen"
+#~ msgstr "Kayan metni ekranınızda görüntüleyin"
+
+#~ msgid "The font used for displaying text."
+#~ msgstr "Metin görüntelemek için kullanılan yazı tipi."
+
+#~ msgid "The font color"
+#~ msgstr "Yazı tipi rengi"
+
+#~ msgid "The background color"
+#~ msgstr "Arka plan rengi"
+
+#~ msgid "The speed"
+#~ msgstr "Hız"
+
+#~ msgid "The slow speed"
+#~ msgstr "Yavaş hız"
+
+#~ msgid "Also bold all the highlight"
+#~ msgstr "Tüm vurguları kalınlaştır"
+
+#~ msgid "Slow Scroll Speed"
+#~ msgstr "Yavaş Kaydırma Hızı"
+
+#~ msgid "When pressing the spacebar"
+#~ msgstr "Boşluk çubuğuna basıldığında"
+
+#~ msgid ""
+#~ "[START]\n"
+#~ "This app can be used to read a script from the screen, just paste or open "
+#~ "a text file.\n"
+#~ "Anything between square brackets like [this] is highlighted.\n"
+#~ "\n"
+#~ "[Customization]\n"
+#~ "The font, color of the text and highlights can be customized.\n"
+#~ msgstr ""
+#~ "[BAŞLAT]\n"
+#~ "Bu uygulama ekrandan metin okumak için kullanılabilir, bir metin "
+#~ "dosyasını yapıştırmanız veya açmanız yeterlidir.\n"
+#~ "[bu] gibi köşeli parantezler arasına alınmış metinler vurgulanır.\n"
+#~ "\n"
+#~ "[Özelleştirme]\n"
+#~ "Yazı tipi, metin rengi ve vurgulamalar özelleştirilebilir.\n"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Play/Pause"
+#~ msgstr "Oynat/Duraklat"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Fullscreen"
+#~ msgstr "Tam Ekran"
 
 #~ msgid "Nokse"
 #~ msgstr "Nokse"

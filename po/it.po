@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: io.github.nokse22.teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-10 17:48+0200\n"
-"PO-Revision-Date: 2025-05-10 17:52+0200\n"
+"PO-Revision-Date: 2026-04-11 08:52+0200\n"
 "Last-Translator: albano Battistella <albanobattistella@gmail.com>\n"
 "Language-Team: it\n"
 "Language: it\n"
@@ -39,13 +39,12 @@ msgstr "Mantieni il filo del discorso"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:146
 msgid "Teleprompter displaying text on a widescreen"
-msgstr "Teleprompter che visualizza il testo su un ampio schermo"
+msgstr "Teleprompter visualizza il testo su un ampio schermo"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:151
-#, fuzzy
 #| msgid "Teleprompter displaying text on a widescreen"
 msgid "Teleprompter displaying text on a widescreen with dark theme"
-msgstr "Teleprompter che visualizza il testo su un ampio schermo"
+msgstr "Teleprompter visualizza il testo su uno schermo panoramico con tema scuro.
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:156
 msgid "Teleprompter displaying text in a narrow screen"
@@ -57,11 +56,10 @@ msgid "translator-credits"
 msgstr "Albano Battistella"
 
 #: src/main.py:150
-#, fuzzy
 #| msgctxt "shortcut window"
 #| msgid "General"
 msgid "Generals"
-msgstr "Generale"
+msgstr "Generali"
 
 #: src/main.py:155
 msgid "Scroll Settings"
@@ -196,7 +194,7 @@ msgstr "_Informazioni su Teleprompter"
 #~ "Qualsiasi cosa tra parentesi quadre tipo [così] verrà evidenziata.\n"
 #~ "\n"
 #~ "[Personalizzazione]\n"
-#~ "Il font, colore del testo e evidenziature possono essere modificati."
+#~ "Il font, colore del testo e evidenziature possono essere personalizzati."
 
 #~ msgctxt "shortcut window"
 #~ msgid "General"

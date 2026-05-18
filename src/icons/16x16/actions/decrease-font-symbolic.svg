@@ -6,7 +6,7 @@
    version="1.1"
    id="svg1"
    sodipodi:docname="decrease-font-symbolic.svg"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -42,13 +42,13 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="true"
      inkscape:zoom="33.543378"
-     inkscape:cx="8.1834334"
+     inkscape:cx="8.1685273"
      inkscape:cy="7.7660634"
-     inkscape:window-width="1920"
-     inkscape:window-height="1011"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:window-width="2008"
+     inkscape:window-height="1083"
+     inkscape:window-x="24"
+     inkscape:window-y="21"
+     inkscape:window-maximized="0"
      inkscape:current-layer="svg1">
     <inkscape:grid
        id="grid1"
@@ -72,15 +72,11 @@
      sodipodi:nodetypes="sssscccsssssssccccscc"
      style="display:none" />
   <path
-     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#2e3434;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-     d="M 3,3 V 14 L 5,11 H 1 l 2,3"
-     id="path2"
-     sodipodi:nodetypes="ccccc" />
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#2e3434;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000;stop-opacity:1;opacity:1"
+     d="M 3,2 A 1,1 0 0 0 2,3 v 7 H 1 a 1.0001,1.0001 0 0 0 -0.83203125,1.554688 l 2.00000005,3 a 1,1 0 0 0 0.484375,0.324218 1.0001,1.0001 0 0 0 0.097656,0.06445 1,1 0 0 0 0.8046875,-0.111328 1,1 0 0 0 0.039063,-0.191406 1.0001,1.0001 0 0 0 0.2382813,-0.08594 l 1.9999999,-3 A 1.0001,1.0001 0 0 0 5,10 H 4 V 3 A 1,1 0 0 0 3,2 Z"
+     id="path2" />
   <path
-     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#2e3434;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-     d="m 10,3 h 2 a 3,3 45 0 1 3,3 v 8 H 11 A 2,2 45 0 1 9,12 v -2 a 2,2 135 0 1 2,-2 h 4"
-     id="path3"
-     inkscape:path-effect="#path-effect3"
-     inkscape:original-d="m 10,3 h 5 V 14 H 9 V 8 h 6"
-     sodipodi:nodetypes="cccccc" />
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#2e3434;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000;stop-opacity:1;opacity:1"
+     d="m 10,2 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 h 2 c 1.116414,0 2,0.8835859 2,2 V 7 H 11 C 9.3549904,7 8,8.3549904 8,10 v 2 c 0,1.64501 1.3549904,3 3,3 h 4 a 1.0001,1.0001 0 0 0 1,-1 V 8 6 C 16,3.8027056 14.197294,2 12,2 Z m 1,7 h 3 v 4 h -3 c -0.564129,0 -1,-0.435871 -1,-1 v -2 c 0,-0.5641294 0.435871,-1 1,-1 z"
+     id="path3" />
 </svg>

@@ -6,9 +6,11 @@
 	<project_license>GPL-3.0-or-later</project_license>
 	<description>
 	  <p>A simple app to read scrolling text from your screen. It has an adaptive layout to work on smartphones too.</p>
+	  <p xml:lang="uk">Екранний підказувач із рухомим текстом для мовців, який завдяки адаптивному дизайну чудово працює на смартфонах.</p>
 	</description>
 
   	<summary>Stay on track during speeches</summary>
+  	<summary xml:lang="uk">Не збивайтеся з думки під час промов</summary>
 
 	<content_rating type="oars-1.1" />
 

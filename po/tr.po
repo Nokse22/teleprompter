@@ -2,6 +2,7 @@
 # Copyright (C) 2023, 2026 io.github.nokse22.teleprompter's COPYRIGHT HOLDER
 # This file is distributed under the same license as the io.github.nokse22.teleprompter package.
 #
+# Ümit Solmaz <usncb@yandex.com>, 2026.
 # Sabri Ünal <yakushabb@gmail.com>, 2023, 2026.
 #
 msgid ""
@@ -9,7 +10,7 @@ msgstr ""
 "Project-Id-Version: io.github.nokse22.teleprompter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-18 18:24+0300\n"
-"PO-Revision-Date: 2026-03-18 18:29+0300\n"
+"PO-Revision-Date: 2026-11-04 22:38+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:8
 msgid ""
@@ -25,23 +26,23 @@ msgid ""
 "layout to work on smartphones too."
 msgstr ""
 "Ekranınızdan kayan metni okumak için basit bir uygulama. Akıllı telefonlarda "
-"da çalışmak için uyarlanabilir düzene sahiptir."
+"da çalışabilmesi için uyarlanabilir bir düzene sahiptir."
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:11
 msgid "Stay on track during speeches"
-msgstr "Konuşma sırasında dikkatiniz dağılmasın"
+msgstr "Konuşmalar sırasında dikkatiniz dağılmasın"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:147
 msgid "Teleprompter displaying text on a widescreen"
-msgstr "Teleprompter, geniş ekranda metin görüntülerken"
+msgstr "Teleprompter geniş ekranda metin gösterirken"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:152
 msgid "Teleprompter displaying text on a widescreen with dark theme"
-msgstr "Teleprompter, koyu temalı geniş ekranda metin görüntülerken"
+msgstr "Teleprompter koyu temayla geniş ekranda metin gösterirken"
 
 #: data/io.github.nokse22.teleprompter.appdata.xml.in:157
 msgid "Teleprompter displaying text in a narrow screen"
-msgstr "Teleprompter, dar ekranda metin görüntülerken"
+msgstr "Teleprompter dar ekranda metin gösterirken"
 
 #. Translators: do not translate the application name
 #: data/io.github.nokse22.teleprompter.desktop.in:3 src/gtk/shortcuts.blp:25
@@ -51,7 +52,7 @@ msgstr "Teleprompter"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:39
 msgid "OSC server port"
-msgstr "OSC sunucu bağlantı noktası"
+msgstr "OSC sunucusu bağlantı noktası"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:40
 msgid "UDP port for OSC communication."
@@ -59,11 +60,11 @@ msgstr "OSC iletişimi için UDP bağlantı noktası."
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:45
 msgid "Auto-start OSC server"
-msgstr "OSC sunucuyu kendiliğinden başlat"
+msgstr "OSC sunucusunu otomatik başlat"
 
 #: data/io.github.nokse22.teleprompter.gschema.xml:46
 msgid "Automatically start OSC server when application launches."
-msgstr "Uygulama başlatıldığında OSC sunucuyu kendiliğinden başlat."
+msgstr "Uygulama başlatıldığında OSC sunucusunu otomatik olarak başlat."
 
 #: src/gtk/preferences.blp:6 src/gtk/shortcuts.blp:6
 msgid "General"
@@ -79,7 +80,7 @@ msgstr "Kaydırma Hızı"
 
 #: src/gtk/preferences.blp:14
 msgid "In words per minute (approximately)"
-msgstr "Dakika başına kelime olarak (yaklaşık)"
+msgstr "Dakikada kelime (yaklaşık)"
 
 #: src/gtk/preferences.blp:25
 msgid "Text"
@@ -103,7 +104,7 @@ msgstr "Yazı tipi"
 
 #: src/gtk/preferences.blp:66
 msgid "OSC Remote Control"
-msgstr "OSC Uzaktan Kumanda Denetimi"
+msgstr "OSC Uzaktan Kumanda"
 
 #: src/gtk/preferences.blp:70
 #| msgid "Scroll Settings"
@@ -112,11 +113,11 @@ msgstr "OSC Ayarları"
 
 #: src/gtk/preferences.blp:71
 msgid "Open Sound Control allows remote control of the teleprompter"
-msgstr "Open Sound Control, teleprompterin uzaktan denetimini sağlar"
+msgstr "Open Sound Control, teleprompterin uzaktan kumanda edilmesini sağlar"
 
 #: src/gtk/preferences.blp:74
 msgid "Enable OSC Server"
-msgstr "OSC Sunucuyu Etkinleştir"
+msgstr "OSC Sunucusunu Etkinleştir"
 
 #: src/gtk/preferences.blp:75
 msgid "Allow remote control via OSC protocol"
@@ -124,7 +125,7 @@ msgstr "OSC iletişim kuralıyla uzaktan denetime izin ver"
 
 #: src/gtk/preferences.blp:80
 msgid "OSC Port"
-msgstr "OSC bağlantı noktası"
+msgstr "OSC Bağlantı Noktası"
 
 #: src/gtk/preferences.blp:81
 msgid "UDP port for OSC communication"
@@ -132,11 +133,11 @@ msgstr "OSC iletişimi için UDP bağlantı noktası"
 
 #: src/gtk/preferences.blp:91
 msgid "Auto-start OSC Server"
-msgstr "OSC sunucuyu kendiliğinden başlat"
+msgstr "OSC Sunucusunu Otomatik Başlat"
 
 #: src/gtk/preferences.blp:92
 msgid "Start OSC server automatically when app launches"
-msgstr "Uygulama başlatıldığında OSC sunucuyu kendiliğinden başlat"
+msgstr "Uygulama başlatıldığında OSC sunucusunu otomatik olarak başlat"
 
 #: src/gtk/preferences.blp:97
 msgid "OSC Commands"
@@ -160,11 +161,11 @@ msgstr "Durdur ve konumu sıfırla"
 
 #: src/gtk/preferences.blp:233
 msgid "Set speed in WPM"
-msgstr "Hızı WPM (Kelime Başına Dakika) olarak ayarla"
+msgstr "Hızı WPM olarak ayarla"
 
 #: src/gtk/preferences.blp:266
 msgid "Set font size"
-msgstr "Yazı tipini belirle"
+msgstr "Yazı tipi boyutunu ayarla"
 
 #: src/gtk/preferences.blp:299
 msgid "Set position (0.0-1.0)"
@@ -276,7 +277,7 @@ msgstr "Koyu Tema"
 
 #: src/gtk/window.blp:331
 msgid "Toggle OSC Server"
-msgstr "OSC Sunucuyu Aç/Kapat"
+msgstr "OSC Sunucusunu Aç/Kapat"
 
 #: src/gtk/window.blp:338
 msgid "Mirror Horizontally"
@@ -296,15 +297,19 @@ msgstr "Teleprompter _Hakkında"
 
 #: src/main.py:240
 msgid "Donate with Ko-Fi"
-msgstr "Ko-Fi ile bağış yap"
+msgstr "Ko-fi ile bağış yap"
 
 #: src/main.py:241
 msgid "Donate with Github"
-msgstr "Github ile bağış yap"
+msgstr "GitHub ile bağış yap"
 
 #: src/main.py:242
 msgid "translator-credits"
 msgstr "Sabri Ünal <yakushabb@gmail.com>"
+
+#: src/main.py:243
+msgid "translator-credits"
+msgstr "Ümit Solmaz <usncb@yandex.com>"
 
 #: src/window.py:77
 msgid "Open File"
@@ -312,15 +317,15 @@ msgstr "Dosya Aç"
 
 #: src/window.py:91
 msgid "File successfully opened"
-msgstr "Dosya açıldı"
+msgstr "Dosya başarıyla açıldı"
 
 #: src/window.py:93
 msgid "Error reading file"
-msgstr "Dosya okunurken hata"
+msgstr "Dosya okunurken hata oluştu"
 
 #: src/window.py:239
 msgid "Pasted Clipboard Content"
-msgstr "Pano İçeriği Yapıştırıldı"
+msgstr "Pano içeriği yapıştırıldı"
 
 #~ msgid "Generals"
 #~ msgstr "Genel"
@@ -329,7 +334,7 @@ msgstr "Pano İçeriği Yapıştırıldı"
 #~ msgstr "Kayan metni ekranınızda görüntüleyin"
 
 #~ msgid "The font used for displaying text."
-#~ msgstr "Metin görüntelemek için kullanılan yazı tipi."
+#~ msgstr "Metin görüntülemek için kullanılan yazı tipi."
 
 #~ msgid "The font color"
 #~ msgstr "Yazı tipi rengi"
@@ -344,7 +349,7 @@ msgstr "Pano İçeriği Yapıştırıldı"
 #~ msgstr "Yavaş hız"
 
 #~ msgid "Also bold all the highlight"
-#~ msgstr "Tüm vurguları kalınlaştır"
+#~ msgstr "Tüm vurguları da kalınlaştır"
 
 #~ msgid "Slow Scroll Speed"
 #~ msgstr "Yavaş Kaydırma Hızı"
@@ -362,12 +367,12 @@ msgstr "Pano İçeriği Yapıştırıldı"
 #~ "The font, color of the text and highlights can be customized.\n"
 #~ msgstr ""
 #~ "[BAŞLAT]\n"
-#~ "Bu uygulama ekrandan metin okumak için kullanılabilir, bir metin "
+#~ "Bu uygulama ekrandan metin okumak için kullanılabilir. Bir metin "
 #~ "dosyasını yapıştırmanız veya açmanız yeterlidir.\n"
 #~ "[bu] gibi köşeli parantezler arasına alınmış metinler vurgulanır.\n"
 #~ "\n"
 #~ "[Özelleştirme]\n"
-#~ "Yazı tipi, metin rengi ve vurgulamalar özelleştirilebilir.\n"
+#~ "Yazı tipi, metin rengi ve vurgular özelleştirilebilir.\n"
 
 #~ msgctxt "shortcut window"
 #~ msgid "Play/Pause"
